@@ -63,7 +63,7 @@ public class AppMain {
 		System.out.println("Gonna test " + gameCount + " games.");
 		
 		Team testingTeam1 = nsh;
-		Team testingTeam2 = chi;
+		Team testingTeam2 = tor;
 		
 		Game testGame = new Game (testingTeam1, testingTeam2);
 		
@@ -83,7 +83,7 @@ public class AppMain {
 		int mercyGames = 0;
 		
 		for (int i = 0; i < gameCount; i++) {
-			testGame = new Game(testingTeam1, testingTeam2);
+			testGame = new Game(testingTeam1, testingTeam2);  // Is this line redundant with line 68?
 			SimEngine.simulateGame(testGame);
 			
 			if (testGame.didTeam1Win()) team1Wins++; else team2Wins++;

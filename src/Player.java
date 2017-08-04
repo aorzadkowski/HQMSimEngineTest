@@ -1,9 +1,9 @@
 
 public class Player {
 	private String name;
-	private Role role;
+	public Role role;  // Made public in new commit
 	
-	private int[] stats = new int[9];
+	public int[] stats = new int[9];  // Made public in new commit
 	
 	/**
 	 * All ints should be between 0-20;

@@ -25,8 +25,30 @@ public class Team {
 		this.teamName = teamName;
 		forwards = new Player[] {f1, f2};
 		defencemen = new Player[] {d1, d2};
+		
+	    // New stuff in new commit
+		
+		if ( (forwards[0].role == Role.PLAYMAKER) && (forwards[1].role == Role.PLAYMAKER)) {
+	    	forwards[0].stats[1] = forwards[0].stats[1] + 1; 
+	    	forwards[1].stats[1] = forwards[1].stats[1] + 1; 
+	    	forwards[0].stats[2] = forwards[0].stats[2] + 1; 
+	    	forwards[1].stats[2] = forwards[1].stats[2] + 1; 
+	    	forwards[0].stats[6] = forwards[0].stats[6] + 1; 
+	    	forwards[1].stats[6] = forwards[1].stats[6] + 1; 
+	    	forwards[0].stats[3] = forwards[0].stats[3] - 2; 
+	    	forwards[1].stats[3] = forwards[1].stats[3] - 2; 
+	    	forwards[0].stats[4] = forwards[0].stats[4] - 2; 
+	    	forwards[1].stats[4] = forwards[1].stats[4] - 2; 
+	    	forwards[0].stats[5] = forwards[0].stats[5] - 2; 
+	    	forwards[1].stats[5] = forwards[1].stats[5] - 2; 
+	    	forwards[0].stats[7] = forwards[0].stats[7] - 2; 
+	    	forwards[1].stats[7] = forwards[1].stats[7] - 2; 
+	    }
+		
+			
 		initSimData();
 	}
+
 	
 	public void generateTeam(PlayerFactory factory) {
 		forwards = new Player[] {factory.generateRandomOMan(), factory.generateRandomOMan()};
