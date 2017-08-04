@@ -59,11 +59,11 @@ public class AppMain {
 		
 		Team[] lhlTeams = {bos, nyr, chi, tor, nsh, win};
 		
-		int gameCount = 100000000;
+		int gameCount = 1000000;
 		System.out.println("Gonna test " + gameCount + " games.");
 		
 		Team testingTeam1 = nsh;
-		Team testingTeam2 = nsh;
+		Team testingTeam2 = chi;
 		
 		Game testGame = new Game (testingTeam1, testingTeam2);
 		
@@ -77,8 +77,10 @@ public class AppMain {
 		int marginOfVictoryGoals = 0;
 		
 		int totalOTGames = 0;
+		int totalSOGames = 0;
 		int maxGoalsInGame = -1;
 		int mostOT = -1;
+		int mercyGames = 0;
 		
 		for (int i = 0; i < gameCount; i++) {
 			testGame = new Game(testingTeam1, testingTeam2);
@@ -93,26 +95,30 @@ public class AppMain {
 			marginOfVictoryGoals += testGame.marginOfVictory();
 			
 			if (testGame.isGameOT()) totalOTGames++;
+			if (testGame.losingTeamGoals() == 0) totalSOGames++;
 			if (testGame.winningTeamGoals() > maxGoalsInGame) maxGoalsInGame = testGame.winningTeamGoals();
 			if (testGame.getOTCount() > mostOT) mostOT = testGame.getOTCount();
+			if (testGame.winningTeamGoals() - testGame.losingTeamGoals() > 5) mercyGames++;
 		}
 		Team team1Out = testGame.getTeam1();
 		Team team2Out = testGame.getTeam2();
 		
 		System.out.println("Tonight's teams were " + team1Out.teamName + " and " + team2Out.teamName);
-		System.out.println(team1Out.teamName + " stats: \n\tOff. Ratio:\t" + team1Out.oRatio 
+		System.out.println("\n" + team1Out.teamName + " stats: \n\tOff. Ratio:\t" + team1Out.oRatio 
 														+ "\n\tDef. Ratio:\t" + team1Out.dRatio 
 														+ "\n\tInvB. Ratio:\t" + team1Out.inverseBRatio
-														+ "\n\tWin %:\t" + (((double)team1Wins) / gameCount));
-		System.out.println(team2Out.teamName + " stats: \n\tOff. Ratio:\t" + team2Out.oRatio 
+														+ "\n\tWin %:\t" + (((double)team1Wins) * 100 / gameCount));
+		System.out.println("\n" + team2Out.teamName + " stats: \n\tOff. Ratio:\t" + team2Out.oRatio 
 														+ "\n\tDef. Ratio:\t" + team2Out.dRatio 
 														+ "\n\tInvB. Ratio:\t" + team2Out.inverseBRatio
-														+ "\n\tWin %:\t" + (((double)team2Wins) / gameCount));
+														+ "\n\tWin %:\t" + (((double)team2Wins) * 100 / gameCount) + "\n");
 		System.out.println("Average Total Goals: \t" + (((double) totalGoals) / gameCount));
 		System.out.println("Average Winning Team's Goals:\t" +(((double) winningTeamGoals) / gameCount));
 		System.out.println("Average Margin of Victory:\t" + (((double) marginOfVictoryGoals) / gameCount));
 		System.out.println("Average Losing Team's Goals:\t" + (((double) losingTeamGoals) / gameCount));
-		System.out.println("% of OT Games:\t" + (((double) totalOTGames) / gameCount));
+		System.out.println("% of SO Games:\t" + (((double) totalSOGames) * 100 / gameCount));
+		System.out.println("% of Games with a mercy score:\t" + (((double) mercyGames) * 100 / gameCount));
+		System.out.println("% of OT Games:\t" + (((double) totalOTGames) * 100 / gameCount));
 		System.out.println("Most OT periods:\t" + mostOT);
 		System.out.println("Most Goals Scored in a Game: \t" + maxGoalsInGame);
 	}
