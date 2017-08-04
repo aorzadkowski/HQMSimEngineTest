@@ -4,19 +4,17 @@ public class SimEngine {
 	public static double maxDefense = 16.8;
 	public static double maxBoth = 4.0;
 	
-	public static void getBoxScore(Team team1, Team team2) {
-		/*
-		System.out.print("Box scores:\t\t\tP1\tP2\tP3\tF\nTeam1: \t\t\t");
-		*/
+	public static void simulateGame(Game game) {
+		
+		Team team1 = game.getTeam1();
+		Team team2 = game.getTeam2();
+		
 		int[][] boxScore = new int[3][2];
 		
 		boxScore[0] = getNetScoreInPeriod(team1, team2);
 		boxScore[1] = getNetScoreInPeriod(team1, team2);
 		boxScore[2] = getNetScoreInPeriod(team1, team2);
-		/*
-		System.out.println(period1[0] + "\t" + period2[0] + "\t" + period3[0] + "\t" + (period1[0] + period2[0] + period3[0]));
-		System.out.println("Team2: \t\t\t" + period1[1] + "\t" + period2[1] + "\t" + period3[1]+ "\t" + (period1[1] + period2[1] + period3[1]));
-		*/
+
 		
 		int team1Score = (boxScore[0][0] + boxScore[1][0] + boxScore[2][0]);
 		int team2Score = (boxScore[0][1] + boxScore[1][1] + boxScore[2][1]);
@@ -67,36 +65,8 @@ public class SimEngine {
 			
 			boxScore = newBoxScore;
 		}
-		int team1FinalScore = 0;
-		int team2FinalScore = 0;
 		
-		String team1OutputLine = team1.teamName + "\t";
-		String team2OutputLine = team2.teamName + "\t";
-
-		for (int i = 0; i < boxScore.length; i++) {
-			team1OutputLine += boxScore[i][0] + "\t";
-			team2OutputLine += boxScore[i][1] + "\t";
-			
-			team1FinalScore += boxScore[i][0];
-			team2FinalScore += boxScore[i][1];
-		}
-		
-		/////////////
-		team1OutputLine += team1FinalScore;
-		team2OutputLine += team2FinalScore;
-		
-		int headerLength = boxScore.length;
-		String headerLine = "Team";
-		
-		for (int i = 0; i < headerLength; i++) {
-			headerLine += "\t" + (i <= 2 ? "P" + (i + 1) : "OT" + (i -2));
-		}
-		System.out.println(headerLine + "\tF");
-		System.out.println(team1OutputLine);
-		System.out.println(team2OutputLine);
-		//////////////
-		
-		//System.out.println(team1FinalScore + "\t" + team2FinalScore + "\t" + (team1FinalScore > team2FinalScore ? "1" : "0"));
+		game.setScore(boxScore);
 	}
 	
 	private static int[] getNetScoreInPeriod(Team team1, Team team2) {

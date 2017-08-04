@@ -2,15 +2,6 @@
 public class AppMain {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		
-		System.out.println("Testing random player generation:");
-		PlayerFactory fact = new PlayerFactory();
-		for (int i = 0; i < 100; i++) {
-			System.out.println(fact.generateRandomPlayer());
-		}
-		System.out.println("Looked good.\n" );
-		
 		System.out.println("Let's test some real teams.");
 		
 		Team team1 = new Team("Team one", 
@@ -68,13 +59,62 @@ public class AppMain {
 		
 		Team[] lhlTeams = {bos, nyr, chi, tor, nsh, win};
 		
-		int gameCount = 1000;
+		int gameCount = 100000000;
+		System.out.println("Gonna test " + gameCount + " games.");
 		
-		//System.out.println("Team1\tTeam2");
+		Team testingTeam1 = nsh;
+		Team testingTeam2 = nsh;
+		
+		Game testGame = new Game (testingTeam1, testingTeam2);
+		
+		int team1Wins = 0;
+		int team2Wins = 0;
+		
+		int totalGoals = 0;
+		int winningTeamGoals = 0;
+		int losingTeamGoals = 0;
+		
+		int marginOfVictoryGoals = 0;
+		
+		int totalOTGames = 0;
+		int maxGoalsInGame = -1;
+		int mostOT = -1;
+		
 		for (int i = 0; i < gameCount; i++) {
-			//System.out.println("Game " + (i+1));
-			SimEngine.getBoxScore(nsh, bos);
+			testGame = new Game(testingTeam1, testingTeam2);
+			SimEngine.simulateGame(testGame);
+			
+			if (testGame.didTeam1Win()) team1Wins++; else team2Wins++;
+			
+			winningTeamGoals += testGame.winningTeamGoals();
+			losingTeamGoals += testGame.losingTeamGoals();
+			totalGoals += testGame.totalGoals();
+			
+			marginOfVictoryGoals += testGame.marginOfVictory();
+			
+			if (testGame.isGameOT()) totalOTGames++;
+			if (testGame.winningTeamGoals() > maxGoalsInGame) maxGoalsInGame = testGame.winningTeamGoals();
+			if (testGame.getOTCount() > mostOT) mostOT = testGame.getOTCount();
 		}
+		Team team1Out = testGame.getTeam1();
+		Team team2Out = testGame.getTeam2();
+		
+		System.out.println("Tonight's teams were " + team1Out.teamName + " and " + team2Out.teamName);
+		System.out.println(team1Out.teamName + " stats: \n\tOff. Ratio:\t" + team1Out.oRatio 
+														+ "\n\tDef. Ratio:\t" + team1Out.dRatio 
+														+ "\n\tInvB. Ratio:\t" + team1Out.inverseBRatio
+														+ "\n\tWin %:\t" + (((double)team1Wins) / gameCount));
+		System.out.println(team2Out.teamName + " stats: \n\tOff. Ratio:\t" + team2Out.oRatio 
+														+ "\n\tDef. Ratio:\t" + team2Out.dRatio 
+														+ "\n\tInvB. Ratio:\t" + team2Out.inverseBRatio
+														+ "\n\tWin %:\t" + (((double)team2Wins) / gameCount));
+		System.out.println("Average Total Goals: \t" + (((double) totalGoals) / gameCount));
+		System.out.println("Average Winning Team's Goals:\t" +(((double) winningTeamGoals) / gameCount));
+		System.out.println("Average Margin of Victory:\t" + (((double) marginOfVictoryGoals) / gameCount));
+		System.out.println("Average Losing Team's Goals:\t" + (((double) losingTeamGoals) / gameCount));
+		System.out.println("% of OT Games:\t" + (((double) totalOTGames) / gameCount));
+		System.out.println("Most OT periods:\t" + mostOT);
+		System.out.println("Most Goals Scored in a Game: \t" + maxGoalsInGame);
 	}
 
 }
