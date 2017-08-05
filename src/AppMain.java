@@ -67,9 +67,9 @@ public class AppMain {
 		
 		Team[] lhlTeams = {bos, nyr, chi, tor, nsh, win};
 
-		/*		
-		
 		int gameCount = 1000000;
+		
+		/*
 		System.out.println("Gonna test " + gameCount + " games.");
 		
 		Team testingTeam1 = tor;
@@ -133,14 +133,29 @@ public class AppMain {
 		System.out.println("% of OT Games:\t" + (((double) totalOTGames) * 100 / gameCount));
 		System.out.println("Most OT periods:\t" + mostOT);
 		System.out.println("Most Goals Scored in a Game: \t" + maxGoalsInGame);
-		
 		*/
+		
+		/*
 		Season.seasonSim( lhlTeams[0], lhlTeams[1], lhlTeams[2], lhlTeams[3], lhlTeams[4], lhlTeams[5] );
 		
 		for( int i = 0; i < 6; i++) {
-			System.out.println( lhlTeams[Season.orderedStandings[0][i]].teamName + "\t (" + Season.orderedStandings[1][i] + "-" + Season.orderedStandings[2][i] + "-"
-								+ Season.orderedStandings[3][i]+ "-" + Season.orderedStandings[4][i] + ") \t" + Season.orderedStandings[5][i]    );
+			System.out.println( lhlTeams[Season.teamOrder[i]].teamName + "\t (" + Season.orderedStandings[0][i] + "-" + Season.orderedStandings[1][i] + "-"
+								+ Season.orderedStandings[2][i]+ "-" + Season.orderedStandings[3][i] + ") \t" + Season.orderedStandings[4][i]    );
+		}
+		*/
+		
+		Season.massSeasonSim( lhlTeams[0], lhlTeams[1], lhlTeams[2], lhlTeams[3], lhlTeams[4], lhlTeams[5], gameCount );
+		
+		System.out.println("Here are the averaged results from simulating S13 LHL " + gameCount + " times! \n");
+		
+		for( int i = 0; i < 6; i++) {
+			System.out.println( lhlTeams[Season.teamOrder[i]].teamName + "\t "
+					/*
+					 + "(" + Season.multOrderedStandings[0][i] + "-"
+								+ Season.multOrderedStandings[1][i] + "-" + Season.multOrderedStandings[2][i]+ "-"
+								+ Season.multOrderedStandings[3][i] + ") \t" 
+					*/			
+					 + Season.multOrderedStandings[4][i]    );
 		}
 	}
-
 }
