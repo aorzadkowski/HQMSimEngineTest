@@ -38,8 +38,8 @@ public class AppMain {
 		
 		Team tor = new Team("Toronto Maple Leafs",
 				new Player("NHLKilla", Role.PLAYMAKER, 12, 13, 13, 14, 14, 14, 15, 15, 15),
-				new Player("Gabe", Role.DANGLER, 16, 15, 15, 16, 19, 18, 18, 18, 18),
-				new Player("xParabolax", Role.OFFENSIVE_DMAN, 14, 15, 12, 16, 16, 15, 14, 14, 17),
+				new Player("Gabe", Role.SNIPER, 16, 15, 15, 16, 19, 18, 18, 18, 18),
+				new Player("xParabolax", Role.DEFENSIVE_DMAN, 14, 15, 12, 16, 16, 15, 14, 14, 17),
 				new Player("Jabba", Role.OFFENSIVE_DMAN,13, 14, 12, 15, 16, 14, 13, 13, 14)
 				);
 

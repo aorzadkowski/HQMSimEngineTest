@@ -41,7 +41,9 @@ public class Team {
 	public void initSimData() {
 		for (int i = 0; i < weightsForO.length; i++) {
 			weightsForO[i] = forwards[0].getStats()[i] * forwards[0].role.getWeights()[i] 		+ forwards[1].getStats()[i] * forwards[1].role.getWeights()[i];
+			if (forwards[0].role == forwards[1].role) 	weightsForO[i] *= 0.95;
 			weightsForD[i] = defencemen[0].getStats()[i] * defencemen[0].role.getWeights()[i] 	+ defencemen[1].getStats()[i] * defencemen[1].role.getWeights()[i];
+			if (defencemen[0].role == defencemen[1].role) weightsForD[i] *= 0.975;
 		}
 		
 		//Only the first 7 stats are needed for offense calculation from forwards.
