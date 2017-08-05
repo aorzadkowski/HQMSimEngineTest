@@ -16,7 +16,7 @@ public class Team {
 	public double bRatio;
 	
 	public double inverseBRatio;
-	
+		
 	public Team(String teamName) {
 		this.teamName = teamName;
 	}
@@ -27,33 +27,49 @@ public class Team {
 		defencemen = new Player[] {d1, d2};
 		
 	    // New stuff in new commit
-		
 		if ( (forwards[0].role == Role.PLAYMAKER) && (forwards[1].role == Role.PLAYMAKER)) {
-	    	forwards[0].stats[1] = forwards[0].stats[1] + 1; 
-	    	forwards[1].stats[1] = forwards[1].stats[1] + 1; 
-	    	forwards[0].stats[2] = forwards[0].stats[2] + 1; 
-	    	forwards[1].stats[2] = forwards[1].stats[2] + 1; 
-	    	forwards[0].stats[6] = forwards[0].stats[6] + 1; 
-	    	forwards[1].stats[6] = forwards[1].stats[6] + 1; 
-	    	forwards[0].stats[3] = forwards[0].stats[3] - 2; 
-	    	forwards[1].stats[3] = forwards[1].stats[3] - 2; 
-	    	forwards[0].stats[4] = forwards[0].stats[4] - 2; 
-	    	forwards[1].stats[4] = forwards[1].stats[4] - 2; 
-	    	forwards[0].stats[5] = forwards[0].stats[5] - 2; 
-	    	forwards[1].stats[5] = forwards[1].stats[5] - 2; 
-	    	forwards[0].stats[7] = forwards[0].stats[7] - 2; 
-	    	forwards[1].stats[7] = forwards[1].stats[7] - 2; 
-	    }
-		
-			
+    	
+		forwards[0].stats[1] = forwards[0].stats[1] + 1; 
+	    forwards[1].stats[1] = forwards[1].stats[1] + 1; 
+		forwards[0].stats[2] = forwards[0].stats[2] + 1; 
+    	forwards[1].stats[2] = forwards[1].stats[2] + 1; 
+    	forwards[0].stats[6] = forwards[0].stats[6] + 1; 
+    	forwards[1].stats[6] = forwards[1].stats[6] + 1; 
+    	forwards[0].stats[3] = forwards[0].stats[3] - 2; 
+    	forwards[1].stats[3] = forwards[1].stats[3] - 2; 
+    	forwards[0].stats[4] = forwards[0].stats[4] - 2; 
+    	forwards[1].stats[4] = forwards[1].stats[4] - 2; 
+    	forwards[0].stats[5] = forwards[0].stats[5] - 2; 
+    	forwards[1].stats[5] = forwards[1].stats[5] - 2; 
+    	forwards[0].stats[7] = forwards[0].stats[7] - 2; 
+    	forwards[1].stats[7] = forwards[1].stats[7] - 2; 
+		}	
 		initSimData();
 	}
+	
 
 	
 	public void generateTeam(PlayerFactory factory) {
 		forwards = new Player[] {factory.generateRandomOMan(), factory.generateRandomOMan()};
 		defencemen = new Player[] {factory.generateRandomDMan(), factory.generateRandomDMan()};
 	}
+	
+/*
+	
+	public void synChange( Player f1 , Player f2) {
+		
+		if ( (f1.role == Role.PLAYMAKER) && (f2.role == Role.PLAYMAKER)) {
+			for ( int i = 0; i < 9; i++) {
+				if ( i != 1 || i != 2 || i != 6 ) {
+			
+					forwards = new Player[] { f1.stats[i] = f1.stats[i] - 2 , f2.stats[i] = f2.stats[i] - 2};
+			
+					}
+			}
+		}
+	}
+	
+*/
 	
 	public String toString() {
 		return teamName + ": " + forwards[0].getName() + ", " + forwards[1].getName() + ", " + defencemen[0].getName() + ", " + defencemen[1].getName();

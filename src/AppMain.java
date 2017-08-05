@@ -42,6 +42,13 @@ public class AppMain {
 				new Player("xParabolax", Role.OFFENSIVE_DMAN, 14, 15, 12, 16, 16, 15, 14, 14, 17),
 				new Player("Jabba", Role.OFFENSIVE_DMAN,13, 14, 12, 15, 16, 14, 13, 13, 14)
 				);
+
+		Team to2 = new Team("Toronto Maple Leafs 2",
+				new Player("NHLKilla", Role.PLAYMAKER, 12, 13, 13, 14, 14, 14, 15, 15, 15),
+				new Player("Gabe", Role.PLAYMAKER, 16, 15, 15, 16, 19, 18, 18, 18, 18),
+				new Player("xParabolax", Role.OFFENSIVE_DMAN, 14, 15, 12, 16, 16, 15, 14, 14, 17),
+				new Player("Jabba", Role.OFFENSIVE_DMAN,13, 14, 12, 15, 16, 14, 13, 13, 14)
+				);
 		
 		Team nsh = new Team("Nashville Predators",
 				new Player("CrabInATree", Role.PLAYMAKER, 19, 19, 17, 16, 18, 16, 19, 19, 20),
@@ -62,8 +69,8 @@ public class AppMain {
 		int gameCount = 1000000;
 		System.out.println("Gonna test " + gameCount + " games.");
 		
-		Team testingTeam1 = nsh;
-		Team testingTeam2 = tor;
+		Team testingTeam1 = tor;
+		Team testingTeam2 = to2;
 		
 		Game testGame = new Game (testingTeam1, testingTeam2);
 		
