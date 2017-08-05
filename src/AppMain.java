@@ -2,7 +2,7 @@
 public class AppMain {
 
 	public static void main(String[] args) {
-		System.out.println("Let's test some real teams.");
+		// System.out.println("Let's test some real teams.");
 		
 		Team team1 = new Team("Team one", 
 					new Player("Lucic", Role.SNIPER, 15, 16, 19, 19, 19, 19, 19, 15, 20),
@@ -15,7 +15,8 @@ public class AppMain {
 					new Player("KS Otto", Role.OFFENSIVE_DMAN, 16, 19, 15, 18, 19, 19, 16, 19, 20),
 					new Player("Dman Jerry", Role.DEFENSIVE_DMAN, 15, 15, 14, 15, 12, 15, 17, 17, 18));
 		
-		Team bos = new Team("Boston Bruins",
+		// \t added for season sim looks, can and probably should be removed (same for win) :v
+		Team bos = new Team("Boston Bruins \t",
 				new Player("Lucic", Role.SNIPER, 15, 16, 19, 19, 19, 19, 19, 19, 20),
 				new Player("Teemu Salami", Role.DANGLER, 12, 13, 15, 17, 16, 17, 17, 17, 18),
 				new Player("KS Otto", Role.OFFENSIVE_DMAN, 16, 19, 15, 18, 19, 19, 16, 16, 20),
@@ -38,14 +39,14 @@ public class AppMain {
 		
 		Team tor = new Team("Toronto Maple Leafs",
 				new Player("NHLKilla", Role.PLAYMAKER, 12, 13, 13, 14, 14, 14, 15, 15, 15),
-				new Player("Gabe", Role.SNIPER, 16, 15, 15, 16, 19, 18, 18, 18, 18),
+				new Player("Gabe", Role.DANGLER, 16, 15, 15, 16, 19, 18, 18, 18, 18),
 				new Player("xParabolax", Role.DEFENSIVE_DMAN, 14, 15, 12, 16, 16, 15, 14, 14, 17),
 				new Player("Jabba", Role.OFFENSIVE_DMAN,13, 14, 12, 15, 16, 14, 13, 13, 14)
 				);
 
 		Team to2 = new Team("Toronto Maple Leafs 2",
 				new Player("NHLKilla", Role.PLAYMAKER, 12, 13, 13, 14, 14, 14, 15, 15, 15),
-				new Player("Gabe", Role.PLAYMAKER, 16, 15, 15, 16, 19, 18, 18, 18, 18),
+				new Player("Gabe", Role.DANGLER, 16, 15, 15, 16, 19, 18, 18, 18, 18),
 				new Player("xParabolax", Role.OFFENSIVE_DMAN, 14, 15, 12, 16, 16, 15, 14, 14, 17),
 				new Player("Jabba", Role.OFFENSIVE_DMAN,13, 14, 12, 15, 16, 14, 13, 13, 14)
 				);
@@ -57,7 +58,7 @@ public class AppMain {
 				new Player("Dman Jerry", Role.DEFENSIVE_DMAN, 15, 15, 14, 15, 12, 15, 17, 17, 18)
 				);
 		
-		Team win = new Team("Winnipeg Jets",
+		Team win = new Team("Winnipeg Jets \t",
 				new Player("guy la floor", Role.TWO_WAY_FORWARD, 14, 15, 15, 17, 17, 17, 16, 16, 20),
 				new Player("Drag", Role.DANGLER, 13, 14, 14, 16, 16, 16, 16, 16, 17),
 				new Player("Dalfan", Role.OFFENSIVE_DMAN, 16, 18, 16, 17, 17, 16, 18, 18, 16),
@@ -65,6 +66,8 @@ public class AppMain {
 				);
 		
 		Team[] lhlTeams = {bos, nyr, chi, tor, nsh, win};
+
+		/*		
 		
 		int gameCount = 1000000;
 		System.out.println("Gonna test " + gameCount + " games.");
@@ -88,6 +91,8 @@ public class AppMain {
 		int maxGoalsInGame = -1;
 		int mostOT = -1;
 		int mercyGames = 0;
+		
+
 		
 		for (int i = 0; i < gameCount; i++) {
 			testGame = new Game(testingTeam1, testingTeam2);  // Is this line redundant with line 68?
@@ -128,6 +133,14 @@ public class AppMain {
 		System.out.println("% of OT Games:\t" + (((double) totalOTGames) * 100 / gameCount));
 		System.out.println("Most OT periods:\t" + mostOT);
 		System.out.println("Most Goals Scored in a Game: \t" + maxGoalsInGame);
+		
+		*/
+		Season.seasonSim( lhlTeams[0], lhlTeams[1], lhlTeams[2], lhlTeams[3], lhlTeams[4], lhlTeams[5] );
+		
+		for( int i = 0; i < 6; i++) {
+			System.out.println( lhlTeams[Season.orderedStandings[0][i]].teamName + "\t (" + Season.orderedStandings[1][i] + "-" + Season.orderedStandings[2][i] + "-"
+								+ Season.orderedStandings[3][i]+ "-" + Season.orderedStandings[4][i] + ") \t" + Season.orderedStandings[5][i]    );
+		}
 	}
 
 }
