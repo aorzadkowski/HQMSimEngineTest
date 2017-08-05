@@ -46,26 +46,11 @@ public class Player {
 	}
 	
 	public double getWeightedAverage() {
-		switch (role) {
-			case SNIPER:
-			case PLAYMAKER:
-			case DANGLER:
-			case TWO_WAY_FORWARD:
-				double total = 0;
-				for (int i = 0; i < stats.length; i++) {
-					total += stats[i] * OFFENSIVE_WEIGHTS[i];
-				}
-				return total;
-			case OFFENSIVE_DMAN:
-			case DEFENSIVE_DMAN:
-				double totalD = 0;
-				for (int i = 0; i < stats.length; i++) {
-					totalD += stats[i] * DEFENSIVE_WEIGHTS[i];
-				}
-				return totalD;
-			default :
-				return 0.0;
+		double total = 0;
+		for (int i = 0; i < stats.length; i++) {
+			total += stats[i] * role.getWeights()[i];
 		}
+		return total;
 	}
 	
 	public int getNHLRating() {
