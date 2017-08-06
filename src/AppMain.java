@@ -67,7 +67,7 @@ public class AppMain {
 		
 		Team[] lhlTeams = {bos, nyr, chi, tor, nsh, win};
 
-		int gameCount = 1000000;
+		int gameCount = 1;
 		
 		/*
 		System.out.println("Gonna test " + gameCount + " games.");
@@ -155,7 +155,8 @@ public class AppMain {
 								+ Season.multOrderedStandings[1][i] + "-" + Season.multOrderedStandings[2][i]+ "-"
 								+ Season.multOrderedStandings[3][i] + ") \t" 
 					*/			
-					 + Season.multOrderedStandings[4][i] + "\tSeason Championships:\t" + Season.multOrderedStandings[5][i]   );
+					 + Season.multOrderedStandings[4][i] + "\tSeason Championships:\t" + Season.multOrderedStandings[5][i]
+					 + "\tPlayoff Championships:\t" + Season.multOrderedStandings[6][i]);
 		}
 	}
 }

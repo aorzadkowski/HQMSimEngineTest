@@ -6,8 +6,8 @@ public class Season {
 	public static int[][] orderedStandings = new int[5][6];
 	private static Game[] seasonGame = new Game[5];
 	private static Game[] playoffGame = new Game[7];
-	private static double[][] multipleSeasonRecords = new double[6][6];
-	public static double[][] multOrderedStandings = new double[6][6];
+	private static double[][] multipleSeasonRecords = new double[7][6];
+	public static double[][] multOrderedStandings = new double[7][6];
 	public static int[] teamOrder = new int [6];
 	private static Team[] playoffTeams = new Team[4];
 	private static Team[] finalsTeams = new Team[2];
@@ -79,6 +79,9 @@ public class Season {
 		
 		// Simulates the games in multiple seasons
 		for( int l = 0; l < gamesPlayed; l++) {
+			int records[][] = new int[5][6];
+			int[] playoffRecords = new int[4];
+			int[] finalsRecords = new int[2];
 			for( int k = 0; k < 5; k++) {
 				for( int j = k + 1; j < 6; j++) {
 					for( int i = 0; i < 5; i++) {
@@ -130,16 +133,24 @@ public class Season {
 			
 			// Simulate Playoffs
 						
+			int[] playoffTeamIndex = new int[4];
+			
 			for( int j = 0; j < 4; j++) {
 				int pointsflag = 0;
 				for( int i = 0; i < 6; i++) {
 					if( multipleSeasonRecords[4][i] > multipleSeasonRecords[4][pointsflag]) pointsflag = i;
 				}
-				for( int i = 0; i < 4; i++) {
-					playoffTeams[i] = seasonTeams[pointsflag];
-				}
+				playoffTeams[j] = seasonTeams[pointsflag];
+				multipleSeasonRecords[4][pointsflag] = 0;
+				playoffTeamIndex[j] = pointsflag;
 			}
 			
+			
+			for( int i = 0; i<4; i++) {
+				System.out.println(playoffTeams[i]);
+			}
+			
+
 			for( int i = 0; i < 7; i++) {
 				playoffGame[i] = new Game ( playoffTeams[0], playoffTeams[3]);
 				SimEngine.simulateGame(playoffGame[i]);
@@ -156,6 +167,7 @@ public class Season {
 			}
 			else {
 				finalsTeams[0] = playoffTeams[3];
+				playoffTeamIndex[0] = playoffTeamIndex[3];
 			}
 			
 			for( int i = 0; i < 7; i++) {
@@ -174,6 +186,7 @@ public class Season {
 			}
 			else {
 				finalsTeams[1] = playoffTeams[2];
+				playoffTeamIndex[1] = playoffTeamIndex[2];
 			}
 			
 			for( int i = 0; i < 7; i++) {
@@ -188,10 +201,10 @@ public class Season {
 				}
 			}
 			if( finalsRecords[0] > finalsRecords[1]) {
-				
+				multipleSeasonRecords[6][playoffTeamIndex[0]]++;
 			}
 			else {
-				
+				multipleSeasonRecords[6][playoffTeamIndex[1]]++;
 			}
 		}
 		
@@ -208,7 +221,7 @@ public class Season {
 			for( int i = 0; i < 6; i++) {
 				if( multipleSeasonRecords[4][i] > multipleSeasonRecords[4][pointsflag]) pointsflag = i;
 			}
-			for( int i = 0; i < 6; i++) {
+			for( int i = 0; i < 7; i++) {
 				multOrderedStandings[i][j] = multipleSeasonRecords[i][pointsflag];
 				multipleSeasonRecords[i][pointsflag] = 0;
 			}
