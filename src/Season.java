@@ -2,12 +2,17 @@
 public class Season {
 //Team[] lhlTeams = {bos, nyr, chi, tor, nsh, win};
 	
-	public static int[][] records = new int[5][6];
+	private static int[][] records = new int[5][6];
 	public static int[][] orderedStandings = new int[5][6];
-	public static Game[] seasonGame = new Game[5];
-	public static double[][] multipleSeasonRecords = new double[6][6];
+	private static Game[] seasonGame = new Game[5];
+	private static Game[] playoffGame = new Game[7];
+	private static double[][] multipleSeasonRecords = new double[6][6];
 	public static double[][] multOrderedStandings = new double[6][6];
 	public static int[] teamOrder = new int [6];
+	private static Team[] playoffTeams = new Team[4];
+	private static Team[] finalsTeams = new Team[2];
+	private static int[] playoffRecords = new int[4];
+	private static int[] finalsRecords = new int[2];
 
 	// For simulating a single season
 	public static void seasonSim( Team team1, Team team2, Team team3, Team team4, Team team5, Team team6 ) {
@@ -122,6 +127,72 @@ public class Season {
 				if ( multipleSeasonRecords[4][i] > multipleSeasonRecords[4][seasonWinner]) seasonWinner = i;
 			}
 			multipleSeasonRecords[5][seasonWinner]++;
+			
+			// Simulate Playoffs
+						
+			for( int j = 0; j < 4; j++) {
+				int pointsflag = 0;
+				for( int i = 0; i < 6; i++) {
+					if( multipleSeasonRecords[4][i] > multipleSeasonRecords[4][pointsflag]) pointsflag = i;
+				}
+				for( int i = 0; i < 4; i++) {
+					playoffTeams[i] = seasonTeams[pointsflag];
+				}
+			}
+			
+			for( int i = 0; i < 7; i++) {
+				playoffGame[i] = new Game ( playoffTeams[0], playoffTeams[3]);
+				SimEngine.simulateGame(playoffGame[i]);
+				
+				if( playoffGame[i].didTeam1Win()) {
+					playoffRecords[0]++;
+				}
+				else {
+					playoffRecords[3]++;
+				}
+			}
+			if( playoffRecords[0] > playoffRecords[3]) {
+				finalsTeams[0] = playoffTeams[0];
+			}
+			else {
+				finalsTeams[0] = playoffTeams[3];
+			}
+			
+			for( int i = 0; i < 7; i++) {
+				playoffGame[i] = new Game ( playoffTeams[1], playoffTeams[2]);
+				SimEngine.simulateGame(playoffGame[i]);
+				
+				if( playoffGame[i].didTeam1Win()) {
+					playoffRecords[1]++;
+				}
+				else {
+					playoffRecords[2]++;
+				}
+			}
+			if( playoffRecords[1] > playoffRecords[2]) {
+				finalsTeams[1] = playoffTeams[1];
+			}
+			else {
+				finalsTeams[1] = playoffTeams[2];
+			}
+			
+			for( int i = 0; i < 7; i++) {
+				playoffGame[i] = new Game ( finalsTeams[0], finalsTeams[1]);
+				SimEngine.simulateGame(playoffGame[i]);
+				
+				if( playoffGame[i].didTeam1Win()) {
+					finalsRecords[0]++;
+				}
+				else {
+					finalsRecords[1]++;
+				}
+			}
+			if( finalsRecords[0] > finalsRecords[1]) {
+				
+			}
+			else {
+				
+			}
 		}
 		
 		// Get averages
