@@ -79,9 +79,9 @@ public class Season {
 		
 		// Simulates the games in multiple seasons
 		for( int l = 0; l < gamesPlayed; l++) {
-			int records[][] = new int[5][6];
-			int[] playoffRecords = new int[4];
-			int[] finalsRecords = new int[2];
+			records = new int[5][6];
+			playoffRecords = new int[4];
+			finalsRecords = new int[2];
 			for( int k = 0; k < 5; k++) {
 				for( int j = k + 1; j < 6; j++) {
 					for( int i = 0; i < 5; i++) {
