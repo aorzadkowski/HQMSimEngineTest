@@ -1,3 +1,4 @@
+package sim;
 
 public class SimEngine {
 	public static double maxOffense = 59.2;

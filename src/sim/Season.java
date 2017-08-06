@@ -1,3 +1,4 @@
+package sim;
 
 public class Season {
 //Team[] lhlTeams = {bos, nyr, chi, tor, nsh, win};

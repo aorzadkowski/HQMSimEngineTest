@@ -1,3 +1,4 @@
+package generation;
 
 public class NameGenerator {
 	private static String[] firstNames = {"A.", "B.", "C.", "D.", "E.", "F."};

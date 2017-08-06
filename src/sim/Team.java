@@ -1,3 +1,7 @@
+package sim;
+
+import generation.PlayerFactory;
+import hqmdatabase.Player;
 
 public class Team {
 	public Player[] forwards;

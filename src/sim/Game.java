@@ -1,4 +1,4 @@
-
+package sim;
 public class Game {
 	private Team team1;
 	private Team team2;

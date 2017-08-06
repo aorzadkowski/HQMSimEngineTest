@@ -1,3 +1,4 @@
+package hqmdatabase;
 
 public enum Role {
 	SNIPER,PLAYMAKER,DANGLER,TWO_WAY_FORWARD,OFFENSIVE_DMAN,DEFENSIVE_DMAN;

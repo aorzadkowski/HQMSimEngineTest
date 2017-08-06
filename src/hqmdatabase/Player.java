@@ -1,6 +1,8 @@
+package hqmdatabase;
 
 public class Player {
 	private String name;
+	private String season;
 	public Role role;  // Made public in new commit
 	
 	public int[] stats = new int[9];  // Made public in new commit
@@ -19,10 +21,11 @@ public class Player {
 	 * @param defAwareness
 	 * @param reliability
 	 */
-	public Player (String name, Role role, int faceoffs, int passing, int receiving, int shooting,
+	public Player (String name, String season, Role role,int faceoffs, int passing, int receiving, int shooting,
 					int handEye, int stickhandling, int offAwareness, int defAwareness, int reliability) {
 		this.name = name;
 		this.role = role;
+		this.season = season;
 		
 		stats[0] = faceoffs % 21;
 		stats[1] = passing % 21;
@@ -33,6 +36,24 @@ public class Player {
 		stats[6] = offAwareness % 21;
 		stats[7] = defAwareness % 21;
 		stats[8] = reliability % 21;
+	}
+	
+	public Player (String name, String season, Role role, int[] stats) {
+		this.name = name; 
+		this.role = role;
+		this.season = season;
+		
+		this.stats = stats;
+	}
+	
+	public Player (Player oldPlayer) {
+		this.name = new String(oldPlayer.getName());
+		this.role = oldPlayer.role;
+		this.season = new String(oldPlayer.getSeason());
+		
+		for (int i = 0; i < oldPlayer.stats.length; i++) {
+			this.stats[i] = oldPlayer.stats[i];
+		}
 	}
 	
 	public double getAverage() {
@@ -76,8 +97,23 @@ public class Player {
 		return name;
 	}
 	
+	public String getSeason() {
+		return season;
+	}
+	
 	public int[] getStats() {
 		return stats;
+	}
+	
+	public boolean equals(Player other) {
+		if (!this.name.equals(other.name) || !this.season.equals(other.season) ||
+				this.role != other.role || this.stats.length != other.stats.length)
+			return false;
+		for (int i = 0; i < stats.length; i++) {
+			if (stats[i] != other.stats[i]) return false;
+		}
+		
+		return true;
 	}
 	
 	//Faceoffs, Passing, Receiving, Shooting, Hand Eye, Stickhandling, Off. Awareness, Def. Awareness, Reliability
