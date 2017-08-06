@@ -5,8 +5,8 @@ public class Season {
 	public static int[][] records = new int[5][6];
 	public static int[][] orderedStandings = new int[5][6];
 	public static Game[] seasonGame = new Game[5];
-	public static double[][] multipleSeasonRecords = new double[5][6];
-	public static double[][] multOrderedStandings = new double[5][6];
+	public static double[][] multipleSeasonRecords = new double[6][6];
+	public static double[][] multOrderedStandings = new double[6][6];
 	public static int[] teamOrder = new int [6];
 
 	// For simulating a single season
@@ -116,6 +116,12 @@ public class Season {
 					records[i][j] = 0;
 				}
 			}
+			
+			int seasonWinner = 0;
+			for( int i = 0; i < 6; i++) {
+				if ( multipleSeasonRecords[4][i] > multipleSeasonRecords[4][seasonWinner]) seasonWinner = i;
+			}
+			multipleSeasonRecords[5][seasonWinner]++;
 		}
 		
 		// Get averages
@@ -131,7 +137,7 @@ public class Season {
 			for( int i = 0; i < 6; i++) {
 				if( multipleSeasonRecords[4][i] > multipleSeasonRecords[4][pointsflag]) pointsflag = i;
 			}
-			for( int i = 0; i < 5; i++) {
+			for( int i = 0; i < 6; i++) {
 				multOrderedStandings[i][j] = multipleSeasonRecords[i][pointsflag];
 				multipleSeasonRecords[i][pointsflag] = 0;
 			}

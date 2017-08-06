@@ -155,7 +155,7 @@ public class AppMain {
 								+ Season.multOrderedStandings[1][i] + "-" + Season.multOrderedStandings[2][i]+ "-"
 								+ Season.multOrderedStandings[3][i] + ") \t" 
 					*/			
-					 + Season.multOrderedStandings[4][i]    );
+					 + Season.multOrderedStandings[4][i] + "\tSeason Championships:\t" + Season.multOrderedStandings[5][i]   );
 		}
 	}
 }
