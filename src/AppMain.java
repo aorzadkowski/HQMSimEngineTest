@@ -67,7 +67,7 @@ public class AppMain {
 		
 		Team[] lhlTeams = {bos, nyr, chi, tor, nsh, win};
 
-		int gameCount = 1;
+		int gameCount = 1000000;
 		
 		/*
 		System.out.println("Gonna test " + gameCount + " games.");
@@ -135,15 +135,7 @@ public class AppMain {
 		System.out.println("Most Goals Scored in a Game: \t" + maxGoalsInGame);
 		*/
 		
-		/*
-		Season.seasonSim( lhlTeams[0], lhlTeams[1], lhlTeams[2], lhlTeams[3], lhlTeams[4], lhlTeams[5] );
-		
-		for( int i = 0; i < 6; i++) {
-			System.out.println( lhlTeams[Season.teamOrder[i]].teamName + "\t (" + Season.orderedStandings[0][i] + "-" + Season.orderedStandings[1][i] + "-"
-								+ Season.orderedStandings[2][i]+ "-" + Season.orderedStandings[3][i] + ") \t" + Season.orderedStandings[4][i]    );
-		}
-		*/
-		
+	
 		Season.massSeasonSim( lhlTeams[0], lhlTeams[1], lhlTeams[2], lhlTeams[3], lhlTeams[4], lhlTeams[5], gameCount );
 		
 		System.out.println("Here are the averaged results from simulating S13 LHL " + gameCount + " times! \n");
@@ -155,8 +147,8 @@ public class AppMain {
 								+ Season.multOrderedStandings[1][i] + "-" + Season.multOrderedStandings[2][i]+ "-"
 								+ Season.multOrderedStandings[3][i] + ") \t" 
 					*/			
-					 + Season.multOrderedStandings[4][i] + "\tSeason Championships:\t" + Season.multOrderedStandings[5][i]
-					 + "\tPlayoff Championships:\t" + Season.multOrderedStandings[6][i]);
+					 + Season.multOrderedStandings[4][i] + "\t\t% Season Championships: " + Season.multOrderedStandings[5][i]
+					 + "\t\t% Playoff Championships: " + Season.multOrderedStandings[6][i]);
 		}
 	}
 }
