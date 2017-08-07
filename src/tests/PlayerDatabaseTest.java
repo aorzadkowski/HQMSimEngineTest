@@ -4,7 +4,6 @@ import hqmdatabase.PlayerDatabase;
 import hqmdatabase.Season;
 import hqmdatabase.Position;
 import hqmdatabase.Role;
-import hqmdatabase.Season;
 
 public class PlayerDatabaseTest {
 	public static void databaseTester() {

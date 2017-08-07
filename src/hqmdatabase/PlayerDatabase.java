@@ -23,9 +23,9 @@ public class PlayerDatabase {
 		return true;
 	}
 	
-	public boolean contains(String name, String season) {
+	public boolean contains(String name, Season season) {
 		for (Player player : data) {
-			if (name.equals(player.getName()) && season.equals(player.getSeason())) return true;
+			if (name.equals(player.getName()) && season == player.getSeason()) return true;
 		}
 		
 		return false;
