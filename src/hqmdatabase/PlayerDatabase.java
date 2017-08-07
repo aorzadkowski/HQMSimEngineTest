@@ -39,9 +39,9 @@ public class PlayerDatabase {
 		return size;
 	}
 	
-	public Player retrievePlayer(String name, String season) {
+	public Player retrievePlayer(String name, Season season) {
 		for (Player player : data) {
-			if (name.equals(player.getName()) && season.equals(player.getSeason())) return player;
+			if (name.equals(player.getName()) && season == player.getSeason()) return player;
 		}
 		
 		return null;
@@ -50,9 +50,26 @@ public class PlayerDatabase {
 	public Player replacePlayer(Player newPlayer) {
 		Player oldPlayer = new Player(retrievePlayer(newPlayer.getName(), newPlayer.getSeason()));
 		
-		if (!data.remove(oldPlayer)) System.out.println("Player could not be found!");
+		if (!removePlayer(oldPlayer)) System.out.println("Player could not be found!");
+		
+		addPlayer(newPlayer);
 		
 		return oldPlayer;
+	}
+	
+	public boolean removePlayer (Player player) {
+		return removePlayer(player.getName(), player.getSeason());
+	}
+	
+	public boolean removePlayer (String name, Season season) {
+		for (Player player : data) {
+			if (name.equals(player.getName()) && season == player.getSeason()) 
+				return data.remove(player);
+		}
+		
+		size--;
+		
+		return false;
 	}
 	
 	public ArrayList<String> getNames() {

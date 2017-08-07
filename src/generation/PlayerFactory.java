@@ -1,6 +1,8 @@
 package generation;
 import hqmdatabase.Player;
+import hqmdatabase.Position;
 import hqmdatabase.Role;
+import hqmdatabase.Season;
 
 public class PlayerFactory {
 	public PlayerFactory() {
@@ -8,18 +10,18 @@ public class PlayerFactory {
 	}
 	
 	public Player generateRandomPlayer() {
-		return generatePlayer(NameGenerator.getName(), "RND", pickRoleEqualChance(), randomNumberBetweenRange(12, 20)
+		return generatePlayer(NameGenerator.getName(), Season.NO_SEASON, Position.C, pickRoleEqualChance(), randomNumberBetweenRange(12, 20)
 				, randomNumberBetweenRange(12, 20), randomNumberBetweenRange(12, 20), randomNumberBetweenRange(12, 20)
 				, randomNumberBetweenRange(12, 20), randomNumberBetweenRange(12, 20), randomNumberBetweenRange(12, 20)
 				, randomNumberBetweenRange(12, 20), randomNumberBetweenRange(12, 20));
 	}
 	
-	public Player generatePlayer(String name, String season, Role role, int faceoffs_longShots, int passing, 
+	public Player generatePlayer(String name, Season season, Position position, Role role, int faceoffs_longShots, int passing, 
 								int receiving, int shooting_wristShots, int stickhandling, 
 								int handEye_shotBlocking, int offAwareness, int defAwareness,
 								int reliability) {
 		
-		return new Player(name, season, role, faceoffs_longShots, passing, receiving, shooting_wristShots, stickhandling,
+		return new Player(name, season, position, role, faceoffs_longShots, passing, receiving, shooting_wristShots, stickhandling,
 				handEye_shotBlocking, offAwareness, defAwareness, reliability);
 	}
 	

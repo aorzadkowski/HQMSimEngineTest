@@ -1,75 +1,83 @@
 import hqmdatabase.Player;
+import hqmdatabase.PlayerDatabase;
+import hqmdatabase.Position;
 import hqmdatabase.Role;
-import sim.Season;
+import hqmdatabase.Season;
+import sim.SimulatedSeason;
 import sim.Team;
 import tests.PlayerDatabaseTest;
 
 public class AppMain {
+	
+	public static PlayerDatabase mainDB = new PlayerDatabase();
 
 	public static void main(String[] args) {
 		// System.out.println("Let's test some real teams.");
+		ArgumentLineHandler.processArguments(args);
 		
 		PlayerDatabaseTest.databaseTester();
 		
+		System.out.println(mainDB.getSize());
+		
 		Team team1 = new Team("Team one", 
-					new Player("Lucic", "LHL S13", Role.SNIPER, 15, 16, 19, 19, 19, 19, 19, 15, 20),
-					new Player("Tony Flow", "LHL S13", Role.PLAYMAKER, 13, 15, 14, 15, 17, 15, 16, 16, 20),
-					new Player("Mat", "LHL S13", Role.OFFENSIVE_DMAN, 16, 17, 16, 16, 15, 15, 15, 15, 12),
-					new Player("FatSquirrel", "LHL S13", Role.OFFENSIVE_DMAN, 13, 13, 11, 13, 14, 14, 12, 14, 16) );
+					new Player("Lucic", Season.LHLS13, Position.C, Role.SNIPER, 15, 16, 19, 19, 19, 19, 19, 15, 20),
+					new Player("Tony Flow", Season.LHLS13, Position.LW, Role.PLAYMAKER, 13, 15, 14, 15, 17, 15, 16, 16, 20),
+					new Player("Mat", Season.LHLS13, Position.LD, Role.OFFENSIVE_DMAN, 16, 17, 16, 16, 15, 15, 15, 15, 12),
+					new Player("FatSquirrel", Season.LHLS13, Position.RD, Role.OFFENSIVE_DMAN, 13, 13, 11, 13, 14, 14, 12, 14, 16) );
 		Team team2 = new Team("Team two", 
-					new Player("tb", "LHL S13", Role.SNIPER, 16, 15, 14, 15, 15, 16, 17, 14, 16),
-					new Player("Kill Pessel", "LHL S13", Role.DANGLER, 12, 12, 13, 15, 14, 14, 14, 10, 17),
-					new Player("KS Otto", "LHL S13", Role.OFFENSIVE_DMAN, 16, 19, 15, 18, 19, 19, 16, 19, 20),
-					new Player("Dman Jerry", "LHL S13", Role.DEFENSIVE_DMAN, 15, 15, 14, 15, 12, 15, 17, 17, 18));
+					new Player("tb", Season.LHLS13, Position.C, Role.SNIPER, 16, 15, 14, 15, 15, 16, 17, 14, 16),
+					new Player("Kill Pessel", Season.LHLS13, Position.LW, Role.DANGLER, 12, 12, 13, 15, 14, 14, 14, 10, 17),
+					new Player("KS Otto", Season.LHLS13, Position.LD, Role.OFFENSIVE_DMAN, 16, 19, 15, 18, 19, 19, 16, 19, 20),
+					new Player("Dman Jerry", Season.LHLS13, Position.RD, Role.DEFENSIVE_DMAN, 15, 15, 14, 15, 12, 15, 17, 17, 18));
 		
 		// \t added for season sim looks, can and probably should be removed (same for win) :v
 		Team bos = new Team("Boston Bruins \t",
-				new Player("Lucic", "LHL S13", Role.SNIPER, 15, 16, 19, 19, 19, 19, 19, 19, 20),
-				new Player("Teemu Salami", "LHL S13", Role.DANGLER, 12, 13, 15, 17, 16, 17, 17, 17, 18),
-				new Player("KS Otto", "LHL S13", Role.OFFENSIVE_DMAN, 16, 19, 15, 18, 19, 19, 16, 16, 20),
-				new Player("Tidge", "LHL S13", Role.DEFENSIVE_DMAN, 14, 15, 15, 15, 12, 15, 17, 17, 16)
+				new Player("Lucic", Season.LHLS13, Position.C, Role.SNIPER, 15, 16, 19, 19, 19, 19, 19, 19, 20),
+				new Player("Teemu Salami", Season.LHLS13, Position.LW, Role.DANGLER, 12, 13, 15, 17, 16, 17, 17, 17, 18),
+				new Player("KS Otto", Season.LHLS13, Position.LD, Role.OFFENSIVE_DMAN, 16, 19, 15, 18, 19, 19, 16, 16, 20),
+				new Player("Tidge", Season.LHLS13, Position.RD, Role.DEFENSIVE_DMAN, 14, 15, 15, 15, 12, 15, 17, 17, 16)
 				);
 		
 		Team nyr = new Team("New York Rangers",
-				new Player("Dick Mcbutts", "LHL S13", Role.SNIPER, 13, 15, 18, 18, 18, 18, 19, 19, 17),
-				new Player("tb", "LHL S13", Role.PLAYMAKER, 16, 15, 14, 15, 15, 16, 17, 17, 16),
-				new Player("TaZeR", "LHL S13", Role.DEFENSIVE_DMAN, 14, 16, 15, 15, 14, 16, 18, 18, 15),
-				new Player("Kapanen", "LHL S13", Role.OFFENSIVE_DMAN, 14, 14, 11, 14, 13, 15, 13, 13, 15)
+				new Player("Dick Mcbutts", Season.LHLS13, Position.C, Role.SNIPER, 13, 15, 18, 18, 18, 18, 19, 19, 17),
+				new Player("tb", Season.LHLS13, Position.LW, Role.PLAYMAKER, 16, 15, 14, 15, 15, 16, 17, 17, 16),
+				new Player("TaZeR", Season.LHLS13, Position.LD, Role.DEFENSIVE_DMAN, 14, 16, 15, 15, 14, 16, 18, 18, 15),
+				new Player("Kapanen", Season.LHLS13, Position.RD, Role.OFFENSIVE_DMAN, 14, 14, 11, 14, 13, 15, 13, 13, 15)
 				);
 		
 		Team chi = new Team("Chicago Blackhawks",
-				new Player("Dyaloreax", "LHL S13", Role.SNIPER, 10, 15, 20, 20, 18, 17, 19, 19, 20),
-				new Player("Tallmidget", "LHL S13", Role.TWO_WAY_FORWARD, 17, 15, 13, 14, 16, 13, 16, 16, 16),
-				new Player("BeeGeePi", "LHL S13", Role.OFFENSIVE_DMAN, 17, 17, 15, 16, 16, 17, 18, 18, 20),
-				new Player("FatSquirrel", "LHL S13", Role.OFFENSIVE_DMAN, 13, 13, 11, 13, 14, 14, 12, 12, 16)
+				new Player("Dyaloreax", Season.LHLS13, Position.C, Role.SNIPER, 10, 15, 20, 20, 18, 17, 19, 19, 20),
+				new Player("Tallmidget", Season.LHLS13, Position.LW, Role.TWO_WAY_FORWARD, 17, 15, 13, 14, 16, 13, 16, 16, 16),
+				new Player("BeeGeePi", Season.LHLS13, Position.LD, Role.OFFENSIVE_DMAN, 17, 17, 15, 16, 16, 17, 18, 18, 20),
+				new Player("FatSquirrel", Season.LHLS13, Position.RD, Role.OFFENSIVE_DMAN, 13, 13, 11, 13, 14, 14, 12, 12, 16)
 				);
 		
 		Team tor = new Team("Toronto Maple Leafs",
-				new Player("NHLKilla", "LHL S13", Role.PLAYMAKER, 12, 13, 13, 14, 14, 14, 15, 15, 15),
-				new Player("Gabe", "LHL S13", Role.DANGLER, 16, 15, 15, 16, 19, 18, 18, 18, 18),
-				new Player("xParabolax", "LHL S13", Role.DEFENSIVE_DMAN, 14, 15, 12, 16, 16, 15, 14, 14, 17),
-				new Player("Jabba", "LHL S13", Role.OFFENSIVE_DMAN,13, 14, 12, 15, 16, 14, 13, 13, 14)
+				new Player("NHLKilla", Season.LHLS13, Position.C, Role.PLAYMAKER, 12, 13, 13, 14, 14, 14, 15, 15, 15),
+				new Player("Gabe", Season.LHLS13, Position.LW, Role.DANGLER, 16, 15, 15, 16, 19, 18, 18, 18, 18),
+				new Player("xParabolax", Season.LHLS13, Position.LD, Role.DEFENSIVE_DMAN, 14, 15, 12, 16, 16, 15, 14, 14, 17),
+				new Player("Jabba", Season.LHLS13, Position.RD, Role.OFFENSIVE_DMAN,13, 14, 12, 15, 16, 14, 13, 13, 14)
 				);
 
 		Team to2 = new Team("Toronto Maple Leafs 2",
-				new Player("NHLKilla", "LHL S13", Role.PLAYMAKER, 12, 13, 13, 14, 14, 14, 15, 15, 15),
-				new Player("Gabe", "LHL S13", Role.DANGLER, 16, 15, 15, 16, 19, 18, 18, 18, 18),
-				new Player("xParabolax", "LHL S13", Role.OFFENSIVE_DMAN, 14, 15, 12, 16, 16, 15, 14, 14, 17),
-				new Player("Jabba", "LHL S13", Role.OFFENSIVE_DMAN,13, 14, 12, 15, 16, 14, 13, 13, 14)
+				new Player("NHLKilla", Season.LHLS13, Position.C, Role.PLAYMAKER, 12, 13, 13, 14, 14, 14, 15, 15, 15),
+				new Player("Gabe", Season.LHLS13, Position.LW, Role.DANGLER, 16, 15, 15, 16, 19, 18, 18, 18, 18),
+				new Player("xParabolax", Season.LHLS13, Position.LD, Role.OFFENSIVE_DMAN, 14, 15, 12, 16, 16, 15, 14, 14, 17),
+				new Player("Jabba", Season.LHLS13, Position.RD, Role.OFFENSIVE_DMAN,13, 14, 12, 15, 16, 14, 13, 13, 14)
 				);
 		
 		Team nsh = new Team("Nashville Predators",
-				new Player("CrabInATree", "LHL S13", Role.PLAYMAKER, 19, 19, 17, 16, 18, 16, 19, 19, 20),
-				new Player("Tony Flow", "LHL S13", Role.TWO_WAY_FORWARD, 13, 15, 14, 15, 17, 15, 16, 16, 20),
-				new Player("Zam", "LHL S13", Role.OFFENSIVE_DMAN, 17, 18, 17, 16, 17, 17, 17, 17, 19),
-				new Player("Dman Jerry", "LHL S13", Role.DEFENSIVE_DMAN, 15, 15, 14, 15, 12, 15, 17, 17, 18)
+				new Player("CrabInATree", Season.LHLS13, Position.C, Role.PLAYMAKER, 19, 19, 17, 16, 18, 16, 19, 19, 20),
+				new Player("Tony Flow", Season.LHLS13, Position.LW, Role.TWO_WAY_FORWARD, 13, 15, 14, 15, 17, 15, 16, 16, 20),
+				new Player("Zam", Season.LHLS13, Position.LD, Role.OFFENSIVE_DMAN, 17, 18, 17, 16, 17, 17, 17, 17, 19),
+				new Player("Dman Jerry", Season.LHLS13, Position.RD, Role.DEFENSIVE_DMAN, 15, 15, 14, 15, 12, 15, 17, 17, 18)
 				);
 		
 		Team win = new Team("Winnipeg Jets \t",
-				new Player("guy la floor", "LHL S13", Role.TWO_WAY_FORWARD, 14, 15, 15, 17, 17, 17, 16, 16, 20),
-				new Player("Drag", "LHL S13", Role.DANGLER, 13, 14, 14, 16, 16, 16, 16, 16, 17),
-				new Player("Dalfan", "LHL S13", Role.OFFENSIVE_DMAN, 16, 18, 16, 17, 17, 16, 18, 18, 16),
-				new Player("Icey", "LHL S13", Role.OFFENSIVE_DMAN, 15, 16, 14, 15, 14, 16, 16, 16, 17)
+				new Player("guy la floor", Season.LHLS13, Position.C, Role.TWO_WAY_FORWARD, 14, 15, 15, 17, 17, 17, 16, 16, 20),
+				new Player("Drag", Season.LHLS13, Position.LW, Role.DANGLER, 13, 14, 14, 16, 16, 16, 16, 16, 17),
+				new Player("Dalfan", Season.LHLS13, Position.LD, Role.OFFENSIVE_DMAN, 16, 18, 16, 17, 17, 16, 18, 18, 16),
+				new Player("Icey", Season.LHLS13, Position.RD, Role.OFFENSIVE_DMAN, 15, 16, 14, 15, 14, 16, 16, 16, 17)
 				);
 		
 		Team[] lhlTeams = {bos, nyr, chi, tor, nsh, win};
@@ -143,19 +151,19 @@ public class AppMain {
 		*/
 		
 	
-		Season.massSeasonSim( lhlTeams[0], lhlTeams[1], lhlTeams[2], lhlTeams[3], lhlTeams[4], lhlTeams[5], gameCount );
+		SimulatedSeason.massSeasonSim( lhlTeams[0], lhlTeams[1], lhlTeams[2], lhlTeams[3], lhlTeams[4], lhlTeams[5], gameCount );
 		
 		System.out.println("Here are the averaged results from simulating S13 LHL " + gameCount + " times! \n");
 		
 		for( int i = 0; i < 6; i++) {
-			System.out.println( lhlTeams[Season.teamOrder[i]].teamName + "\t "
+			System.out.println( lhlTeams[SimulatedSeason.teamOrder[i]].teamName + "\t "
 					/*
 					 + "(" + Season.multOrderedStandings[0][i] + "-"
 								+ Season.multOrderedStandings[1][i] + "-" + Season.multOrderedStandings[2][i]+ "-"
 								+ Season.multOrderedStandings[3][i] + ") \t" 
 					*/			
-					 + Season.multOrderedStandings[4][i] + "\t\t% Season Championships: " + Season.multOrderedStandings[5][i]
-					 + "\t\t% Playoff Championships: " + Season.multOrderedStandings[6][i]);
+					 + SimulatedSeason.multOrderedStandings[4][i] + "\t\t% Season Championships: " + SimulatedSeason.multOrderedStandings[5][i]
+					 + "\t\t% Playoff Championships: " + SimulatedSeason.multOrderedStandings[6][i]);
 		}
 	}
 }

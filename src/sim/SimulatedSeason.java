@@ -1,6 +1,6 @@
 package sim;
 
-public class Season {
+public class SimulatedSeason {
 //Team[] lhlTeams = {bos, nyr, chi, tor, nsh, win};
 	
 	private static int[][] records = new int[5][6];

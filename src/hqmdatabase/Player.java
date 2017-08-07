@@ -2,7 +2,8 @@ package hqmdatabase;
 
 public class Player {
 	private String name;
-	private String season;
+	private Season season;
+	private Position position;
 	public Role role;  // Made public in new commit
 	
 	public int[] stats = new int[9];  // Made public in new commit
@@ -21,11 +22,12 @@ public class Player {
 	 * @param defAwareness
 	 * @param reliability
 	 */
-	public Player (String name, String season, Role role,int faceoffs, int passing, int receiving, int shooting,
+	public Player (String name, Season season, Position position, Role role,int faceoffs, int passing, int receiving, int shooting,
 					int handEye, int stickhandling, int offAwareness, int defAwareness, int reliability) {
 		this.name = name;
 		this.role = role;
 		this.season = season;
+		this.position = position;
 		
 		stats[0] = faceoffs % 21;
 		stats[1] = passing % 21;
@@ -38,10 +40,11 @@ public class Player {
 		stats[8] = reliability % 21;
 	}
 	
-	public Player (String name, String season, Role role, int[] stats) {
+	public Player (String name, Season season, Position position, Role role, int[] stats) {
 		this.name = name; 
 		this.role = role;
 		this.season = season;
+		this.position = position;
 		
 		this.stats = stats;
 	}
@@ -49,7 +52,8 @@ public class Player {
 	public Player (Player oldPlayer) {
 		this.name = new String(oldPlayer.getName());
 		this.role = oldPlayer.role;
-		this.season = new String(oldPlayer.getSeason());
+		this.season = oldPlayer.getSeason();
+		this.position = oldPlayer.position;
 		
 		for (int i = 0; i < oldPlayer.stats.length; i++) {
 			this.stats[i] = oldPlayer.stats[i];
@@ -97,7 +101,7 @@ public class Player {
 		return name;
 	}
 	
-	public String getSeason() {
+	public Season getSeason() {
 		return season;
 	}
 	
