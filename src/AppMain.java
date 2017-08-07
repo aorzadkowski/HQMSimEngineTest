@@ -15,7 +15,7 @@ public class AppMain {
 		// System.out.println("Let's test some real teams.");
 		ArgumentLineHandler.processArguments(args);
 		
-		PlayerDatabaseTest.databaseTester();
+		// PlayerDatabaseTest.databaseTester();
 		
 		System.out.println(mainDB.getSize());
 		
