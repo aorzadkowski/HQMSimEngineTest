@@ -52,6 +52,22 @@ public class Player {
 		stats[19] = consistency % 21;
 	}
 	
+	public Player (String name, Season season, Position position, Role role, int longshotsaves, int wristshotsaves, int breakawaysaves,
+			int reboundcontrol, int positioning, int stickhandling, int passing) {
+		this.name = name;
+		this.role = role;
+		this.season = season;
+		this.position = position;
+
+		stats[0] = longshotsaves % 21;
+		stats[1] = wristshotsaves % 21;
+		stats[2] = breakawaysaves % 21;
+		stats[3] = reboundcontrol % 21;
+		stats[4] = positioning % 21;
+		stats[5] = stickhandling % 21;
+		stats[6] = passing % 21;
+	}
+	
 	public Player (String name, Season season, Position position, Role role, int[] stats) {
 		this.name = name; 
 		this.role = role;
