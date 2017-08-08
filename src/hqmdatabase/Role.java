@@ -1,7 +1,7 @@
 package hqmdatabase;
 
 public enum Role {
-	SNIPER,PLAYMAKER,DANGLER,TWO_WAY_FORWARD,OFFENSIVE_DMAN,DEFENSIVE_DMAN,NO_ROLE;
+	SNIPER,PLAYMAKER,DANGLER,TWO_WAY_FORWARD,OFFENSIVE_DMAN,DEFENSIVE_DMAN,DEVELOPER,NO_ROLE;
 	
 	public String toString() {
 		switch (this) {
@@ -11,6 +11,7 @@ public enum Role {
 		case TWO_WAY_FORWARD: return "Two Way Forward";
 		case OFFENSIVE_DMAN: return "Offensive Defenceman";
 		case DEFENSIVE_DMAN: return "Defensive Defenceman";
+		case DEVELOPER: return "Developer";
 		default: return "No Role";
 		}
 	}
@@ -23,6 +24,7 @@ public enum Role {
         case TWO_WAY_FORWARD: return new double[] {0.05,0.115,0.115,0.12,0.15,0.09,0.17,0.14,0.05};
         case OFFENSIVE_DMAN: return new double[] {0.155, 0.105, 0.055, 0.105, 0.105, 0.155, 0.185, 0.085, 0.05};
         case DEFENSIVE_DMAN: return new double[] {0.145, 0.095, 0.045, 0.095, 0.095, 0.145, 0.215, 0.115, 0.05};
+        case DEVELOPER: return new double[] {0.1111, 0.1111, 0.1111, 0.1111, 0.1111, 0.1111, 0.1111, 0.1111, 0.1111};
         default: return new double[] {0.00,0.0,0.00,0.00,0.00,0.00,0.00,0.00,0.00};
         }
 	 }

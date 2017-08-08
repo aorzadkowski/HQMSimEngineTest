@@ -15,7 +15,6 @@ public class SimEngine {
 		boxScore[0] = getNetScoreInPeriod(team1, team2);
 		boxScore[1] = getNetScoreInPeriod(team1, team2);
 		boxScore[2] = getNetScoreInPeriod(team1, team2);
-
 		
 		int team1Score = (boxScore[0][0] + boxScore[1][0] + boxScore[2][0]);
 		int team2Score = (boxScore[0][1] + boxScore[1][1] + boxScore[2][1]);
