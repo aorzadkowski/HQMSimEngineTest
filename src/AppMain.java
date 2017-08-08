@@ -89,7 +89,7 @@ public class AppMain {
 		
 		// Team[] lhlTeams = {bos, nyr, chi, tor, nsh, win};
 
-		int gameCount = 1;
+		int gameCount = 1000000;
 		
 		
 		System.out.println("Gonna test " + gameCount + " games.");
@@ -148,19 +148,18 @@ public class AppMain {
 		System.out.println("% of Games with a mercy score:\t" + (((double) mercyGames) * 100 / gameCount));
 		System.out.println("% of OT Games:\t" + (((double) totalOTGames) * 100 / gameCount));
 		System.out.println("Most OT periods:\t" + mostOT);
-		System.out.println("Most Goals Scored in a Game: \t" + maxGoalsInGame);
-		// for ( int i = 0; i < 20; i++) {
-		//	System.out.println(team1Out.bothTotal[0]);
-		System.out.println(team1Out.offenseTotal[0]);
+		System.out.println("Most Goals Scored in a Game: \t" + maxGoalsInGame + "\n");
+
 		
+		for ( int i = 0; i < 4; i++ ) {
+			System.out.println(team1Out.teamPlayers[i].getName() + "\t\t" + team2Out.teamPlayers[i].getName());
+			System.out.println("Goals: " + (SimEngine.team1MultiStats[0][i] / gameCount ) + "\t\tGoals: " + (SimEngine.team2MultiStats[0][i] / gameCount ));
+			System.out.println("Assists: " + (SimEngine.team1MultiStats[1][i] / gameCount ) + "\t\tAssists: " + (SimEngine.team2MultiStats[1][i] / gameCount ) + "\n");
+			}
 		
-		System.out.println(team1Out.oRatio[0]);
-		System.out.println(team1Out.dRatio[0]);
-		System.out.println(team1Out.bRatio[0]);
-		//}
+
 		
 		/*
-		
 		SimulatedSeason.massSeasonSim( lhlTeams[0], lhlTeams[1], lhlTeams[2], lhlTeams[3], lhlTeams[4], lhlTeams[5], gameCount );
 		
 		System.out.println("Here are the averaged results from simulating S13 LHL " + gameCount + " times! \n");

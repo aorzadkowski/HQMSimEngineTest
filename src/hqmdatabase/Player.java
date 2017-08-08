@@ -121,6 +121,10 @@ public class Player {
 		return stats;
 	}
 	
+	public int getStat( int statNum ) {
+		return stats[statNum];
+	}
+	
 	public boolean equals(Player other) {
 		if (!this.name.equals(other.name) || !this.season.equals(other.season) ||
 				this.role != other.role || this.stats.length != other.stats.length)

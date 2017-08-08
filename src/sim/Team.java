@@ -69,7 +69,7 @@ public class Team {
 	for ( int j = 0; j < 4; j++) {
 		for ( int i = 0; i < 20; i++) {
 			if ( i == 12 || i == 15 || i == 19) bothTotal[j] += weightsForPlayer[i][j];
-			if ( i == 13 || i == 14 || i == 16 || i == 18) defenseTotal[j] += weightsForPlayer[i][j];
+			else if ( i == 13 || i == 14 || i == 16 || i == 18) defenseTotal[j] += weightsForPlayer[i][j];
 			else offenseTotal[j] += weightsForPlayer[i][j];
 		}
 	}

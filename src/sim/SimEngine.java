@@ -8,8 +8,11 @@ public class SimEngine {
 	private static int[] team2Blocks = new int[4];
 	private static int[] team1Points = new int[4];
 	private static int[] team2Points = new int[4];
-	public static int[] team1Stats = new int[4];
-	public static int[] team2Stats = new int[4];
+	public static int[][] team1Stats = new int[2][4];
+	public static int[][] team2Stats = new int[2][4];
+	public static double[][] team1MultiStats = new double[2][4];
+	public static double[][] team2MultiStats = new double[2][4];
+	public static double[] probArray = new double[5];
 	
 	public static void simulateGame(Game game) {
 		
@@ -74,6 +77,8 @@ public class SimEngine {
 		}
 		
 		game.setScore(boxScore);
+		team1Stats = new int[2][4]; // Resets individual game stats
+		team2Stats = new int[2][4]; // Resets individual game stats
 	}
 	
 	private static int[] getNetScoreInPeriod(Team team1, Team team2) {
@@ -91,13 +96,24 @@ public class SimEngine {
 		for ( int i = 0; i < 4; i++ ) {
 			team1Points[i] = team1Goals[i] + team2Blocks[3-i];
 			if (team1Points[i] < 0) team1Points[i] = 0;
-			team1Stats[i] = team1Points[i];
+			team1Stats[0][i] += team1Points[i];
 			team1Total += team1Points[i];
+			
+			if ( team1Points[i] > 0) calcApple(team1, team1Points[i], i, 1);
 		
 			team2Points[i] = team2Goals[i] + team1Blocks[3-i];
 			if (team2Points[i] < 0) team2Points[i] = 0;
-			team2Stats[i] = team2Points[i];
+			team2Stats[0][i] += team2Points[i];
 			team2Total += team2Points[i];
+			
+			if ( team2Points[i] > 0) calcApple(team2, team2Points[i], i, 2);
+			
+			team1MultiStats[0][i] += team1Stats[0][i];
+			team1MultiStats[1][i] += team1Stats[1][i];
+			team2MultiStats[0][i] += team2Stats[0][i];
+			team2MultiStats[1][i] += team2Stats[1][i];
+			
+			
 		}
 		return new int[] {team1Total, team2Total};
 	}
@@ -107,7 +123,7 @@ public class SimEngine {
 		int currentScore = 0;
 			if (randomNumb <= team.oRatio[player]) {
 				currentScore += 1;
-		//		currentScore += getScoreInPeriod(team, 1, player);
+				currentScore += getScoreInPeriod(team, 1, player);
 			}
 		return currentScore;
 	}
@@ -126,7 +142,7 @@ public class SimEngine {
 		int currentDefCont = 0;
 		if (randomNumb <= team.dRatio[player]) {
 			currentDefCont -= 1;
-		//	currentDefCont += getBlocksInPeriod(team, 1, player);
+			currentDefCont += getBlocksInPeriod(team, 1, player);
 		}
 		return currentDefCont;
 	}
@@ -138,5 +154,42 @@ public class SimEngine {
 			return (-1) - getBlocksInPeriod(team, score + 1);
 		}
 		return 0;
+	}
+	
+	public static void calcApple( Team team, int goals, int player, int teamNum ) {
+		for ( int i = 0; i < goals; i++ ) {
+			double[] playerPassing = {0,0,0,0};
+			int passingTotal = 0;
+			probArray = new double[]{0.15,0.15,0.15,0.15,0.15};
+			
+			int appleFlag = 0;
+			
+			for ( int j = 0; j < 4; j++ ) {
+				if( j != player ) playerPassing[j] = team.teamPlayers[j].stats[4] + team.teamPlayers[j].stats[5] + team.teamPlayers[j].stats[6];
+				passingTotal += playerPassing[j];
+			}
+			for ( int j = 0; j < 4; j++) {
+				playerPassing[j] =  playerPassing[j] / passingTotal;
+				if ( j == player ) probArray[j+1] = probArray[j];
+				else	probArray[j+1] = probArray[j] + playerPassing[j] - 0.05;
+			}
+			
+			
+			double prob = Math.random();
+			for ( int j = 0; j < 5; j++) {
+				if( j != (player + 1) ) {
+					if( prob < probArray[j] && j != 0 && appleFlag == 0 ) {
+						if ( teamNum == 1) {
+							team1Stats[1][j-1]++;
+							appleFlag = 1;
+						}
+						else {
+							team2Stats[1][j-1]++;
+							appleFlag = 1;
+						}
+					}
+				}
+			}
+		}
 	}
 }
