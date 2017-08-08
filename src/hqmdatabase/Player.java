@@ -4,9 +4,9 @@ public class Player {
 	private String name;
 	private Season season;
 	private Position position;
-	public Role role;  // Made public in new commit
+	public Role role; 
 	
-	public int[] stats = new int[9];  // Made public in new commit
+	public int[] stats = new int[20]; 
 	
 	/**
 	 * All ints should be between 0-20;
@@ -22,22 +22,34 @@ public class Player {
 	 * @param defAwareness
 	 * @param reliability
 	 */
-	public Player (String name, Season season, Position position, Role role,int faceoffs, int passing, int receiving, int shooting,
-					int handEye, int stickhandling, int offAwareness, int defAwareness, int reliability) {
+	public Player (String name, Season season, Position position, Role role, int faceoffs, int longshots, int pointshots, int wristshots, int boardpassing, 
+					int openicepassing, int breakoutpassing, int boardreceiving, int openicereceiving, int handeye, int stickhandling, int dangling,
+					int possession, int shotblocking, int hitting, int positioning, int pokecheck, int offAwareness, int defAwareness, int consistency) {
 		this.name = name;
 		this.role = role;
 		this.season = season;
 		this.position = position;
 		
 		stats[0] = faceoffs % 21;
-		stats[1] = passing % 21;
-		stats[2] = receiving % 21;
-		stats[3] = shooting % 21;
-		stats[4] = handEye % 21;
-		stats[5] = stickhandling % 21;
-		stats[6] = offAwareness % 21;
-		stats[7] = defAwareness % 21;
-		stats[8] = reliability % 21;
+		stats[1] = longshots % 21;
+		stats[2] = pointshots % 21;
+		stats[3] = wristshots % 21;
+		stats[4] = boardpassing % 21;
+		stats[5] = openicepassing % 21;
+		stats[6] = breakoutpassing % 21;
+		stats[7] = boardreceiving % 21;
+		stats[8] = openicereceiving % 21;
+		stats[9] = handeye % 21;
+		stats[10] = stickhandling % 21;
+		stats[11] = dangling % 21;
+		stats[12] = possession % 21;
+		stats[13] = shotblocking % 21;
+		stats[14] = hitting % 21;
+		stats[15] = positioning % 21;
+		stats[16] = pokecheck % 21;
+		stats[17] = offAwareness % 21;
+		stats[18] = defAwareness % 21;
+		stats[19] = consistency % 21;
 	}
 	
 	public Player (String name, Season season, Position position, Role role, int[] stats) {

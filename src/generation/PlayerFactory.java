@@ -13,16 +13,20 @@ public class PlayerFactory {
 		return generatePlayer(NameGenerator.getName(), Season.NO_SEASON, Position.C, pickRoleEqualChance(), randomNumberBetweenRange(12, 20)
 				, randomNumberBetweenRange(12, 20), randomNumberBetweenRange(12, 20), randomNumberBetweenRange(12, 20)
 				, randomNumberBetweenRange(12, 20), randomNumberBetweenRange(12, 20), randomNumberBetweenRange(12, 20)
-				, randomNumberBetweenRange(12, 20), randomNumberBetweenRange(12, 20));
+				, randomNumberBetweenRange(12, 20), randomNumberBetweenRange(12, 20), randomNumberBetweenRange(12, 20)
+				, randomNumberBetweenRange(12, 20), randomNumberBetweenRange(12, 20), randomNumberBetweenRange(12, 20)
+				, randomNumberBetweenRange(12, 20), randomNumberBetweenRange(12, 20), randomNumberBetweenRange(12, 20)
+				, randomNumberBetweenRange(12, 20), randomNumberBetweenRange(12, 20), randomNumberBetweenRange(12, 20)
+				, randomNumberBetweenRange(12, 20));
 	}
 	
-	public Player generatePlayer(String name, Season season, Position position, Role role, int faceoffs_longShots, int passing, 
-								int receiving, int shooting_wristShots, int stickhandling, 
-								int handEye_shotBlocking, int offAwareness, int defAwareness,
-								int reliability) {
+	public Player generatePlayer(String name, Season season, Position position, Role role, int faceoffs, int longshots, int pointshots, int wristshots, int boardpassing, 
+			int openicepassing, int breakoutpassing, int boardreceiving, int openicereceiving, int handeye, int stickhandling, int dangling,
+			int possession, int shotblocking, int hitting, int positioning, int pokecheck, int offAwareness, int defAwareness, int consistency) {
 		
-		return new Player(name, season, position, role, faceoffs_longShots, passing, receiving, shooting_wristShots, stickhandling,
-				handEye_shotBlocking, offAwareness, defAwareness, reliability);
+		return new Player(name, season, position, role, faceoffs, longshots, pointshots, wristshots, boardpassing, 
+				openicepassing, breakoutpassing, boardreceiving, openicereceiving, handeye, stickhandling, dangling,
+				possession, shotblocking, hitting, positioning, pokecheck, offAwareness, defAwareness, consistency);
 	}
 	
 	public Player generateRandomDMan() {

@@ -3,6 +3,8 @@ import hqmdatabase.PlayerDatabase;
 import hqmdatabase.Position;
 import hqmdatabase.Role;
 import hqmdatabase.Season;
+import sim.Game;
+import sim.SimEngine;
 import sim.SimulatedSeason;
 import sim.Team;
 import tests.PlayerDatabaseTest;
@@ -17,8 +19,9 @@ public class AppMain {
 		
 		// PlayerDatabaseTest.databaseTester();
 		
-		System.out.println(mainDB.getSize());
+		// System.out.println(mainDB.getSize());
 		
+		/*
 		Team team1 = new Team("Team one", 
 					new Player("Lucic", Season.LHLS13, Position.C, Role.SNIPER, 15, 16, 19, 19, 19, 19, 19, 15, 20),
 					new Player("Tony Flow", Season.LHLS13, Position.LW, Role.PLAYMAKER, 13, 15, 14, 15, 17, 15, 16, 16, 20),
@@ -29,15 +32,17 @@ public class AppMain {
 					new Player("Kill Pessel", Season.LHLS13, Position.LW, Role.DANGLER, 12, 12, 13, 15, 14, 14, 14, 10, 17),
 					new Player("KS Otto", Season.LHLS13, Position.LD, Role.OFFENSIVE_DMAN, 16, 19, 15, 18, 19, 19, 16, 19, 20),
 					new Player("Dman Jerry", Season.LHLS13, Position.RD, Role.DEFENSIVE_DMAN, 15, 15, 14, 15, 12, 15, 17, 17, 18));
+		*/
 		
 		// \t added for season sim looks, can and probably should be removed (same for win) :v
 		Team bos = new Team("Boston Bruins \t",
-				new Player("Lucic", Season.LHLS13, Position.C, Role.SNIPER, 15, 16, 19, 19, 19, 19, 19, 19, 20),
-				new Player("Teemu Salami", Season.LHLS13, Position.LW, Role.DANGLER, 12, 13, 15, 17, 16, 17, 17, 17, 18),
-				new Player("KS Otto", Season.LHLS13, Position.LD, Role.OFFENSIVE_DMAN, 16, 19, 15, 18, 19, 19, 16, 16, 20),
-				new Player("Tidge", Season.LHLS13, Position.RD, Role.DEFENSIVE_DMAN, 14, 15, 15, 15, 12, 15, 17, 17, 16)
+				new Player("Lucic", Season.LHLS13, Position.C, Role.SNIPER, 13, 14, 15, 18, 13, 15, 13, 17, 18, 17, 18, 18, 18, 11, 12, 13, 13, 18, 11, 16),
+				new Player("Teemu Salami", Season.LHLS13, Position.LW, Role.DANGLER, 12, 12, 12, 17, 11, 11, 8, 13, 15, 16, 17, 17, 14, 5, 6, 4, 10, 18, 6, 16),
+				new Player("KS Otto", Season.LHLS13, Position.LD, Role.OFFENSIVE_DMAN, 12, 10, 12, 18, 13, 15, 14, 18, 18, 19, 20, 20, 19, 19, 10, 14, 17, 19, 15, 19),
+				new Player("Tidge", Season.LHLS13, Position.RD, Role.DEFENSIVE_DMAN, 5, 14, 15, 12, 12, 13, 14, 12, 10, 12, 10, 7, 12, 15, 15, 17, 15, 13, 15, 13)
 				);
 		
+		/*
 		Team nyr = new Team("New York Rangers",
 				new Player("Dick Mcbutts", Season.LHLS13, Position.C, Role.SNIPER, 13, 15, 18, 18, 18, 18, 19, 19, 17),
 				new Player("tb", Season.LHLS13, Position.LW, Role.PLAYMAKER, 16, 15, 14, 15, 15, 16, 17, 17, 16),
@@ -65,30 +70,32 @@ public class AppMain {
 				new Player("xParabolax", Season.LHLS13, Position.LD, Role.OFFENSIVE_DMAN, 14, 15, 12, 16, 16, 15, 14, 14, 17),
 				new Player("Jabba", Season.LHLS13, Position.RD, Role.OFFENSIVE_DMAN,13, 14, 12, 15, 16, 14, 13, 13, 14)
 				);
-		
+		*/
 		Team nsh = new Team("Nashville Predators",
-				new Player("CrabInATree", Season.LHLS13, Position.C, Role.PLAYMAKER, 19, 19, 17, 16, 18, 16, 19, 19, 20),
-				new Player("Tony Flow", Season.LHLS13, Position.LW, Role.TWO_WAY_FORWARD, 13, 15, 14, 15, 17, 15, 16, 16, 20),
-				new Player("Zam", Season.LHLS13, Position.LD, Role.OFFENSIVE_DMAN, 17, 18, 17, 16, 17, 17, 17, 17, 19),
-				new Player("Dman Jerry", Season.LHLS13, Position.RD, Role.DEFENSIVE_DMAN, 15, 15, 14, 15, 12, 15, 17, 17, 18)
+				new Player("CrabInATree", Season.LHLS13, Position.C, Role.PLAYMAKER, 19, 13, 14, 17, 18, 19, 18, 17, 17, 17, 16, 16, 17, 14, 13, 16, 16, 18, 17, 18),
+				new Player("Tony Flow", Season.LHLS13, Position.LW, Role.TWO_WAY_FORWARD, 12, 12, 12, 15, 14, 15, 14, 14, 14, 17, 13, 12, 14, 15, 12, 15, 13, 16, 16, 15),
+				new Player("Zam", Season.LHLS13, Position.LD, Role.OFFENSIVE_DMAN, 7, 14, 15, 15, 15, 14, 16, 16, 14, 16, 17, 15, 15, 13, 9, 15, 14, 17, 14, 13),
+				new Player("Dman Jerry", Season.LHLS13, Position.RD, Role.DEFENSIVE_DMAN, 5, 14, 15, 12, 14, 14, 15, 14, 10, 12, 10, 7, 12, 16, 16, 17, 15, 13, 16, 12)
 				);
 		
+		/*
 		Team win = new Team("Winnipeg Jets \t",
 				new Player("guy la floor", Season.LHLS13, Position.C, Role.TWO_WAY_FORWARD, 14, 15, 15, 17, 17, 17, 16, 16, 20),
 				new Player("Drag", Season.LHLS13, Position.LW, Role.DANGLER, 13, 14, 14, 16, 16, 16, 16, 16, 17),
 				new Player("Dalfan", Season.LHLS13, Position.LD, Role.OFFENSIVE_DMAN, 16, 18, 16, 17, 17, 16, 18, 18, 16),
 				new Player("Icey", Season.LHLS13, Position.RD, Role.OFFENSIVE_DMAN, 15, 16, 14, 15, 14, 16, 16, 16, 17)
 				);
+		*/
 		
-		Team[] lhlTeams = {bos, nyr, chi, tor, nsh, win};
+		// Team[] lhlTeams = {bos, nyr, chi, tor, nsh, win};
 
 		int gameCount = 1;
 		
-		/*
+		
 		System.out.println("Gonna test " + gameCount + " games.");
 		
-		Team testingTeam1 = tor;
-		Team testingTeam2 = to2;
+		Team testingTeam1 = bos;
+		Team testingTeam2 = nsh;
 		
 		Game testGame = new Game (testingTeam1, testingTeam2);
 		
@@ -131,14 +138,8 @@ public class AppMain {
 		Team team2Out = testGame.getTeam2();
 		
 		System.out.println("Tonight's teams were " + team1Out.teamName + " and " + team2Out.teamName);
-		System.out.println("\n" + team1Out.teamName + " stats: \n\tOff. Ratio:\t" + team1Out.oRatio 
-														+ "\n\tDef. Ratio:\t" + team1Out.dRatio 
-														+ "\n\tInvB. Ratio:\t" + team1Out.inverseBRatio
-														+ "\n\tWin %:\t" + (((double)team1Wins) * 100 / gameCount));
-		System.out.println("\n" + team2Out.teamName + " stats: \n\tOff. Ratio:\t" + team2Out.oRatio 
-														+ "\n\tDef. Ratio:\t" + team2Out.dRatio 
-														+ "\n\tInvB. Ratio:\t" + team2Out.inverseBRatio
-														+ "\n\tWin %:\t" + (((double)team2Wins) * 100 / gameCount) + "\n");
+		System.out.println("\n" + team1Out.teamName + " stats: \n\tWin %:\t" + (((double)team1Wins) * 100 / gameCount));
+		System.out.println("\n" + team2Out.teamName + " stats: \n\tWin %:\t" + (((double)team2Wins) * 100 / gameCount) + "\n");
 		System.out.println("Average Total Goals: \t" + (((double) totalGoals) / gameCount));
 		System.out.println("Average Winning Team's Goals:\t" +(((double) winningTeamGoals) / gameCount));
 		System.out.println("Average Margin of Victory:\t" + (((double) marginOfVictoryGoals) / gameCount));
@@ -148,22 +149,32 @@ public class AppMain {
 		System.out.println("% of OT Games:\t" + (((double) totalOTGames) * 100 / gameCount));
 		System.out.println("Most OT periods:\t" + mostOT);
 		System.out.println("Most Goals Scored in a Game: \t" + maxGoalsInGame);
-		*/
+		// for ( int i = 0; i < 20; i++) {
+		//	System.out.println(team1Out.bothTotal[0]);
+		System.out.println(team1Out.offenseTotal[0]);
 		
-	
+		
+		System.out.println(team1Out.oRatio[0]);
+		System.out.println(team1Out.dRatio[0]);
+		System.out.println(team1Out.bRatio[0]);
+		//}
+		
+		/*
+		
 		SimulatedSeason.massSeasonSim( lhlTeams[0], lhlTeams[1], lhlTeams[2], lhlTeams[3], lhlTeams[4], lhlTeams[5], gameCount );
 		
 		System.out.println("Here are the averaged results from simulating S13 LHL " + gameCount + " times! \n");
 		
 		for( int i = 0; i < 6; i++) {
 			System.out.println( lhlTeams[SimulatedSeason.teamOrder[i]].teamName + "\t "
-					/*
+					
 					 + "(" + Season.multOrderedStandings[0][i] + "-"
 								+ Season.multOrderedStandings[1][i] + "-" + Season.multOrderedStandings[2][i]+ "-"
 								+ Season.multOrderedStandings[3][i] + ") \t" 
-					*/			
+								
 					 + SimulatedSeason.multOrderedStandings[4][i] + "\t\t% Season Championships: " + SimulatedSeason.multOrderedStandings[5][i]
 					 + "\t\t% Playoff Championships: " + SimulatedSeason.multOrderedStandings[6][i]);
 		}
+		*/
 	}
 }

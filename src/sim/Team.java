@@ -6,56 +6,8 @@ import hqmdatabase.Player;
 public class Team {
 	public Player[] forwards;
 	public Player[] defencemen;
+	public Player[] teamPlayers;
 	public String teamName;
-	
-	/*
-	
-	public double[] weightsForO = new double[9];
-	public double[] weightsForD = new double[9];
-	
-	public double offenseTotal;
-	public double defenseTotal;
-	public double bothTotal;
-		
-	public double oRatio;
-	public double dRatio;
-	public double bRatio;
-	public double inverseBRatio;
-	
-	*/
-	
-	/*
-	
-	public void initSimData() {
-		for (int i = 0; i < weightsForO.length; i++) {
-			weightsForO[i] = forwards[0].getStats()[i] * forwards[0].role.getWeights()[i] 		+ forwards[1].getStats()[i] * forwards[1].role.getWeights()[i];
-			if (forwards[0].role == forwards[1].role) 	weightsForO[i] *= 0.95;
-			weightsForD[i] = defencemen[0].getStats()[i] * defencemen[0].role.getWeights()[i] 	+ defencemen[1].getStats()[i] * defencemen[1].role.getWeights()[i];
-			if (defencemen[0].role == defencemen[1].role) weightsForD[i] *= 0.975;
-		}
-		
-	//Only the first 7 stats are needed for offense calculation from forwards.
-	for (int i = 0; i < 7; i++) {
-		offenseTotal += weightsForO[i];
-	}
-	//Only the first 6 stats are needed for offense calculation from defencemen.
-	for (int i = 0; i < 6; i++) {
-		offenseTotal += weightsForD[i];
-	}
-		
-	//Only these three stats are used for defense calculation.
-	defenseTotal = weightsForO[7] + weightsForD[6] + weightsForD[7];
-		
-	//Reliability stat
-	bothTotal = weightsForO[8] + weightsForD[8];
-		
-	oRatio = offenseTotal / SimEngine.maxOffense;
-	dRatio = defenseTotal / SimEngine.maxDefense;
-	bRatio = bothTotal / SimEngine.maxBoth;
-		
-	inverseBRatio = 1 - bRatio;
-	
-	*/
 	
 	// New stuff for new SimEngine calculator
 		
@@ -71,7 +23,6 @@ public class Team {
 	public double[] defenseTotal = new double[4];
 	public double[] bothTotal = new double[4];
 	
-
 		
 	public Team(String teamName) {
 		this.teamName = teamName;
@@ -81,9 +32,19 @@ public class Team {
 		this.teamName = teamName;
 		forwards = new Player[] {f1, f2};
 		defencemen = new Player[] {d1, d2};
+		teamPlayers = new Player[] {f1, f2, d1, d2};
 		
-		initSimData();
+		initSimData( f1, f2, d1, d2);
 	}
+	
+	/*      
+	  	f1 = C = array index 0
+		f2 = LW = array index 1
+		d2 = RD = array index 3
+		d1 = LD = array index 2
+	*/
+	
+	
 	
 	public void generateTeam(PlayerFactory factory) {
 		forwards = new Player[] {factory.generateRandomOMan(), factory.generateRandomOMan()};
@@ -94,7 +55,7 @@ public class Team {
 		return teamName + ": " + forwards[0].getName() + ", " + forwards[1].getName() + ", " + defencemen[0].getName() + ", " + defencemen[1].getName();
 	}
 	
-	public void initSimData() {
+	public void initSimData( Player f1, Player f2, Player d1, Player d2) {
 		for (int i = 0; i < weightsForPlayer.length; i++) {
 			weightsForPlayer[i][0] = forwards[0].getStats()[i] * forwards[0].role.getWeights()[i];
 			weightsForPlayer[i][1] = forwards[1].getStats()[i] * forwards[1].role.getWeights()[i];
@@ -107,16 +68,19 @@ public class Team {
 	// Adds the stat categories for each player
 	for ( int j = 0; j < 4; j++) {
 		for ( int i = 0; i < 20; i++) {
-			if ( i == 12 || i == 15 || i == 19) bothTotal[j] += weightsForPlayer[17][j];
-			if ( i == 13 || i == 14 || i == 16 || i == 18) defenseTotal[j] += weightsForPlayer[17][j];
+			if ( i == 12 || i == 15 || i == 19) bothTotal[j] += weightsForPlayer[i][j];
+			if ( i == 13 || i == 14 || i == 16 || i == 18) defenseTotal[j] += weightsForPlayer[i][j];
 			else offenseTotal[j] += weightsForPlayer[i][j];
 		}
 	}
 	
 	for ( int i = 0; i < 4; i++) {
-		oRatio[i] = offenseTotal[i] / SimEngine.maxOffense;
-		dRatio[i] = defenseTotal[i] / SimEngine.maxDefense;
-		bRatio[i] = bothTotal[i] / SimEngine.maxBoth;
+		double[] roleRatio = new double[3];
+		roleRatio = teamPlayers[i].role.getMax();	
+				
+		oRatio[i] = offenseTotal[i] / roleRatio[0];
+		dRatio[i] = defenseTotal[i] / roleRatio[1];
+		bRatio[i] = bothTotal[i] / roleRatio[2];
 		inverseBRatio[i] = 1 - bRatio[i];
 	}
 	
