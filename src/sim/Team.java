@@ -9,11 +9,7 @@ public class Team {
 	public Player goalie;
 	public Player[] teamPlayers;
 	public String teamName;
-	
-	// New stuff for new SimEngine calculator
-		
-	public double[][] weightsForPlayer = new double[20][4];
-	
+	private double[][] weightsForPlayer = new double[20][4];
 	public double[] oRatio = new double[4];
 	public double[] playerDRatio = new double[4];
 	public double[] playerBRatio = new double[4];
@@ -22,15 +18,14 @@ public class Team {
 	public double teamBRatio = 0; // Doesn't include goalie
 	public double teamInvBRatio = 0; // Doesn't include goalie
 	public double goalieDRatio = 0;
-	public double teamDRoleRatio = 0;
-	public double teamBRoleRatio = 0;
-		
-	public double[] offenseTotal = new double[4];
-	public double[] defenseTotal = new double[4];
-	public double[] bothTotal = new double[4];
-	public double teamDefenseTotal = 0;
-	public double teamBothTotal = 0;
-	public double goalieTotal = 0;
+	private double teamDRoleRatio = 0;
+	private double teamBRoleRatio = 0;
+	private double[] offenseTotal = new double[4];
+	private double[] defenseTotal = new double[4];
+	private double[] bothTotal = new double[4];
+	private double teamDefenseTotal = 0;
+	private double teamBothTotal = 0;
+	private double goalieTotal = 0;
 	
 		
 	public Team(String teamName) {
@@ -46,13 +41,6 @@ public class Team {
 		
 		initSimData( f1, f2, d1, d2, g1);
 	}
-	
-	/*      
-	  	f1 = C = array index 0
-		f2 = LW = array index 1
-		d2 = RD = array index 3
-		d1 = LD = array index 2
-	*/
 	
 	public void generateTeam(PlayerFactory factory) {
 		forwards = new Player[] {factory.generateRandomOMan(), factory.generateRandomOMan()};
@@ -84,6 +72,7 @@ public class Team {
 			else offenseTotal[j] += weightsForPlayer[i][j];
 		}
 	}
+	
 
 	for ( int i = 0; i < 4; i++) {
 		double[] roleRatio = new double[3];

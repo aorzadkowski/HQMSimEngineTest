@@ -37,7 +37,7 @@ public class AppMain {
 		// \t added for season sim looks, can and probably should be removed (same for win) :v
 		Team bos = new Team("Boston Bruins \t",
 				new Player("Lucic", Season.LHLS13, Position.C, Role.SNIPER, 13, 14, 15, 18, 13, 15, 13, 17, 18, 17, 18, 18, 18, 11, 12, 13, 13, 18, 11, 16),
-				new Player("Teemu Salami", Season.LHLS13, Position.LW, Role.DANGLER, 12, 12, 12, 17, 11, 11, 8, 13, 15, 16, 17, 17, 14, 5, 6, 4, 10, 18, 6, 16),
+				new Player("Teemu", Season.LHLS13, Position.LW, Role.DANGLER, 12, 12, 12, 17, 11, 11, 8, 13, 15, 16, 17, 17, 14, 5, 6, 4, 10, 18, 6, 16),
 				new Player("KS Otto", Season.LHLS13, Position.LD, Role.OFFENSIVE_DMAN, 12, 10, 12, 18, 13, 15, 14, 18, 18, 19, 20, 20, 19, 19, 10, 14, 17, 19, 15, 19),
 				new Player("Tidge", Season.LHLS13, Position.RD, Role.DEFENSIVE_DMAN, 5, 14, 15, 12, 12, 13, 14, 12, 10, 12, 10, 7, 12, 15, 15, 17, 15, 13, 15, 13),
 				new Player("SelfPlug", Season.LHLS13, Position.G, Role.GOALIE, 16, 12, 13, 14, 7, 18, 13)
@@ -91,7 +91,7 @@ public class AppMain {
 		
 		// Team[] lhlTeams = {bos, nyr, chi, tor, nsh, win};
 
-		int gameCount = 1;
+		int gameCount = 1000000;
 		
 		
 		System.out.println("Gonna test " + gameCount + " games.");
@@ -121,7 +121,7 @@ public class AppMain {
 		for (int i = 0; i < gameCount; i++) {
 			testGame = new Game(testingTeam1, testingTeam2);  // Is this line redundant with line 68?
 			SimEngine.simulateGame(testGame);
-			
+
 			if (testGame.didTeam1Win()) team1Wins++; else team2Wins++;
 			
 			winningTeamGoals += testGame.winningTeamGoals();
@@ -153,12 +153,14 @@ public class AppMain {
 		System.out.println("Most Goals Scored in a Game: \t" + maxGoalsInGame + "\n");
 
 		for ( int i = 0; i < 4; i++ ) {
-			System.out.println(team1Out.teamPlayers[i].getName() + "\t\t" + team2Out.teamPlayers[i].getName());
-			System.out.println("Goals: " + (SimEngine.team1MultiStats[0][i] / gameCount ) + "\t\tGoals: " + (SimEngine.team2MultiStats[0][i] / gameCount ));
+			System.out.println(team1Out.teamPlayers[i].getName() + "\t\t\t" + team2Out.teamPlayers[i].getName());
+			System.out.println("Goals:   " + (SimEngine.team1MultiStats[0][i] / gameCount ) + "\t\tGoals:   " + (SimEngine.team2MultiStats[0][i] / gameCount ));
 			System.out.println("Assists: " + (SimEngine.team1MultiStats[1][i] / gameCount ) + "\t\tAssists: " + (SimEngine.team2MultiStats[1][i] / gameCount ) + "\n");
 			}
-		
-
+			System.out.println(team1Out.teamPlayers[4].getName() + "\t\t" + team2Out.teamPlayers[4].getName());
+			System.out.println("Saves:    " + (SimEngine.team1MultiStats[0][4] / gameCount ) + "\t\tSaves:    " + (SimEngine.team2MultiStats[0][4] / gameCount ));
+			System.out.println("Attempts: " + (SimEngine.team1MultiStats[1][4] / gameCount ) + "\t\tAttempts: " + (SimEngine.team2MultiStats[1][4] / gameCount ));
+			System.out.println("Assists:  " + (SimEngine.goalieAssists[0] / gameCount ) + "\t\tAssists:  " + (SimEngine.goalieAssists[1] / gameCount ));
 		
 		/*
 		SimulatedSeason.massSeasonSim( lhlTeams[0], lhlTeams[1], lhlTeams[2], lhlTeams[3], lhlTeams[4], lhlTeams[5], gameCount );
