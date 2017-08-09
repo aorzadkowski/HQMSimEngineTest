@@ -1,7 +1,7 @@
 package hqmdatabase;
 
 public enum Role {
-	SNIPER,PLAYMAKER,DANGLER,TWO_WAY_FORWARD,OFFENSIVE_DMAN,DEFENSIVE_DMAN,DEVELOPER,NO_ROLE;
+	SNIPER,PLAYMAKER,DANGLER,TWO_WAY_FORWARD,OFFENSIVE_DMAN,DEFENSIVE_DMAN,GOALIE,DEVELOPER,NO_ROLE;
 	
 	public String toString() {
 		switch (this) {
@@ -11,26 +11,11 @@ public enum Role {
 		case TWO_WAY_FORWARD: return "Two Way Forward";
 		case OFFENSIVE_DMAN: return "Offensive Defenceman";
 		case DEFENSIVE_DMAN: return "Defensive Defenceman";
+		case GOALIE: return "Goalie";
 		case DEVELOPER: return "Developer";
 		default: return "No Role";
 		}
 	}
-	
-	public double[] getWeights() {
-        switch (this) {
-        case SNIPER: return new double[] {0.05,0.115,0.125,0.17,0.14,0.095,0.145,0.11,0.05};
-        case PLAYMAKER: return new double[] {0.05,0.145,0.12,0.12,0.14,0.09,0.17,0.115,0.05};
-        case DANGLER: return new double[] {0.05,0.105,0.12,0.125,0.16,0.13,0.15,0.11,0.05};
-        case TWO_WAY_FORWARD: return new double[] {0.05,0.115,0.115,0.12,0.15,0.09,0.17,0.14,0.05};
-        case OFFENSIVE_DMAN: return new double[] {0.155, 0.105, 0.055, 0.105, 0.105, 0.155, 0.185, 0.085, 0.05};
-        case DEFENSIVE_DMAN: return new double[] {0.145, 0.095, 0.045, 0.095, 0.095, 0.145, 0.215, 0.115, 0.05};
-        case DEVELOPER: return new double[] {0.1111, 0.1111, 0.1111, 0.1111, 0.1111, 0.1111, 0.1111, 0.1111, 0.1111};
-        default: return new double[] {0.00,0.0,0.00,0.00,0.00,0.00,0.00,0.00,0.00};
-        }
-	 }
-
-	/* This is for the new player categories
-	 
 	 
 	public double[] getWeights() {
         switch (this) {
@@ -40,9 +25,23 @@ public enum Role {
         case TWO_WAY_FORWARD: return new double[] {0.047,0.046,0.042,0.052,0.048,0.052,0.048,0.05,0.05,0.059,0.049,0.047,0.048,0.047,0.054,0.052,0.048,0.054,0.053,0.05};
         case OFFENSIVE_DMAN: return new double[] {0.032,0.045,0.048,0.05,0.052,0.051,0.051,0.053,0.053,0.056,0.056,0.053,0.052,0.032,0.051,0.051,0.051,0.058,0.05,0.048};
         case DEFENSIVE_DMAN: return new double[] {0.02,0.053,0.058,0.045,0.051,0.051,0.056,0.053,0.04,0.046,0.04,0.03,0.049,0.02,0.059,0.068,0.06,0.049,0.063,0.051};
-        case GOALIE: return new double[] {};
+        case GOALIE: return new double[] {1/7,1/7,1/7,1/7,1/7,1/7,1/7};
+	case DEVELOPER: return new double[] {0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05};
         default: return new double[] {0.00,0.0,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.0,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00};
         }
-	 }
-	 */
+	}
+	
+	public double[] getMax() {
+		switch (this) {
+        case SNIPER: return new double[] {13.60,3.34,3.06};
+        case PLAYMAKER: return new double[] {13.32,3.80,2.92};
+        case DANGLER: return new double[] {14.68,2.64,2.72};
+        case TWO_WAY_FORWARD: return new double[] {12.88,4.10,3.00};
+        case OFFENSIVE_DMAN: return new double[] {13.16,3.86,3.02};
+        case DEFENSIVE_DMAN: return new double[] {11.84,4.84,3.36};
+        case GOALIE: return new double[] {0.00,14.29,0.00};
+	case DEVELOPER: return new double[] {14.00, 4.00, 3.00};
+        default: return new double[] {0.00,0.00,0.00};
+		}
+	}
 }

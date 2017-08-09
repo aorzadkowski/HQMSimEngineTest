@@ -8,7 +8,7 @@ import hqmdatabase.Role;
 public class PlayerDatabaseTest {
 	public static void databaseTester() {
 		PlayerDatabase db = new PlayerDatabase();
-		
+/*		
 		db.addPlayer(new Player("Lucic", Season.LHLS13, Position.C, Role.SNIPER, 15, 16, 19, 19, 19, 19, 19, 15, 20));
 		System.out.println("Added Lucic LHL S13. Size: " + db.getSize());
 		db.addPlayer(new Player("Tony Flow", Season.LHLS13, Position.LW, Role.PLAYMAKER, 13, 15, 14, 15, 17, 15, 16, 16, 20));
@@ -33,5 +33,6 @@ public class PlayerDatabaseTest {
 		for (String str : db.getNames()) {
 			System.out.println("\t" + str);
 		}
+*/
 	}
 }
