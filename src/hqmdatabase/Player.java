@@ -3,7 +3,7 @@ package hqmdatabase;
 public class Player {
 	private String name;
 	private Season season;
-	private Position position;
+	public Position position;
 	public Role role; 
 	
 	public int[] stats = new int[20]; 
