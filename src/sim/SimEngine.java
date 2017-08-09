@@ -1,5 +1,7 @@
 package sim;
 
+import main.Options;
+
 public class SimEngine {
 	
 	private static int[] team1Goals = new int[4];
@@ -181,6 +183,8 @@ public class SimEngine {
 	}
 	
 	public static int calcSave( Team goalieTeam, int goals, int goalieTeamNum ) {
+		if (Options.debug) System.out.println("calcSave( "+ goalieTeam.teamName + " , " + goals + " , " + goalieTeamNum + " )\ngoalieTeam.goalieDRatio=" + goalieTeam.goalieDRatio);
+		
 		int saves = 0;
 		int newGoals = 0;
 
@@ -189,13 +193,15 @@ public class SimEngine {
 			else newGoals++;
 		}
 
+		if (Options.debug) System.out.println("calcSave: saves=" + saves + " newGoals=" + newGoals);
+		
 		if ( saves > 0 && goalieTeamNum == 1 ) {
 			team1MultiStats[0][4] += saves;
 		}
 		else if( saves > 0 && goalieTeamNum == 2 ) {
 			team2MultiStats[0][4] += saves;
 		}
-
+		
 		return newGoals;
 	}
 	
