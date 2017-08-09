@@ -1,7 +1,7 @@
 package sim;
 
-import generation.PlayerFactory;
 import hqmdatabase.Player;
+import main.Options;
 
 public class Team {
 	public Player[] forwards;
@@ -42,11 +42,6 @@ public class Team {
 		initSimData( f1, f2, d1, d2, g1);
 	}
 	
-	public void generateTeam(PlayerFactory factory) {
-		forwards = new Player[] {factory.generateRandomOMan(), factory.generateRandomOMan()};
-		defencemen = new Player[] {factory.generateRandomDMan(), factory.generateRandomDMan()};
-	}
-	
 	public String toString() {
 		return teamName + ": " + forwards[0].getName() + ", " + forwards[1].getName() + ", " + defencemen[0].getName() + ", " + defencemen[1].getName();
 	}
@@ -62,6 +57,8 @@ public class Team {
 		}
 		for (int i = 0; i < 5; i++) {
 			goalieTotal += goalie.getStats()[i] * goalie.role.getWeights()[i];
+
+			if (Options.debug) System.out.println(teamName + " in iteration " + (i + 1) + " goalieTotal=" + goalie.getStats()[i] + " * " + goalie.role.getWeights()[i] + " = " + goalieTotal);
 		}
 	
 	// Adds the stat categories for each player
@@ -89,7 +86,9 @@ public class Team {
 	teamDRatio = teamDefenseTotal / teamDRoleRatio;
 	teamBRatio = teamBothTotal / teamBRoleRatio;
 	teamInvBRatio = 1 - teamBRatio;
+	
 	goalieDRatio = goalieTotal / teamPlayers[4].role.getMax()[1];
+	if (Options.debug) System.out.println(teamName + " goalieDRatio=" + goalieTotal + " / " + teamPlayers[4].role.getMax()[1] + " = " + goalieDRatio);
 	
 	}
 }
