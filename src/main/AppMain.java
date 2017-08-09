@@ -33,10 +33,10 @@ public class AppMain {
 					new Player("Dman Jerry", Season.LHLS13, Position.RD, Role.DEFENSIVE_DMAN, 15, 15, 14, 15, 12, 15, 17, 17, 18));
 		*/
 		
-		// \t added for season sim looks, can and probably should be removed (same for win) :v
-		Team bos = new Team("Boston Bruins \t",
+		//
+		Team bos = new Team("Boston Bruins",
 				new Player("Lucic", Season.LHLS13, Position.C, Role.SNIPER, 13, 14, 15, 18, 13, 15, 13, 17, 18, 17, 18, 18, 18, 11, 12, 13, 13, 18, 11, 16),
-				new Player("Teemu", Season.LHLS13, Position.LW, Role.DANGLER, 12, 12, 12, 17, 11, 11, 8, 13, 15, 16, 17, 17, 14, 5, 6, 4, 10, 18, 6, 16),
+				new Player("Teemu Salami", Season.LHLS13, Position.LW, Role.DANGLER, 12, 12, 12, 17, 11, 11, 8, 13, 15, 16, 17, 17, 14, 5, 6, 4, 10, 18, 6, 16),
 				new Player("KS Otto", Season.LHLS13, Position.LD, Role.OFFENSIVE_DMAN, 12, 10, 12, 18, 13, 15, 14, 18, 18, 19, 20, 20, 19, 19, 10, 14, 17, 19, 15, 19),
 				new Player("Tidge", Season.LHLS13, Position.RD, Role.DEFENSIVE_DMAN, 5, 14, 15, 12, 12, 13, 14, 12, 10, 12, 10, 7, 12, 15, 15, 17, 15, 13, 15, 13),
 				new Player("SelfPlug", Season.LHLS13, Position.G, Role.GOALIE, 16, 12, 13, 14, 7, 18, 13)
@@ -80,7 +80,7 @@ public class AppMain {
 				);
 		
 		/*
-		Team win = new Team("Winnipeg Jets \t",
+		Team win = new Team("Winnipeg Jets ",
 				new Player("guy la floor", Season.LHLS13, Position.C, Role.TWO_WAY_FORWARD, 14, 15, 15, 17, 17, 17, 16, 16, 20),
 				new Player("Drag", Season.LHLS13, Position.LW, Role.DANGLER, 13, 14, 14, 16, 16, 16, 16, 16, 17),
 				new Player("Dalfan", Season.LHLS13, Position.LD, Role.OFFENSIVE_DMAN, 16, 18, 16, 17, 17, 16, 18, 18, 16),

@@ -1,6 +1,6 @@
 package sim;
 
-import main.Options;
+import hqmdatabase.Player;
 
 public class SimEngine {
 	
@@ -122,7 +122,7 @@ public class SimEngine {
 			team1Points[i] = team1Goals[i] + team2Blocks[i];
 		    if (team1Points[i] > 0) {
 				team2Stats[1][4] += team1Points[i];
-	    		team1Points[i] = calcSave(team2, team1Points[i], 2);
+	    		team1Points[i] = calcSave(team2, team1.teamPlayers[i], team2.teamPlayers[4], team1Points[i], 2);
 			}
 			if (team1Points[i] < 0) team1Points[i] = 0;
 			team1Stats[0][i] += team1Points[i];
@@ -133,7 +133,7 @@ public class SimEngine {
 			team2Points[i] = team2Goals[i] + team1Blocks[i];
 			if (team2Points[i] > 0) {
 				team1Stats[1][4] += team2Points[i];
-		    	team2Points[i] = calcSave(team1, team2Points[i], 1);
+		    	team2Points[i] = calcSave(team1, team2.teamPlayers[i], team1.teamPlayers[4], team2Points[i], 1);
 			}
 			if (team2Points[i] < 0) team2Points[i] = 0;
 			team2Stats[0][i] += team2Points[i];
@@ -182,26 +182,49 @@ public class SimEngine {
 		return 0;
 	}
 	
-	public static int calcSave( Team goalieTeam, int goals, int goalieTeamNum ) {
-		if (Options.debug) System.out.println("calcSave( "+ goalieTeam.teamName + " , " + goals + " , " + goalieTeamNum + " )\ngoalieTeam.goalieDRatio=" + goalieTeam.goalieDRatio);
-		
+	public static int calcSave( Team goalieTeam, Player shooter, Player goalie, int goals, int goalieTeamNum ) {
+		double[] weights;
+		int shooterStatUsed;
+		double goalieStatUsed;
+		double difference;
+		double newGoalieDRatio;
 		int saves = 0;
 		int newGoals = 0;
 
+
 		for ( int i = 0; i < goals; i++ ) {
-			if( Math.random() < goalieTeam.goalieDRatio ) saves++;
+			if( shooter.position.toString() == "C" || shooter.position.toString() == "LW" ) weights = new double[] {0.05,0.25,1}; // 5% long shot 20% point shot 75% wrist shot
+			else weights = new double[] {0.05,0.8,1}; // 5% long shot 75% point shot 20% wrist shot
+			double prob = Math.random();
+			if ( prob <= weights[0]) {
+				shooterStatUsed = shooter.stats[1];
+				goalieStatUsed = goalie.stats[0];
+			}
+			else if ( prob <= weights[1]) {
+				shooterStatUsed = shooter.stats[2];
+				goalieStatUsed = goalie.stats[1];
+			}
+			else {
+				shooterStatUsed = shooter.stats[3];
+				goalieStatUsed = (double)(goalie.stats[1] + goalie.stats[2])/2; // Average of wrist and breakaway
+			}
+			difference = goalieStatUsed - shooterStatUsed;
+			newGoalieDRatio = goalieTeam.goalieDRatio + (0.05 * difference);
+			//System.out.println(goalieTeam.goalieDRatio + "\t" + difference + "\t" + newGoalieDRatio + "\t" + shooter.getName() + "\t" + shooterStatUsed + "\t" + goalieStatUsed + "\t" + prob);
+			if ( newGoalieDRatio > 0.90) newGoalieDRatio = 0.9;
+			if ( newGoalieDRatio < 0.10) newGoalieDRatio = 0.1;
+			//System.out.println(goalieTeam.goalieDRatio + "\t" + difference + "\t" + newGoalieDRatio + "\n");
+			if( Math.random() < newGoalieDRatio ) saves++;
 			else newGoals++;
 		}
 
-		if (Options.debug) System.out.println("calcSave: saves=" + saves + " newGoals=" + newGoals);
-		
 		if ( saves > 0 && goalieTeamNum == 1 ) {
 			team1MultiStats[0][4] += saves;
 		}
 		else if( saves > 0 && goalieTeamNum == 2 ) {
 			team2MultiStats[0][4] += saves;
 		}
-		
+
 		return newGoals;
 	}
 	
