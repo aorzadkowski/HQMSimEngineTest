@@ -26,6 +26,10 @@ public class OptionsIO {
 				
 				lineCount++;
 				
+				if (nextLine[1].contains("#")) {
+					nextLine[1] = nextLine[1].substring(0, nextLine[1].indexOf('#'));
+				}
+				
 				if (nextLine[0].contains("#")) {
 					continue;
 				} else if (nextLine.length != 2) {
@@ -33,9 +37,6 @@ public class OptionsIO {
 					return;
 				}
 				
-				if (nextLine[1].contains("#")) {
-					nextLine[1] = nextLine[1].substring(0, nextLine[1].indexOf('#'));
-				}
 				
 				switch (nextLine[0]) {
 				case "debug": handleDebug(nextLine[1]); break;
