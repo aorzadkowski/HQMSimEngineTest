@@ -1,3 +1,4 @@
+package main;
 import hqmdatabase.Player;
 import hqmdatabase.PlayerDatabase;
 import hqmdatabase.Position;
@@ -7,17 +8,15 @@ import sim.Game;
 import sim.SimEngine;
 import sim.SimulatedSeason;
 import sim.Team;
-import tests.PlayerDatabaseTest;
 
 public class AppMain {
 	
 	public static PlayerDatabase mainDB = new PlayerDatabase();
 
 	public static void main(String[] args) {
-		// System.out.println("Let's test some real teams.");
-		ArgumentLineHandler.processArguments(args);
+		OptionsIO.readFile();
 		
-		// PlayerDatabaseTest.databaseTester();
+		ArgumentLineHandler.processArguments(args);
 		
 		// System.out.println(mainDB.getSize());
 		
@@ -91,7 +90,7 @@ public class AppMain {
 		
 		// Team[] lhlTeams = {bos, nyr, chi, tor, nsh, win};
 
-		int gameCount = 1000000;
+		int gameCount = Options.numberOfGames;
 		
 		
 		System.out.println("Gonna test " + gameCount + " games.");
