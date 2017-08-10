@@ -28,6 +28,8 @@ public class OptionsIO {
 				
 				if (nextLine[1].contains("#")) {
 					nextLine[1] = nextLine[1].substring(0, nextLine[1].indexOf('#'));
+
+					nextLine = new String[] {nextLine[0], nextLine[1]};
 				}
 				
 				if (nextLine[0].contains("#")) {
