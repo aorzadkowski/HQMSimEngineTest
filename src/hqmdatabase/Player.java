@@ -152,6 +152,32 @@ public class Player {
 		return true;
 	}
 	
+	public int getStat(String stat) {
+		switch (stat.toLowerCase()) {
+		case "faceoffs" : return stats[0];
+		case "longshots": return stats[1];
+		case "pointshots": return stats[2];
+		case "wristshots": return stats[3];
+		case "board passing": return stats[4];
+		case "open ice passing": return stats[5];
+		case "breakout passing": return stats[6];
+		case "board receiving": return stats[7];
+		case "open ice receiving": return stats[8];
+		case "hand eye": return stats[9];
+		case "stickhandling": return stats[10];
+		case "dangling": return stats[11];
+		case "possession": return stats[12];
+		case "shot blocking": return stats[13];
+		case "hitting": return stats[14];
+		case "positioning": return stats[15];
+		case "pokecheck": return stats[16];
+		case "off awareness": return stats[17];
+		case "def awareness": return stats[18];
+		case "consistency": return stats[19];
+		default : System.err.println("Invalid getStat() string"); return -1; 
+		}
+	}
+	
 	//Faceoffs, Passing, Receiving, Shooting, Hand Eye, Stickhandling, Off. Awareness, Def. Awareness, Reliability
 	public static final double[] OFFENSIVE_WEIGHTS = {0.05, 0.125, 0.125, 0.13, 0.15, 0.1, 0.15, 0.12, 0.05};
 	

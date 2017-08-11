@@ -35,17 +35,18 @@ public class PlayerDBIO {
 				
 				String[] splitString = in.split(",");
 				
-				if (splitString.length != 24) { //24 is the number of elements per row in our desired sim.  (4 for identification, 20 stats)
+				if (splitString.length != 24 && splitString.length != 11) { //24 is the number of elements per row in our desired sim.  (4 for identification, 20 stats)
 					System.err.println("Invalid number of elements in row: " + rowCounter);
 					return;
 				}
+				
 				
 				String name = splitString[0];
 				Season season = parseSeason(splitString[1]);
 				Position position = parsePosition(splitString[2]);
 				Role role = parseRole(splitString[3]);
 				
-				int[] stats = new int[20];
+				int[] stats = (splitString.length == 24 ? new int[20] : new int[7]);
 				
 				for (int i = 4; i < splitString.length; i++) {
 					try {
@@ -57,6 +58,7 @@ public class PlayerDBIO {
 				}
 				
 				db.addPlayer(new Player(name, season, position, role, stats));
+
 			}
 			
 		} catch (FileNotFoundException E) {
@@ -76,6 +78,7 @@ public class PlayerDBIO {
 		case "Two Way Forward": return Role.TWO_WAY_FORWARD;
 		case "Offensive Defenceman": return Role.OFFENSIVE_DMAN;
 		case "Defensive Defenceman": return Role.DEFENSIVE_DMAN;
+		case "Goalie": return Role.GOALIE;
 		default: return Role.NO_ROLE;
 		}
 	}
@@ -86,6 +89,7 @@ public class PlayerDBIO {
 		case "C": return Position.C;
 		case "LD": return Position.LD;
 		case "RD": return Position.RD;
+		case "G": return Position.G;
 		default: return Position.NO_POS;
 		}
 	}

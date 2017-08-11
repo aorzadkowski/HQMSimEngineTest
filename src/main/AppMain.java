@@ -8,6 +8,7 @@ import sim.Game;
 import sim.SimEngine;
 import sim.SimulatedSeason;
 import sim.Team;
+import sim.gamefsm.GameState;
 
 public class AppMain {
 	
@@ -17,6 +18,7 @@ public class AppMain {
 		OptionsIO.readFile();
 		
 		ArgumentLineHandler.processArguments(args);
+		
 		
 		// System.out.println(mainDB.getSize());
 		
@@ -89,6 +91,7 @@ public class AppMain {
 		*/
 		
 		// Team[] lhlTeams = {bos, nyr, chi, tor, nsh, win};
+		GameState gs = new GameState(bos, bos);
 
 		int gameCount = Options.numberOfGames;
 		

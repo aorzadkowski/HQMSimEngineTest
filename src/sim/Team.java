@@ -42,6 +42,16 @@ public class Team {
 		initSimData( f1, f2, d1, d2, g1);
 	}
 	
+	public Team(Team other) {
+		this.teamName = new String(other.teamName);
+		
+		forwards = new Player[] { new Player(other.teamPlayers[0]), new Player(other.teamPlayers[1]) };
+		defencemen = new Player[] { new Player(other.teamPlayers[2]), new Player(other.teamPlayers[3]) };
+		goalie = new Player(other.goalie);
+		
+		teamPlayers = new Player[] { forwards[0], forwards[1], defencemen[0], defencemen[1], goalie };
+	}
+	
 	public String toString() {
 		return teamName + ": " + forwards[0].getName() + ", " + forwards[1].getName() + ", " + defencemen[0].getName() + ", " + defencemen[1].getName();
 	}
