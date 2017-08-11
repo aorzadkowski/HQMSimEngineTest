@@ -19,79 +19,58 @@ public class AppMain {
 		
 		ArgumentLineHandler.processArguments(args);
 		
+		//System.out.println(mainDB.getSize());
 		
-		// System.out.println(mainDB.getSize());
-		
-		/*
-		Team team1 = new Team("Team one", 
-					new Player("Lucic", Season.LHLS13, Position.C, Role.SNIPER, 15, 16, 19, 19, 19, 19, 19, 15, 20),
-					new Player("Tony Flow", Season.LHLS13, Position.LW, Role.PLAYMAKER, 13, 15, 14, 15, 17, 15, 16, 16, 20),
-					new Player("Mat", Season.LHLS13, Position.LD, Role.OFFENSIVE_DMAN, 16, 17, 16, 16, 15, 15, 15, 15, 12),
-					new Player("FatSquirrel", Season.LHLS13, Position.RD, Role.OFFENSIVE_DMAN, 13, 13, 11, 13, 14, 14, 12, 14, 16) );
-		Team team2 = new Team("Team two", 
-					new Player("tb", Season.LHLS13, Position.C, Role.SNIPER, 16, 15, 14, 15, 15, 16, 17, 14, 16),
-					new Player("Kill Pessel", Season.LHLS13, Position.LW, Role.DANGLER, 12, 12, 13, 15, 14, 14, 14, 10, 17),
-					new Player("KS Otto", Season.LHLS13, Position.LD, Role.OFFENSIVE_DMAN, 16, 19, 15, 18, 19, 19, 16, 19, 20),
-					new Player("Dman Jerry", Season.LHLS13, Position.RD, Role.DEFENSIVE_DMAN, 15, 15, 14, 15, 12, 15, 17, 17, 18));
-		*/
-		
-		//
 		Team bos = new Team("Boston Bruins",
-				new Player("Lucic", Season.LHLS13, Position.C, Role.SNIPER, 13, 14, 15, 18, 13, 15, 13, 17, 18, 17, 18, 18, 18, 11, 12, 13, 13, 18, 11, 16),
-				new Player("Teemu Salami", Season.LHLS13, Position.LW, Role.DANGLER, 12, 12, 12, 17, 11, 11, 8, 13, 15, 16, 17, 17, 14, 5, 6, 4, 10, 18, 6, 16),
-				new Player("KS Otto", Season.LHLS13, Position.LD, Role.OFFENSIVE_DMAN, 12, 10, 12, 18, 13, 15, 14, 18, 18, 19, 20, 20, 19, 19, 10, 14, 17, 19, 15, 19),
-				new Player("Tidge", Season.LHLS13, Position.RD, Role.DEFENSIVE_DMAN, 5, 14, 15, 12, 12, 13, 14, 12, 10, 12, 10, 7, 12, 15, 15, 17, 15, 13, 15, 13),
-				new Player("SelfPlug", Season.LHLS13, Position.G, Role.GOALIE, 16, 12, 13, 14, 7, 18, 13)
-				);
+                mainDB.retrievePlayer("Lucic",Season.LHLS13),
+                mainDB.retrievePlayer("Teemu Salami",Season.LHLS13),
+                mainDB.retrievePlayer("KS Otto",Season.LHLS13),
+                mainDB.retrievePlayer("Tidge",Season.LHLS13),
+                mainDB.retrievePlayer("SelfPlug",Season.LHLS13)
+                );
 		
-		/*
 		Team nyr = new Team("New York Rangers",
-				new Player("Dick Mcbutts", Season.LHLS13, Position.C, Role.SNIPER, 13, 15, 18, 18, 18, 18, 19, 19, 17),
-				new Player("tb", Season.LHLS13, Position.LW, Role.PLAYMAKER, 16, 15, 14, 15, 15, 16, 17, 17, 16),
-				new Player("TaZeR", Season.LHLS13, Position.LD, Role.DEFENSIVE_DMAN, 14, 16, 15, 15, 14, 16, 18, 18, 15),
-				new Player("Kapanen", Season.LHLS13, Position.RD, Role.OFFENSIVE_DMAN, 14, 14, 11, 14, 13, 15, 13, 13, 15)
+				mainDB.retrievePlayer("Dick Mcbutts", Season.LHLS13),
+				mainDB.retrievePlayer("tb", Season.LHLS13),
+				mainDB.retrievePlayer("TaZeR", Season.LHLS13),
+				mainDB.retrievePlayer("Kapanen", Season.LHLS13),
+				mainDB.retrievePlayer("meat",Season.LHLS13)
 				);
 		
 		Team chi = new Team("Chicago Blackhawks",
-				new Player("Dyaloreax", Season.LHLS13, Position.C, Role.SNIPER, 10, 15, 20, 20, 18, 17, 19, 19, 20),
-				new Player("Tallmidget", Season.LHLS13, Position.LW, Role.TWO_WAY_FORWARD, 17, 15, 13, 14, 16, 13, 16, 16, 16),
-				new Player("BeeGeePi", Season.LHLS13, Position.LD, Role.OFFENSIVE_DMAN, 17, 17, 15, 16, 16, 17, 18, 18, 20),
-				new Player("FatSquirrel", Season.LHLS13, Position.RD, Role.OFFENSIVE_DMAN, 13, 13, 11, 13, 14, 14, 12, 12, 16)
+				mainDB.retrievePlayer("Dyaloreax", Season.LHLS13),
+				mainDB.retrievePlayer("Tallmidget", Season.LHLS13),
+				mainDB.retrievePlayer("BeeGeePi", Season.LHLS13),
+				mainDB.retrievePlayer("FatSquirrel", Season.LHLS13),
+				mainDB.retrievePlayer("Narguila",Season.LHLS13)
 				);
 		
 		Team tor = new Team("Toronto Maple Leafs",
-				new Player("NHLKilla", Season.LHLS13, Position.C, Role.PLAYMAKER, 12, 13, 13, 14, 14, 14, 15, 15, 15),
-				new Player("Gabe", Season.LHLS13, Position.LW, Role.DANGLER, 16, 15, 15, 16, 19, 18, 18, 18, 18),
-				new Player("xParabolax", Season.LHLS13, Position.LD, Role.DEFENSIVE_DMAN, 14, 15, 12, 16, 16, 15, 14, 14, 17),
-				new Player("Jabba", Season.LHLS13, Position.RD, Role.OFFENSIVE_DMAN,13, 14, 12, 15, 16, 14, 13, 13, 14)
+				mainDB.retrievePlayer("NHLKilla", Season.LHLS13),
+				mainDB.retrievePlayer("Gabe", Season.LHLS13),
+				mainDB.retrievePlayer("xParabolax", Season.LHLS13),
+				mainDB.retrievePlayer("Jabba", Season.LHLS13),
+				mainDB.retrievePlayer("kBomb",Season.LHLS13)
 				);
 
-		Team to2 = new Team("Toronto Maple Leafs 2",
-				new Player("NHLKilla", Season.LHLS13, Position.C, Role.PLAYMAKER, 12, 13, 13, 14, 14, 14, 15, 15, 15),
-				new Player("Gabe", Season.LHLS13, Position.LW, Role.DANGLER, 16, 15, 15, 16, 19, 18, 18, 18, 18),
-				new Player("xParabolax", Season.LHLS13, Position.LD, Role.OFFENSIVE_DMAN, 14, 15, 12, 16, 16, 15, 14, 14, 17),
-				new Player("Jabba", Season.LHLS13, Position.RD, Role.OFFENSIVE_DMAN,13, 14, 12, 15, 16, 14, 13, 13, 14)
-				);
-		*/
 		Team nsh = new Team("Nashville Predators",
-				new Player("CrabInATree", Season.LHLS13, Position.C, Role.PLAYMAKER, 19, 13, 14, 17, 18, 19, 18, 17, 17, 17, 16, 16, 17, 14, 13, 16, 16, 18, 17, 18),
-				new Player("Tony Flow", Season.LHLS13, Position.LW, Role.TWO_WAY_FORWARD, 12, 12, 12, 15, 14, 15, 14, 14, 14, 17, 13, 12, 14, 15, 12, 15, 13, 16, 16, 15),
-				new Player("Zam", Season.LHLS13, Position.LD, Role.OFFENSIVE_DMAN, 7, 14, 15, 15, 15, 14, 16, 16, 14, 16, 17, 15, 15, 13, 9, 15, 14, 17, 14, 13),
-				new Player("Dman Jerry", Season.LHLS13, Position.RD, Role.DEFENSIVE_DMAN, 5, 14, 15, 12, 14, 14, 15, 14, 10, 12, 10, 7, 12, 16, 16, 17, 15, 13, 16, 12),
-				new Player("Kiwi", Season.LHLS13, Position.G, Role.GOALIE, 18, 17, 16, 15, 17, 13, 16)
+				mainDB.retrievePlayer("CrabInATree", Season.LHLS13),
+				mainDB.retrievePlayer("Tony Flow", Season.LHLS13),
+				mainDB.retrievePlayer("Zam", Season.LHLS13),
+				mainDB.retrievePlayer("Dman Jerry", Season.LHLS13),
+				mainDB.retrievePlayer("Kiwi", Season.LHLS13)
 				);
 		
-		/*
 		Team win = new Team("Winnipeg Jets ",
-				new Player("guy la floor", Season.LHLS13, Position.C, Role.TWO_WAY_FORWARD, 14, 15, 15, 17, 17, 17, 16, 16, 20),
-				new Player("Drag", Season.LHLS13, Position.LW, Role.DANGLER, 13, 14, 14, 16, 16, 16, 16, 16, 17),
-				new Player("Dalfan", Season.LHLS13, Position.LD, Role.OFFENSIVE_DMAN, 16, 18, 16, 17, 17, 16, 18, 18, 16),
-				new Player("Icey", Season.LHLS13, Position.RD, Role.OFFENSIVE_DMAN, 15, 16, 14, 15, 14, 16, 16, 16, 17)
+				mainDB.retrievePlayer("guy la floor", Season.LHLS13),
+				mainDB.retrievePlayer("Drag", Season.LHLS13),
+				mainDB.retrievePlayer("Dalfan", Season.LHLS13),
+				mainDB.retrievePlayer("Icey", Season.LHLS13),
+				mainDB.retrievePlayer("Ace",Season.LHLS13)
 				);
-		*/
 		
-		// Team[] lhlTeams = {bos, nyr, chi, tor, nsh, win};
-		GameState gs = new GameState(bos, bos);
+		Team[] lhlTeams = {bos, nyr, chi, tor, nsh, win};
+		// GameState gs = new GameState(bos, bos);
 
 		int gameCount = Options.numberOfGames;
 		
@@ -118,7 +97,7 @@ public class AppMain {
 		int mostOT = -1;
 		int mercyGames = 0;
 		
-
+/*
 		
 		for (int i = 0; i < gameCount; i++) {
 			testGame = new Game(testingTeam1, testingTeam2);  // Is this line redundant with line 68?
@@ -163,22 +142,18 @@ public class AppMain {
 			System.out.println("Saves:    " + (SimEngine.team1MultiStats[0][4] / gameCount ) + "\t\tSaves:    " + (SimEngine.team2MultiStats[0][4] / gameCount ));
 			System.out.println("Attempts: " + (SimEngine.team1MultiStats[1][4] / gameCount ) + "\t\tAttempts: " + (SimEngine.team2MultiStats[1][4] / gameCount ));
 			System.out.println("Assists:  " + (SimEngine.goalieAssists[0] / gameCount ) + "\t\tAssists:  " + (SimEngine.goalieAssists[1] / gameCount ));
+	*/	
 		
-		/*
 		SimulatedSeason.massSeasonSim( lhlTeams[0], lhlTeams[1], lhlTeams[2], lhlTeams[3], lhlTeams[4], lhlTeams[5], gameCount );
 		
 		System.out.println("Here are the averaged results from simulating S13 LHL " + gameCount + " times! \n");
 		
 		for( int i = 0; i < 6; i++) {
 			System.out.println( lhlTeams[SimulatedSeason.teamOrder[i]].teamName + "\t "
-					
-					 + "(" + Season.multOrderedStandings[0][i] + "-"
-								+ Season.multOrderedStandings[1][i] + "-" + Season.multOrderedStandings[2][i]+ "-"
-								+ Season.multOrderedStandings[3][i] + ") \t" 
-								
-					 + SimulatedSeason.multOrderedStandings[4][i] + "\t\t% Season Championships: " + SimulatedSeason.multOrderedStandings[5][i]
-					 + "\t\t% Playoff Championships: " + SimulatedSeason.multOrderedStandings[6][i]);
+					+ "(" + SimulatedSeason.multOrderedStandings[0][i] + "-" + SimulatedSeason.multOrderedStandings[1][i]
+					+ "-" + SimulatedSeason.multOrderedStandings[2][i]+ "-"	+ SimulatedSeason.multOrderedStandings[3][i] + ") \t" 
+					+ SimulatedSeason.multOrderedStandings[4][i] + "\t\t% Season Championships: " + SimulatedSeason.multOrderedStandings[5][i]
+					+ "\t\t% Playoff Championships: " + SimulatedSeason.multOrderedStandings[6][i]);
 		}
-		*/
 	}
 }
