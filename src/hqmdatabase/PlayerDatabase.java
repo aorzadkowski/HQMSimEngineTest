@@ -44,7 +44,7 @@ public class PlayerDatabase {
 			if (name.equals(player.getName()) && season == player.getSeason()) return player;
 		}
 		
-		return null;
+		return new Player("INVALID PLAYER: " + name, season, Position.NO_POS, Role.NO_ROLE, new int[] {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0});
 	}
 	
 	public Player replacePlayer(Player newPlayer) {

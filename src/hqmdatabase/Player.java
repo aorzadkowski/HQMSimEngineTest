@@ -115,7 +115,7 @@ public class Player {
 	}
 	
 	public String toString() {
-		String toReturn = name + "\t" + role;
+		String toReturn = name + "\t" + season + "\t" + position + "\t" + role;
 		for (int i = 0; i < stats.length; i++) {
 			toReturn += "\t" + stats[i];
 		}

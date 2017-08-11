@@ -58,7 +58,6 @@ public class PlayerDBIO {
 				}
 				
 				db.addPlayer(new Player(name, season, position, role, stats));
-
 			}
 			
 		} catch (FileNotFoundException E) {
@@ -76,8 +75,8 @@ public class PlayerDBIO {
 		case "Playmaker": return Role.PLAYMAKER;
 		case "Dangler": return Role.DANGLER;
 		case "Two Way Forward": return Role.TWO_WAY_FORWARD;
-		case "Offensive Defenceman": return Role.OFFENSIVE_DMAN;
-		case "Defensive Defenceman": return Role.DEFENSIVE_DMAN;
+		case "Offensive Dman": return Role.OFFENSIVE_DMAN;
+		case "Defensive Dman": return Role.DEFENSIVE_DMAN;
 		case "Goalie": return Role.GOALIE;
 		default: return Role.NO_ROLE;
 		}
