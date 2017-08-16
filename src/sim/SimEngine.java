@@ -15,16 +15,23 @@ public class SimEngine {
 	public static double[][] team1MultiStats = new double[2][5];
 	public static double[][] team2MultiStats = new double[2][5];
 	public static double[] probArray = new double[5];
-	public static double[] goalieAssists = new double[2];
+	public static int[] goalieAssists = new int[2];
+	public static int[] multiGoalieAssists = new int[2];
 	static int team1Total = 0;
 	static int team2Total = 0;
+	public static int team1Assists;
+	public static int team2Assists;
 	
 	public static void simulateGame(Game game) {
 
 		team1Stats = new int[2][5]; // Resets individual game stats
 		team2Stats = new int[2][5]; // Resets individual game stats
+		goalieAssists = new int[2];
 		team1Total = 0;
 		team2Total = 0;
+		team1Assists = 0;
+		team2Assists = 0;
+
 		
 		Team team1 = game.getTeam1();
 		Team team2 = game.getTeam2();
@@ -37,7 +44,7 @@ public class SimEngine {
 		
 		int team1Score = (boxScore[0][0] + boxScore[1][0] + boxScore[2][0]);
 		int team2Score = (boxScore[0][1] + boxScore[1][1] + boxScore[2][1]);
-		
+
 		
 		if (team1Score == team2Score) {
 			int team1OTScore = 0;
@@ -98,9 +105,15 @@ public class SimEngine {
 			team1MultiStats[1][i] += team1Stats[1][i];
 			team2MultiStats[0][i] += team2Stats[0][i];
 			team2MultiStats[1][i] += team2Stats[1][i];
+			team1Assists += team1Stats[1][i];
+			team2Assists += team2Stats[1][i];
 		}
 		team1MultiStats[1][4] += team1Stats[1][4];
 		team2MultiStats[1][4] += team2Stats[1][4];
+		team1Assists += goalieAssists[0];
+		team2Assists += goalieAssists[1];
+		multiGoalieAssists[0] += goalieAssists[0];
+		multiGoalieAssists[1] += goalieAssists[1];
 		
 		game.setScore(boxScore);
 
@@ -232,7 +245,7 @@ public class SimEngine {
 		for ( int i = 0; i < goals; i++ ) {
 			double[] playerPassing = {0,0,0,0,0};
 			int passingTotal = 0;
-			probArray = new double[]{0.10,0.10,0.10,0.10,0.10,0.10};
+			probArray = new double[]{0.28,0.28,0.28,0.28,0.28,0.28};
 			
 			int appleFlag = 0;
 			
@@ -247,12 +260,15 @@ public class SimEngine {
 			for ( int j = 0; j < 5; j++) {
 				playerPassing[j] =  playerPassing[j] / passingTotal;
 				if ( j == player ) probArray[j+1] = probArray[j];
-				else	probArray[j+1] = probArray[j] + playerPassing[j] - 0.025;
+				else	probArray[j+1] = probArray[j] + playerPassing[j] - 0.07;
 			}
 			
 			double prob = Math.random();
 			for ( int j = 0; j < 6; j++) {
-				if( j != (player + 1) ) {
+				if( prob < probArray[j] && j == 0 && appleFlag == 0 ) {
+					appleFlag = 1;
+				}
+				else if( j != (player + 1) ) {
 					if( prob < probArray[j] && j != 0 && appleFlag == 0 ) {
 						if ( teamNum == 1 && j != 5) {
 							team1Stats[1][j-1]++;

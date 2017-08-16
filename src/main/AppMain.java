@@ -21,7 +21,7 @@ public class AppMain {
 		
 		//System.out.println(mainDB.getSize());
 		
-		Team bos = new Team("Boston Bruins",
+		Team bos = new Team("Boston Bruins \t",
                 mainDB.retrievePlayer("Lucic",Season.LHLS13),
                 mainDB.retrievePlayer("Teemu Salami",Season.LHLS13),
                 mainDB.retrievePlayer("KS Otto",Season.LHLS13),
@@ -61,7 +61,7 @@ public class AppMain {
 				mainDB.retrievePlayer("Kiwi", Season.LHLS13)
 				);
 		
-		Team win = new Team("Winnipeg Jets ",
+		Team win = new Team("Winnipeg Jets \t",
 				mainDB.retrievePlayer("guy la floor", Season.LHLS13),
 				mainDB.retrievePlayer("Drag", Season.LHLS13),
 				mainDB.retrievePlayer("Dalfan", Season.LHLS13),
@@ -87,7 +87,9 @@ public class AppMain {
 		
 		int totalGoals = 0;
 		int winningTeamGoals = 0;
+		int winningTeamAssists = 0;
 		int losingTeamGoals = 0;
+		int losingTeamAssists = 0;
 		
 		int marginOfVictoryGoals = 0;
 		
@@ -107,6 +109,8 @@ public class AppMain {
 			
 			winningTeamGoals += testGame.winningTeamGoals();
 			losingTeamGoals += testGame.losingTeamGoals();
+			winningTeamAssists += testGame.winningTeamAssists();
+			losingTeamAssists += testGame.losingTeamAssists();
 			totalGoals += testGame.totalGoals();
 			
 			marginOfVictoryGoals += testGame.marginOfVictory();
@@ -127,6 +131,8 @@ public class AppMain {
 		System.out.println("Average Winning Team's Goals:\t" +(((double) winningTeamGoals) / gameCount));
 		System.out.println("Average Margin of Victory:\t" + (((double) marginOfVictoryGoals) / gameCount));
 		System.out.println("Average Losing Team's Goals:\t" + (((double) losingTeamGoals) / gameCount));
+		System.out.println("Average Winning Team's Assists:\t" +(((double) winningTeamAssists) / gameCount));
+		System.out.println("Average Losing Team's Assists:\t" + (((double) losingTeamAssists) / gameCount));
 		System.out.println("% of SO Games:\t" + (((double) totalSOGames) * 100 / gameCount));
 		System.out.println("% of Games with a mercy score:\t" + (((double) mercyGames) * 100 / gameCount));
 		System.out.println("% of OT Games:\t" + (((double) totalOTGames) * 100 / gameCount));
@@ -141,7 +147,7 @@ public class AppMain {
 			System.out.println(team1Out.teamPlayers[4].getName() + "\t\t" + team2Out.teamPlayers[4].getName());
 			System.out.println("Saves:    " + (SimEngine.team1MultiStats[0][4] / gameCount ) + "\t\tSaves:    " + (SimEngine.team2MultiStats[0][4] / gameCount ));
 			System.out.println("Attempts: " + (SimEngine.team1MultiStats[1][4] / gameCount ) + "\t\tAttempts: " + (SimEngine.team2MultiStats[1][4] / gameCount ));
-			System.out.println("Assists:  " + (SimEngine.goalieAssists[0] / gameCount ) + "\t\tAssists:  " + (SimEngine.goalieAssists[1] / gameCount ));
+			System.out.println("Assists:  " + ((double)SimEngine.multiGoalieAssists[0] / gameCount ) + "\t\tAssists:  " + ((double)SimEngine.multiGoalieAssists[1] / gameCount ));
 	*/	
 		
 		SimulatedSeason.massSeasonSim( lhlTeams[0], lhlTeams[1], lhlTeams[2], lhlTeams[3], lhlTeams[4], lhlTeams[5], gameCount );
@@ -150,10 +156,14 @@ public class AppMain {
 		
 		for( int i = 0; i < 6; i++) {
 			System.out.println( lhlTeams[SimulatedSeason.teamOrder[i]].teamName + "\t "
-					+ "(" + SimulatedSeason.multOrderedStandings[0][i] + "-" + SimulatedSeason.multOrderedStandings[1][i]
-					+ "-" + SimulatedSeason.multOrderedStandings[2][i]+ "-"	+ SimulatedSeason.multOrderedStandings[3][i] + ") \t" 
+					// + "(" + SimulatedSeason.multOrderedStandings[0][i] + "-" + SimulatedSeason.multOrderedStandings[1][i]
+					// + "-" + SimulatedSeason.multOrderedStandings[2][i]+ "-"	+ SimulatedSeason.multOrderedStandings[3][i] + ") \t" 
 					+ SimulatedSeason.multOrderedStandings[4][i] + "\t\t% Season Championships: " + SimulatedSeason.multOrderedStandings[5][i]
-					+ "\t\t% Playoff Championships: " + SimulatedSeason.multOrderedStandings[6][i]);
+					+ "\t\t% Playoff Championships: " + SimulatedSeason.multOrderedStandings[6][i] + "\t\tG/G: " + SimulatedSeason.multiOrderedTeamStats[0][i]
+					+ "\t\tA/G: " + SimulatedSeason.multiOrderedTeamStats[1][i]
+					+ "\t\tGA/G: " + SimulatedSeason.multiOrderedTeamStats[2][i]
+					+ "\t\tSv/G: " + SimulatedSeason.multiOrderedTeamStats[3][i]);
 		}
+	
 	}
 }

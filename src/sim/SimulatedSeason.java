@@ -14,7 +14,9 @@ public class SimulatedSeason {
 	private static Team[] finalsTeams = new Team[2];
 	private static int[] playoffRecords = new int[4];
 	private static int[] finalsRecords = new int[2];
-
+	private static int[][] teamStats = new int[4][6];
+	private static double[][] multiTeamStats = new double[4][6];
+	public static double[][] multiOrderedTeamStats = new double[4][6];
 
 	public static void massSeasonSim( Team team1, Team team2, Team team3, Team team4, Team team5, Team team6, int gamesPlayed ) {
 		
@@ -37,12 +39,28 @@ public class SimulatedSeason {
 								records[4][k]+= 2;
 								records[2][j]++;
 								records[4][j]+= 1;
+								teamStats[0][k] += seasonGame[i].winningTeamGoals();
+								teamStats[0][j] += seasonGame[i].losingTeamGoals();
+								teamStats[1][k] += seasonGame[i].winningTeamAssists();
+								teamStats[1][j] += seasonGame[i].losingTeamAssists();
+								teamStats[2][k] += seasonGame[i].losingTeamGoals();
+								teamStats[2][j] += seasonGame[i].winningTeamGoals();
+								teamStats[3][k] += seasonGame[i].winningTeamSaves();
+								teamStats[3][j] += seasonGame[i].losingTeamSaves();
 							}
 							else {
 								records[2][k]++;
 								records[4][k]+= 1;
 								records[1][j]++;
 								records[4][j]+= 2;
+								teamStats[0][k] += seasonGame[i].losingTeamGoals();
+								teamStats[0][j] += seasonGame[i].winningTeamGoals();
+								teamStats[1][k] += seasonGame[i].losingTeamAssists();
+								teamStats[1][j] += seasonGame[i].winningTeamAssists();
+								teamStats[2][k] += seasonGame[i].winningTeamGoals();
+								teamStats[2][j] += seasonGame[i].losingTeamGoals();
+								teamStats[3][k] += seasonGame[i].losingTeamSaves();
+								teamStats[3][j] += seasonGame[i].winningTeamSaves();
 							}
 						}
 						else {
@@ -50,11 +68,27 @@ public class SimulatedSeason {
 								records[0][k]++;
 								records[4][k]+= 3;
 								records[3][j]++;
+								teamStats[0][k] += seasonGame[i].winningTeamGoals();
+								teamStats[0][j] += seasonGame[i].losingTeamGoals();
+								teamStats[1][k] += seasonGame[i].winningTeamAssists();
+								teamStats[1][j] += seasonGame[i].losingTeamAssists();
+								teamStats[2][k] += seasonGame[i].losingTeamGoals();
+								teamStats[2][j] += seasonGame[i].winningTeamGoals();
+								teamStats[3][k] += seasonGame[i].winningTeamSaves();
+								teamStats[3][j] += seasonGame[i].losingTeamSaves();
 							}
 							else {
 								records[3][k]++; 
 								records[0][j]++;
 								records[4][j]+= 3;
+								teamStats[0][k] += seasonGame[i].losingTeamGoals();
+								teamStats[0][j] += seasonGame[i].winningTeamGoals();
+								teamStats[1][k] += seasonGame[i].losingTeamAssists();
+								teamStats[1][j] += seasonGame[i].winningTeamAssists();
+								teamStats[2][k] += seasonGame[i].winningTeamGoals();
+								teamStats[2][j] += seasonGame[i].losingTeamGoals();
+								teamStats[3][k] += seasonGame[i].losingTeamSaves();
+								teamStats[3][j] += seasonGame[i].winningTeamSaves();
 							}
 						}
 					}
@@ -149,6 +183,10 @@ public class SimulatedSeason {
 		for( int j = 0; j < 6; j++) {
 			for( int i = 0; i < 5; i++) {
 				multipleSeasonRecords[i][j] = multipleSeasonRecords[i][j] / gamesPlayed;
+				multiTeamStats[0][j] = (double)teamStats[0][j] / (gamesPlayed * 25);
+				multiTeamStats[1][j] = (double)teamStats[1][j] / (gamesPlayed * 25);
+				multiTeamStats[2][j] = (double)teamStats[2][j] / (gamesPlayed * 25);
+				multiTeamStats[3][j] = (double)teamStats[3][j] / (gamesPlayed * 25);
 			}
 		}
 		
@@ -166,6 +204,10 @@ public class SimulatedSeason {
 			}
 			for( int i = 0; i < 7; i++) {
 				multOrderedStandings[i][j] = multipleSeasonRecords[i][pointsflag];
+				multiOrderedTeamStats[0][j] = multiTeamStats[0][pointsflag];
+				multiOrderedTeamStats[1][j] = multiTeamStats[1][pointsflag];
+				multiOrderedTeamStats[2][j] = multiTeamStats[2][pointsflag];
+				multiOrderedTeamStats[3][j] = multiTeamStats[3][pointsflag];
 				multipleSeasonRecords[i][pointsflag] = 0;
 			}
 			teamOrder[j] = pointsflag;

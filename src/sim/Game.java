@@ -1,4 +1,5 @@
 package sim;
+import sim.SimEngine;
 public class Game {
 	private Team team1;
 	private Team team2;
@@ -98,6 +99,26 @@ public class Game {
 	public int losingTeamGoals() {
 		if (!scoreSet) { System.err.println("Game.java: Score is not set!"); return -1; }
 		return (team1Score < team2Score ? team1Score : team2Score);
+	}
+	
+	public int winningTeamAssists() {
+		if (!scoreSet) { System.err.println("Game.java: Score is not set!"); return -1; }
+		return (team1Score > team2Score ? SimEngine.team1Assists : SimEngine.team2Assists);
+	}
+	
+	public int losingTeamAssists() {
+		if (!scoreSet) { System.err.println("Game.java: Score is not set!"); return -1; }
+		return (team1Score < team2Score ? SimEngine.team1Assists : SimEngine.team2Assists);
+	}
+	
+	public int winningTeamSaves() {
+		if (!scoreSet) { System.err.println("Game.java: Score is not set!"); return -1; }
+		return (team1Score > team2Score ? SimEngine.team1Stats[1][4] : SimEngine.team2Stats[1][4]);
+	}
+	
+	public int losingTeamSaves() {
+		if (!scoreSet) { System.err.println("Game.java: Score is not set!"); return -1; }
+		return (team1Score < team2Score ? SimEngine.team1Stats[1][4] : SimEngine.team2Stats[1][4]);
 	}
 	
 	public boolean didTeam1Win() {
