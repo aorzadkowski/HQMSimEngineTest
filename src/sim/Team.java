@@ -74,8 +74,8 @@ public class Team {
 	// Adds the stat categories for each player
 	for ( int j = 0; j < 4; j++) {
 		for ( int i = 0; i < 20; i++) {
-			if ( i == 12 || i == 15 || i == 19) { bothTotal[j] += weightsForPlayer[i][j]; teamBothTotal += weightsForPlayer[i][j]; }
-			else if ( i == 13 || i == 14 || i == 16 || i == 18) { defenseTotal[j] += weightsForPlayer[i][j]; teamDefenseTotal += weightsForPlayer[i][j]; }
+			if ( i == 19) { bothTotal[j] += weightsForPlayer[i][j]; teamBothTotal += weightsForPlayer[i][j]; }
+			else if ( i == 12 || i == 13 || i == 14 || i == 15 || i == 16 || i == 18) { defenseTotal[j] += weightsForPlayer[i][j]; teamDefenseTotal += weightsForPlayer[i][j]; }
 			else offenseTotal[j] += weightsForPlayer[i][j];
 		}
 	}

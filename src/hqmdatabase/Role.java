@@ -36,12 +36,12 @@ public enum Role {
 	 */
 	public double[] getMax() {
 		switch (this) {
-        case SNIPER: return new double[] {13.60,3.34,3.06};
-        case PLAYMAKER: return new double[] {13.32,3.80,2.92};
-        case DANGLER: return new double[] {14.68,2.64,2.72};
-        case TWO_WAY_FORWARD: return new double[] {12.88,4.10,3.00};
-        case OFFENSIVE_DMAN: return new double[] {13.16,3.86,3.02};
-        case DEFENSIVE_DMAN: return new double[] {11.84,4.84,3.36};
+        case SNIPER: return new double[] {13.60,5.34,1.06};
+        case PLAYMAKER: return new double[] {13.32,5.78,0.94};
+        case DANGLER: return new double[] {14.68,4.30,1.06};
+        case TWO_WAY_FORWARD: return new double[] {12.88,6.10,1.00};
+        case OFFENSIVE_DMAN: return new double[] {13.16,5.92,0.96};
+        case DEFENSIVE_DMAN: return new double[] {11.84,7.18,1.02};
         case GOALIE: return new double[] {0.00,14.29,0.00};
         case DEVELOPER: return new double[] {14.00, 4.00, 3.00};
         default: return new double[] {0.00,0.00,0.00};

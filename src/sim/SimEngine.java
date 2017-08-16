@@ -21,7 +21,6 @@ public class SimEngine {
 	static int team2Total = 0;
 	public static int team1Assists;
 	public static int team2Assists;
-	
 	public static void simulateGame(Game game) {
 
 		team1Stats = new int[2][5]; // Resets individual game stats
@@ -31,7 +30,6 @@ public class SimEngine {
 		team2Total = 0;
 		team1Assists = 0;
 		team2Assists = 0;
-
 		
 		Team team1 = game.getTeam1();
 		Team team2 = game.getTeam2();
@@ -232,9 +230,11 @@ public class SimEngine {
 		}
 
 		if ( saves > 0 && goalieTeamNum == 1 ) {
+			team1Stats[0][4] += saves;
 			team1MultiStats[0][4] += saves;
 		}
 		else if( saves > 0 && goalieTeamNum == 2 ) {
+			team2Stats[0][4] += saves;
 			team2MultiStats[0][4] += saves;
 		}
 
