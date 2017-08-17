@@ -3,7 +3,14 @@ package sim;
 public class SimulatedSeason {
 //Team[] lhlTeams = {bos, nyr, chi, tor, nsh, win};
 	
-	private static int[][] records = new int[5][6];
+	private Team team1;
+	private Team team2;
+	private Team team3;
+	private Team team4;
+	private Team team5;
+	private Team team6;
+	private int seasonsPlayed;
+
 	public static int[][] orderedStandings = new int[5][6];
 	private static Game[] seasonGame = new Game[5];
 	private static Game[] playoffGame = new Game[7];
@@ -18,9 +25,20 @@ public class SimulatedSeason {
 	private static double[][] multiTeamStats = new double[5][6];
 	public static double[][] multiOrderedTeamStats = new double[5][6];
 
-	public static void massSeasonSim( Team team1, Team team2, Team team3, Team team4, Team team5, Team team6, int seasonsPlayed ) {
-		
-		Team[] seasonTeams = new Team[]{team1,team2,team3,team4,team5,team6};
+	public SimulatedSeason( Team team1, Team team2, Team team3, Team team4, Team team5, Team team6, int seasonsPlayed ) {
+		this.team1 = team1;
+		this.team2 = team2;
+		this.team3 = team3;
+		this.team4 = team4;
+		this.team5 = team5;
+		this.team6 = team6;
+		this.seasonsPlayed = seasonsPlayed;
+	}
+	
+	public static void massSeasonSim( SimulatedSeason simSeason ) {
+	//	Team[] seasonTeams = new Team[]{team1,team2,team3,team4,team5,team6};
+		int[][] records = new int[5][6];
+
 		
 		// Simulates the games in multiple seasons
 		for( int l = 0; l < seasonsPlayed; l++) {
@@ -33,7 +51,7 @@ public class SimulatedSeason {
 					for( int i = 0; i < 5; i++) {					// Cycles through the games between Team 1 and Team 2
 						seasonGame[i] = new Game (seasonTeams[k], seasonTeams[j]);	// Sets up the games
 						SimEngine.simulateGame(seasonGame[i]);		// Simulates the games
-						statsUpdate( k, j, i, seasonGame[i].didTeam1Win(), seasonGame[i].isGameOT());	// Updates the stats
+						statsUpdate( k, j, i, seasonGame[i].didTeam1Win(), seasonGame[i].isGameOT(), records);	// Updates the stats
 					}
 				}
 			}
@@ -161,9 +179,10 @@ public class SimulatedSeason {
 			multiOrderedTeamStats[4][j] = multiTeamStats[4][pointsflag];	// Ranks SA/G
 			teamOrder[j] = pointsflag;								// Sets the team order to display team names with stats
 		}
+		
 	}
 	
-	private static void statsUpdate( int team1, int team2, int game,  boolean team1Win, boolean OT ) {
+	private static void statsUpdate( int team1, int team2, int game,  boolean team1Win, boolean OT, int[][] records ) {
 		if (OT) {													// Checks if game went to OT
 			if (team1Win) {											// Checks which team won
 				records[1][team1]++;								// Increments
@@ -230,5 +249,13 @@ public class SimulatedSeason {
 				teamStats[4][team2] += seasonGame[game].losingTeamShots();
 			}
 	}
+	}
+	
+	public int getSeasonsPlayed() {
+		return seasonsPlayed;
+	}
+	
+	public SimulatedSeason( int seasonsPlayed ) {
+		this.seasonsPlayed = seasonsPlayed;
 	}
 }

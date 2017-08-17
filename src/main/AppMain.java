@@ -96,7 +96,9 @@ public class AppMain {
 	 
 	private static void runSeasons(int numberOfSeasons, Team[] lhlTeams) {
 		// TODO Auto-generated method stub
-		SimulatedSeason.massSeasonSim( lhlTeams[0], lhlTeams[1], lhlTeams[2], lhlTeams[3], lhlTeams[4], lhlTeams[5], numberOfSeasons );
+		SimulatedSeason simSeason = new SimulatedSeason ( lhlTeams[0], lhlTeams[1], lhlTeams[2], lhlTeams[3], lhlTeams[4], lhlTeams[5], numberOfSeasons );
+		
+		SimulatedSeason.massSeasonSim( simSeason );
 		
 		System.out.println("Here are the averaged results from simulating S13 LHL " + numberOfSeasons + " times! \n");
 		
