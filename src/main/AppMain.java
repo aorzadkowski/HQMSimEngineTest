@@ -9,6 +9,7 @@ import sim.SimEngine;
 import sim.SimulatedSeason;
 import sim.Team;
 import sim.gamefsm.GameState;
+import tests.PlayerStatsTest;
 
 public class AppMain {
 	
@@ -19,8 +20,10 @@ public class AppMain {
 		
 		ArgumentLineHandler.processArguments(args);
 		
-		//System.out.println(mainDB.getSize());
+		PlayerStatsTest.testPlayerStats();
 		
+		//System.out.println(mainDB.getSize());
+/*		
 		Team bos = new Team("Boston Bruins \t",
                 mainDB.retrievePlayer("Lucic",Season.LHLS13),
                 mainDB.retrievePlayer("Teemu Salami",Season.LHLS13),
@@ -73,7 +76,7 @@ public class AppMain {
 		
 		// GameState gs = new GameState(bos, bos);
 
-	/*
+	
 		for( int i = 0; i < 6; i++) {
 			System.out.println(lhlTeams[i].teamName);
 			System.out.println(lhlTeams[i].oRatio);	
@@ -81,7 +84,7 @@ public class AppMain {
 			System.out.println(lhlTeams[i].teamBRatio);
 			System.out.println(lhlTeams[i].goalieDRatio + "\n");
 		}
-		*/
+		
 	
 
 		switch (Options.simtype) {
@@ -89,7 +92,7 @@ public class AppMain {
 		case 2: runGames(Options.numberOfGames, bos, nsh); break;
 		case 3: runSeasons(Options.numberOfSeasons, lhlTeams); break;
 		}
-		
+	*/	
 	}
 
 	
