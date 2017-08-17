@@ -1,7 +1,9 @@
 package sim.gamefsm;
 
 public enum Event {
-	WIN_FACEOFF,SKATE,PASS,RECEIVE,RECEIVE_MISSED,PASS_MISSED,PASS_TIPPED,PASS_INTERCEPTED,PASS_DUMPED,SHOT_LONG,SHOT_WRIST,SHOT_POINT,SHOT_GOAL,SHOT_ASSISTED_GOAL,SHOT_BLOCKED,SHOT_MISSED,SHOT_SAVED,LOST_PUCK,POKE_CHECKED,BODY_CHECKED,PHYSICS,SWING_MISSED;
+	WIN_FACEOFF,SKATE,OPEN_PASS,OPEN_RECEIVE,BOARD_PASS,BOARD_RECEIVE,BREAKOUT_PASS,BREAKOUT_RECEIVE,RECEIVE_MISSED,PASS_MISSED,PASS_TIPPED,PASS_INTERCEPTED,PASS_DUMPED,
+	SHOT_LONG,SHOT_WRIST,SHOT_POINT,SHOT_GOAL,SHOT_ASSISTED_GOAL,SHOT_BLOCKED,SHOT_MISSED,SHOT_SAVED,
+	LOST_PUCK,POKE_CHECKED,BODY_CHECKED,PHYSICS,SWING_MISSED;
 	
 	/**
 	 * %p1 refers to player 1, while %p2 refers to player 2. Replace these strings with player names.
@@ -11,8 +13,10 @@ public enum Event {
 		switch (this) {
 		case WIN_FACEOFF: return "%p1 has won the faceoff!";
 		case SKATE: return "%p1 skates up with the puck.";
-		case PASS: return "%p1 passes the puck up to %p2.";
-		case RECEIVE: return "%p1 got the puck.";
+		case OPEN_PASS: return "%p1 passes the puck up the open ice to %p2.";
+		case OPEN_RECEIVE: return "%p1 has the puck.";
+		case BREAKOUT_PASS: return "%p1 passes the puck up to %p2.";
+		case BREAKOUT_RECEIVE: return "%p1 got the puck.";
 		case RECEIVE_MISSED: return "%p1 could not reach the puck.";
 		case PASS_MISSED: return "%p1 missed the pass.";
 		case PASS_TIPPED: return "%p2's pass was tipped by %p1!";
