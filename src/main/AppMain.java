@@ -20,7 +20,7 @@ public class AppMain {
 		
 		ArgumentLineHandler.processArguments(args);
 		
-		PlayerStatsTest.testPlayerStats();
+		//PlayerStatsTest.testPlayerStats();
 		
 		//System.out.println(mainDB.getSize());
 /*		

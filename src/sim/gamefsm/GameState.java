@@ -6,14 +6,14 @@ import hqmdatabase.Player;
 import sim.Team;
 
 public class GameState {
-	Team team1;
-	Team team2;
+	Team homeTeam;
+	Team awayTeam;
 	
 	Player playerInPossession;
-	boolean team1InPossession;
+	boolean homeTeamInPossession;
 	
-	int team1Score;
-	int team2Score;
+	int homeScore;
+	int awayScore;
 	
 	int period;
 	int timeLeft; //in seconds.
@@ -24,24 +24,51 @@ public class GameState {
 	
 	State currentState;
 	
-	public GameState(Team team1, Team team2) {
-		this.team1 = applyConsistencyForTeam(team1);
-		this.team2 = applyConsistencyForTeam(team2);
+	/*
+	 * In order for puck movement to not be based on random players, puck positioning has to be accounted for.  
+	 * X axis is how far the puck is from the center line, where the line is between values 4 and 5. As the value
+	 * approaches 0, the closer the puck is to the red net.  As the value goes up to 9, the puck moves closer to
+	 * the blue net.  It's important to remember that x values0 and 9 are actually behind the nets. 
+	 *
+	 * As for the y value, it is how far off to the side the puck is to the net. 0 is on the red net's left side boards
+	 * (or blue's right side), and 4 is to red's right side boards (or blue's left side boards). 2 is dead center.
+	 *
+	 * The nets are between (0-1, 3) for red and (8-9, 3) for blue.  This means goalies would stand at (1, 2) and (8, 2)
+	 * for each team.
+	 *
+	 * Player starting positions are:
+	 * 		Home Team:
+	 * 			C (4,2)
+	 * 			LW (4,1)
+	 * 			LD (3,1)
+	 * 			RD (3,3)
+	 * 			G (1,2)
+	 * 		Away Team:
+	 * 			C (5,2)
+	 * 			LW (5,3)
+	 * 			LD (6,3)
+	 * 			RD (6,1)
+	 * 			G (8,2)
+	 */
+	int puckX;
+	int puckY;
+	
+	public GameState(Team homeTeam, Team awayTeam) {
+		this.homeTeam = applyConsistencyForTeam(homeTeam);
+		this.awayTeam = applyConsistencyForTeam(awayTeam);
 		
 		playerInPossession = null;
-		team1InPossession = true;
+		homeTeamInPossession = true;
 		
-		team1Score = 0;
-		team2Score = 0;
+		homeScore = 0;
+		awayScore = 0;
 		
 		period = 1;
-		timeLeft = 300;
+		timeLeft = 300; //5 * 60 = 5 minutes
 		
 		recentEvents = new ArrayList<>();
 		
 		currentState = possibleStates[0];
-		
-		currentState.getNextState(this).getNextState(this);
 	}
 	
 	private String getNormalizedTime(int seconds) {
@@ -89,5 +116,25 @@ public class GameState {
 			else return player.getStat(skill) - 3;
 		} else 
 			return player.getStat(skill);
+	}
+	
+	public String fullPlayByPlay() {
+		String toReturn = "";
+		
+		toReturn += "Tonight's game is between " + awayTeam.teamName + " play at " + homeTeam.teamName + ".\n";
+		
+		for (int i = 0; i < recentEvents.size(); i++) {
+			EventHandler eventH = recentEvents.get(i);
+			String play = eventH.event.getEventText().replace("%p1", eventH.player1.getName()).replace("%p2", eventH.player2.getName());
+			
+			toReturn += getNormalizedTime(eventH.time) + " : " + play + "\n";
+		}
+		
+		return toReturn;
+	}
+	
+	public String toString() {
+		String toReturn = fullPlayByPlay();
+		return toReturn;
 	}
 }
