@@ -170,7 +170,6 @@ public class SimEngine {
 			if ( team2Points[i] > 0) calcApple(team2, team2Points[i], i, 2);
 			
 		}
-
 		return new int[] {team1Total, team2Total};
 	}
 	
