@@ -21,6 +21,10 @@ public class SimEngine {
 	static int team2Total = 0;
 	public static int team1Assists;
 	public static int team2Assists;
+	
+	public static Stats[] team1PlayerStats;
+	public static Stats[] team2PlayerStats;
+	
 	public static void simulateGame(Game game) {
 
 		team1Stats = new int[2][5]; // Resets individual game stats
@@ -34,6 +38,14 @@ public class SimEngine {
 		Team team1 = game.getTeam1();
 		Team team2 = game.getTeam2();
 		
+		team1PlayerStats = new Stats[5];
+		team2PlayerStats = new Stats[5];
+		
+		for (int i = 0; i < team1.teamPlayers.length; i++) {
+			team1PlayerStats[i] = new Stats(team1.teamPlayers[i]);
+			team2PlayerStats[i] = new Stats(team2.teamPlayers[i]);
+		}
+		
 		int[][] boxScore = new int[3][2];
 		
 		boxScore[0] = getNetScoreInPeriod(team1, team2);
@@ -42,7 +54,6 @@ public class SimEngine {
 		
 		int team1Score = (boxScore[0][0] + boxScore[1][0] + boxScore[2][0]);
 		int team2Score = (boxScore[0][1] + boxScore[1][1] + boxScore[2][1]);
-
 		
 		if (team1Score == team2Score) {
 			int team1OTScore = 0;
@@ -133,6 +144,11 @@ public class SimEngine {
 			team1Points[i] = team1Goals[i] + team2Blocks[i];
 		    if (team1Points[i] > 0) {
 				team2Stats[1][4] += team1Points[i];
+				
+				for (int k = 0; k < team2Stats[1][4]; k++) {
+					addShotOnGoal(getNameFromIndex(4, team2));
+				}
+				
 	    		team1Points[i] = calcSave(team2, team1.teamPlayers[i], team2.teamPlayers[4], team1Points[i], 2);
 			}
 			if (team1Points[i] < 0) team1Points[i] = 0;
@@ -155,6 +171,95 @@ public class SimEngine {
 		}
 
 		return new int[] {team1Total, team2Total};
+	}
+	
+	private static void addPlus(boolean team1) {
+		if (team1) {
+			for (int i = 0; i < team1PlayerStats.length; i++) {
+				team1PlayerStats[i].addPlusMinus();
+			}
+		} else {
+			for (int i = 0; i < team2PlayerStats.length; i++) {
+				team2PlayerStats[i].addPlusMinus();
+			}
+		}
+	}
+	
+	private static void addMinus(boolean team1) {
+		if (team1) {
+			for (int i = 0; i < team1PlayerStats.length; i++) {
+				team1PlayerStats[i].removePlusMinus();
+			}
+		} else {
+			for (int i = 0; i < team2PlayerStats.length; i++) {
+				team2PlayerStats[i].removePlusMinus();
+			}
+		}
+	}
+	
+	private static void addShot(String playerName) {
+		for (int i = 0; i < team1PlayerStats.length; i++) {
+			if (team1PlayerStats[i].getPlayerName().equals(playerName)) {
+				team1PlayerStats[i].addShot();
+				return;
+			}
+		}
+		
+		for (int i = 0; i < team2PlayerStats.length; i++) {
+			if (team2PlayerStats[i].getPlayerName().equals(playerName)) {
+				team2PlayerStats[i].addShot();
+				return;
+			}
+		}
+	}
+	
+	private static void addGoal(String playerName) {
+		for (int i = 0; i < team1PlayerStats.length; i++) {
+			if (team1PlayerStats[i].getPlayerName().equals(playerName)) {
+				team1PlayerStats[i].addGoal();
+			}
+		}
+		
+		for (int i = 0; i < team2PlayerStats.length; i++) {
+			if (team2PlayerStats[i].getPlayerName().equals(playerName)) {
+				team2PlayerStats[i].addGoal();
+				return;
+			}
+		}
+	}
+	
+	private static void addShotOnGoal(String playerName) {
+		for (int i = 0; i < team1PlayerStats.length; i++) {
+			if (team1PlayerStats[i].getPlayerName().equals(playerName)) {
+				team1PlayerStats[i].addShotOnNet();
+			}
+		}
+		
+		for (int i = 0; i < team2PlayerStats.length; i++) {
+			if (team2PlayerStats[i].getPlayerName().equals(playerName)) {
+				team2PlayerStats[i].addShotOnNet();
+				return;
+			}
+		}
+	}
+	
+	private static void addSave(String playerName) {
+		for (int i = 0; i < team1PlayerStats.length; i++) {
+			if (team1PlayerStats[i].getPlayerName().equals(playerName)) {
+				team1PlayerStats[i].addSave();
+			}
+		}
+		
+		for (int i = 0; i < team2PlayerStats.length; i++) {
+			if (team2PlayerStats[i].getPlayerName().equals(playerName)) {
+				team2PlayerStats[i].addSave();
+				return;
+			}
+		}
+	}
+	
+	private static String getNameFromIndex(int index, Team team) {
+		return team.teamPlayers[index].getName();
 	}
 	
 	private static int getScoreInPeriod(Team team, int player) {
@@ -232,11 +337,20 @@ public class SimEngine {
 		if ( saves > 0 && goalieTeamNum == 1 ) {
 			team1Stats[0][4] += saves;
 			team1MultiStats[0][4] += saves;
+			
+			for (int i = 0; i < team1Stats[0][4]; i++) {
+				addSave(getNameFromIndex(4, goalieTeam));
+			}
 		}
 		else if( saves > 0 && goalieTeamNum == 2 ) {
 			team2Stats[0][4] += saves;
 			team2MultiStats[0][4] += saves;
+
+			for (int i = 0; i < team2Stats[0][4]; i++) {
+				addSave(getNameFromIndex(4, goalieTeam));
+			}
 		}
+		
 
 		return newGoals;
 	}

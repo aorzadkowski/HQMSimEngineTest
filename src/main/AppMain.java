@@ -20,10 +20,10 @@ public class AppMain {
 		
 		ArgumentLineHandler.processArguments(args);
 		
-		PlayerStatsTest.testPlayerStats();
+		//PlayerStatsTest.testPlayerStats();
 		
 		//System.out.println(mainDB.getSize());
-/*		
+		
 		Team bos = new Team("Boston Bruins \t",
                 mainDB.retrievePlayer("Lucic",Season.LHLS13),
                 mainDB.retrievePlayer("Teemu Salami",Season.LHLS13),
@@ -76,7 +76,7 @@ public class AppMain {
 		
 		// GameState gs = new GameState(bos, bos);
 
-	
+		/*	
 		for( int i = 0; i < 6; i++) {
 			System.out.println(lhlTeams[i].teamName);
 			System.out.println(lhlTeams[i].oRatio);	
@@ -86,13 +86,13 @@ public class AppMain {
 		}
 		
 	
-
+*/
 		switch (Options.simtype) {
 		case 1: runPeriod(bos, nsh); break;
 		case 2: runGames(Options.numberOfGames, bos, nsh); break;
 		case 3: runSeasons(Options.numberOfSeasons, lhlTeams); break;
 		}
-	*/	
+		
 	}
 
 	
