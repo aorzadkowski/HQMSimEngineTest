@@ -39,7 +39,7 @@ public class Stats {
 	}
 	
 	public double getPointsPerGame() {
-		return ((double) getGoals()) / getGamesPlayed(); 
+		return ((double) getPoints()) / getGamesPlayed(); 
 	}
 	
 	public double getSavePercentage() {
