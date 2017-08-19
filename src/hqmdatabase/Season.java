@@ -9,4 +9,11 @@ public enum Season {
 		default: return "";
 		}
 	}
+	
+	public static Season parseSeason(String str) {
+		switch (str) {
+		case "LHL S13": return LHLS13;
+		default: return NO_SEASON;
+		}
+	}
 }

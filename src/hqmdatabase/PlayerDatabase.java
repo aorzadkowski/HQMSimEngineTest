@@ -76,7 +76,7 @@ public class PlayerDatabase {
 		ArrayList<String> names = new ArrayList<>();
 		
 		for (Player player : data) {
-			names.add(player.getName() + " " + player.getSeason());
+			names.add(player.getName() + "," + player.getSeason());
 		}
 		
 		return names;

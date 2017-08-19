@@ -69,7 +69,7 @@ public class Player {
 	}
 	
 	public Player (String name, Season season, Position position, Role role, int[] stats) {
-		this.name = name; 
+		this.name = name;
 		this.role = role;
 		this.season = season;
 		this.position = position;
