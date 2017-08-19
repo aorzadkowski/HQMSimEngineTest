@@ -35,7 +35,7 @@ public class PlayerDBIO {
 				
 				String[] splitString = in.split(",");
 				
-				if (splitString.length != 24 && splitString.length != 11) { //24 is the number of elements per row in our desired sim.  (4 for identification, 20 stats)
+				if (splitString.length != 24 && splitString.length != 12) { //24 is the number of elements per row in our desired sim.  (4 for identification, 20 stats)
 					System.err.println("Invalid number of elements in row: " + rowCounter);
 					return;
 				}
@@ -46,7 +46,7 @@ public class PlayerDBIO {
 				Position position = parsePosition(splitString[2]);
 				Role role = parseRole(splitString[3]);
 				
-				int[] stats = (splitString.length == 24 ? new int[20] : new int[7]);
+				int[] stats = (splitString.length == 24 ? new int[20] : new int[8]);
 				
 				for (int i = 4; i < splitString.length; i++) {
 					try {

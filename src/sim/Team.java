@@ -18,6 +18,7 @@ public class Team {
 	public double teamBRatio = 0; // Doesn't include goalie
 	public double teamInvBRatio = 0; // Doesn't include goalie
 	public double goalieDRatio = 0;
+	public double invGoalieBRatio = 0;
 	private double teamDRoleRatio = 0;
 	private double teamBRoleRatio = 0;
 	private double[] offenseTotal = new double[4];
@@ -98,7 +99,9 @@ public class Team {
 	teamInvBRatio = 1 - teamBRatio;
 	
 	goalieDRatio = goalieTotal / teamPlayers[4].role.getMax()[1];
-	if (Options.debug) System.out.println(teamName + " goalieDRatio=" + goalieTotal + " / " + teamPlayers[4].role.getMax()[1] + " = " + goalieDRatio);
+	invGoalieBRatio = 1 - ( goalie.getStats()[7] * goalie.role.getWeights()[2] ) / goalie.role.getMax()[2];
+	if (Options.debug) System.out.println(teamName + " goalieDRatio=" + goalieTotal + " / " + teamPlayers[4].role.getMax()[1] + " = " + goalieDRatio
+			+ "\ninvGoalieBRatio=" + invGoalieBRatio);
 	
 	}
 }
