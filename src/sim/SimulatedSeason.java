@@ -17,10 +17,13 @@ public class SimulatedSeason {
 	private static int[][] teamStats = new int[5][6];
 	private static double[][] multiTeamStats = new double[5][6];
 	public static double[][] multiOrderedTeamStats = new double[5][6];
+	
+	public static Stats[] playerStats; //5 players per team, 6 teams.
 
 	public static void massSeasonSim( Team team1, Team team2, Team team3, Team team4, Team team5, Team team6, int seasonsPlayed ) {
-		
 		Team[] seasonTeams = new Team[]{team1,team2,team3,team4,team5,team6};
+		
+		playerStats = initPlayerStatsArray(seasonTeams);
 		
 		// Simulates the games in multiple seasons
 		for( int l = 0; l < seasonsPlayed; l++) {
@@ -33,6 +36,7 @@ public class SimulatedSeason {
 					for( int i = 0; i < 5; i++) {					// Cycles through the games between Team 1 and Team 2
 						seasonGame[i] = new Game (seasonTeams[k], seasonTeams[j]);	// Sets up the games
 						SimEngine.simulateGame(seasonGame[i]);		// Simulates the games
+						updatePlayerStats(seasonGame[i]);			// Updates player stats using the new stats class
 						statsUpdate( k, j, i, seasonGame[i].didTeam1Win(), seasonGame[i].isGameOT());	// Updates the stats
 					}
 				}
@@ -69,7 +73,7 @@ public class SimulatedSeason {
 			for( int i = 0; i < 7; i++) {							// Cycles through a 7 game series
 				playoffGame[i] = new Game ( playoffTeams[0], playoffTeams[3]); // Sets up the first matchup
 				SimEngine.simulateGame(playoffGame[i]);				// Simulates the first matchup
-				
+				updatePlayerStats(playoffGame[i]);			// Updates player stats using the new stats class
 				if( playoffGame[i].didTeam1Win()) {					// Checks to see    
 					playoffRecords[0]++;							// which team
 				}													// won and 
@@ -89,7 +93,7 @@ public class SimulatedSeason {
 			for( int i = 0; i < 7; i++) {							// Cycles through a 7 game series
 				playoffGame[i] = new Game ( playoffTeams[1], playoffTeams[2]); // Sets up the second matchup
 				SimEngine.simulateGame(playoffGame[i]);				// Simulates the second matchup
-				
+				updatePlayerStats(playoffGame[i]);			// Updates player stats using the new stats class
 				if( playoffGame[i].didTeam1Win()) {					// Checks to see
 					playoffRecords[1]++;							// which team
 				}													// won and
@@ -109,7 +113,7 @@ public class SimulatedSeason {
 			for( int i = 0; i < 7; i++) {							// Cycles through a 7 game series
 				playoffGame[i] = new Game ( finalsTeams[0], finalsTeams[1]);	// Sets up the finals matchup
 				SimEngine.simulateGame(playoffGame[i]);				// Simulates the finals matchup
-				
+				updatePlayerStats(playoffGame[i]);			// Updates player stats using the new stats class
 				if( playoffGame[i].didTeam1Win()) {					// Checks to see
 					finalsRecords[0]++;								// which team
 				}													// won and
@@ -230,5 +234,57 @@ public class SimulatedSeason {
 				teamStats[4][team2] += seasonGame[game].losingTeamShots();
 			}
 	}
+	}
+	
+	private static Stats[] initPlayerStatsArray(Team[] teams) {
+		Stats[] toReturn = new Stats[teams.length * 5]; // 5 players per team. 
+		
+		for (int i = 0; i < teams.length; i++) {
+			for (int j = 0; j < teams[i].teamPlayers.length; j++) {
+				toReturn[(i * teams[i].teamPlayers.length) +  j] = new Stats(teams[i].teamPlayers[j]);
+				//System.out.println("Added " + teams[i].teamPlayers[j].getName() + " to index " + ((i * teams[i].teamPlayers.length) +  j));
+			}
+		}
+		
+		return toReturn;
+	}
+	
+	private static void updatePlayerStats(Game game) {
+		
+		for (int i = 0; i < game.team1PlayerStats.length; i++) {
+			for (int j = 0; j < playerStats.length; j++) {
+				
+				//System.out.println("playerStats[j].getPlayerName() null == " + (playerStats[j].getPlayerName() == null) + "     game.team1PlayerStats[i] null == " + (game.team1PlayerStats[i] == null));
+				
+				if (playerStats[j].getPlayerName().equals(game.team1PlayerStats[i].getPlayerName())) {
+					playerStats[j].addStats(game.team1PlayerStats[i]);
+					break;
+				}
+			}
+		}
+		
+		for (int i = 0; i < game.team2PlayerStats.length; i++) {
+			for (int j = 0; j < playerStats.length; j++) {
+				if (playerStats[j].getPlayerName().equals(game.team2PlayerStats[i].getPlayerName())) {
+					playerStats[j].addStats(game.team1PlayerStats[i]);
+					break;
+				}
+			}
+		}
+	}
+
+	public static void printFullStats() {
+		System.out.println("Here are the stats for each player: \n\tName\tSeason\tPos\tPts\tG\tA\tP/G\t+/-\tShots\tShots Faced\tSvs\tSv%\tSv/G\tGA\tGAA\tGP\tGP@G");
+		
+		for (int i = 0; i < playerStats.length; i++) {
+			if (i % 5 == 0) System.out.println();
+			
+			String[] stats = playerStats[i].toCSV().split(",");
+			
+			for (int j = 0; j < stats.length; j++) {
+				System.out.print("\t" + stats[j]);
+			}
+			System.out.println();
+		}
 	}
 }

@@ -134,10 +134,11 @@ public class SimEngine {
 		
 		game.setScore(boxScore);
 
-		
+		game.team1PlayerStats = team1PlayerStats;
+		game.team2PlayerStats = team2PlayerStats;
 
-
-		System.out.println("Here are the stats for each player: \n\tName\tSeason\tPos\tPts\tG\tA\tP/G\t+/-\tShots\tSvs\tSv%\tSv/G\tGA\tGAA\tGP\tGP@G");
+		/*
+		System.out.println("Here are the stats for each player: \n\tName\tSeason\tPos\tPts\tG\tA\tP/G\t+/-\tShots\tShots Faced\tSvs\tSv%\tSv/G\tGA\tGAA\tGP\tGP@G");
 		
 		for (int i = 0; i < team1PlayerStats.length; i++) {
 			
@@ -160,6 +161,7 @@ public class SimEngine {
 			}
 			System.out.println();
 		}
+		*/
 	}
 	
 	public static int[] getNetScoreInPeriod(Team team1, Team team2) {
@@ -181,7 +183,7 @@ public class SimEngine {
 				
 				////////////
 				//new stats system
-				for (int k = 0; k < team2Stats[1][4]; k++) {
+				for (int k = 0; k < team1Points[i]; k++) {
 					addShotOnGoal(getNameFromIndex(4, team2));
 					addShot(getNameFromIndex(i, team1));
 				}
@@ -194,7 +196,7 @@ public class SimEngine {
 			
 			//////////////
 			//new stats system
-			for (int k = 0; k < team1Stats[0][i]; k++) {
+			for (int k = 0; k < team1Points[i]; k++) {
 				addGoal(getNameFromIndex(i, team1));
 				addPlus(true);
 				addMinus(false);
@@ -208,7 +210,7 @@ public class SimEngine {
 				
 				////////////
 				//new stats system
-				for (int k = 0; k < team1Stats[1][4]; k++) {
+				for (int k = 0; k < team2Points[i]; k++) {
 					addShotOnGoal(getNameFromIndex(4, team1));
 					addShot(getNameFromIndex(i, team2));
 				}
@@ -415,8 +417,8 @@ public class SimEngine {
 			
 			///////////////////
 			//new stats system
-			for (int i = 0; i < team1Stats[0][4]; i++) {
-				addSave(getNameFromIndex(4, goalieTeam));
+			for (int i = 0; i < saves; i++) {
+				addSave(goalie.getName());
 			}
 		}
 		else if( saves > 0 && goalieTeamNum == 2 ) {
@@ -425,7 +427,7 @@ public class SimEngine {
 
 			////////////////////
 			//new stats system
-			for (int i = 0; i < team2Stats[0][4]; i++) {
+			for (int i = 0; i < saves; i++) {
 				addSave(getNameFromIndex(4, goalieTeam));
 			}
 		}
