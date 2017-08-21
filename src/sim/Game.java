@@ -13,6 +13,9 @@ public class Game {
 	
 	private boolean scoreSet;
 	
+	public Stats[] team1PlayerStats;
+	public Stats[] team2PlayerStats;
+	
 	public Game (Team team1, Team team2) {
 		this.team1 = team1;
 		this.team2 = team2;
@@ -21,6 +24,19 @@ public class Game {
 		team2Score = 0;
 		
 		scoreSet = false;
+		
+		team1PlayerStats = initPlayerStats(team1);
+		team2PlayerStats = initPlayerStats(team2);
+	}
+	
+	private Stats[] initPlayerStats(Team team) {
+		Stats[] toReturn = new Stats[team.teamPlayers.length];
+		
+		for (int i = 0; i < team.teamPlayers.length; i++) {
+			toReturn[i] = new Stats(team.teamPlayers[i]);
+		}
+		
+		return toReturn;
 	}
 	
 	public void setScore(int[][] newBoxScore) {

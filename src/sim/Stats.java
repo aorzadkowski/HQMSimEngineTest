@@ -39,23 +39,23 @@ public class Stats {
 	}
 	
 	public double getPointsPerGame() {
-		return ((double) getGoals()) / getGamesPlayed(); 
+		return (player.role != Role.GOALIE ? ((double) getPoints()) / getGamesPlayed() : ((double) getPoints()) / getGamesPlayedAtG()); 
 	}
 	
 	public double getSavePercentage() {
-		return ((double) getSaves()) / getShotsOnNet();
+		return (player.role == Role.GOALIE ? ((double) getSaves()) / getShotsOnNet() : 0);
 	}
 	
 	public double getSavesPerGame() {
-		return ((double) getSaves()) / getGamesPlayedAtG();
+		return (player.role == Role.GOALIE ? ((double) getSaves()) / getGamesPlayedAtG() : 0);
 	}
 	
 	public int getGoalsAllowed() {
-		return getShotsOnNet() - getSaves();
+		return (player.role == Role.GOALIE ? (getShotsOnNet() - getSaves() >= 0 ? getShotsOnNet() - getSaves() : 0) : 0);
 	}
 	
 	public double getGoalsAllowedAverage() {
-		return ((double) getGoalsAllowed()) / getGamesPlayedAtG();
+		return (player.role == Role.GOALIE ? ((double) getGoalsAllowed()) / getGamesPlayedAtG() : 0);
 	}
 	
 	public int getShots() {
@@ -126,10 +126,53 @@ public class Stats {
 		stats.replace("Plus/minus", stats.get("Plus/minus") - 1);
 	}
 	
+	public void removeShot() {
+		stats.replace("Shots", stats.get("Shots") - 1);
+	}
+	
+	public void addStats(Stats other) {
+		for (int i = 0; i < other.getShots(); i++) {
+			addShot();
+		}
+		
+		for (int i = 0; i < other.getAssists(); i++) {
+			addAssist();
+		}
+		
+		for (int i = 0; i < other.getGoals(); i++) {
+			addGoal();
+		}
+		
+		for (int i = 0; i < other.getShotsOnNet(); i++) {
+			addShotOnNet();
+		}
+		
+		for (int i = 0; i < other.getSaves(); i++) {
+			addSave();
+		}
+		
+		for (int i = 0;  i < other.getGamesPlayed(); i++) {
+			addGamesPlayed();
+		}
+		
+		for (int i = 0; i < other.getGamesPlayedAtG(); i++) {
+			addGamesPlayedAtG();
+		}
+		
+		//There are two loops for +/-. If a player has a negative +/-, the first loop will never be true. The reverse is true for the second loop.
+		for (int i = 0; i < other.getPlusMinus(); i++) {
+			addPlusMinus();
+		}
+		
+		for (int i = 0; i > other.getPlusMinus(); i--) {
+			removePlusMinus();
+		}
+	}
+	
 	public String toCSV() {
 		return player.getName() + "," + player.getSeason() + "," + player.position + "," 
 				+ getPoints() + "," + getGoals() + "," + getAssists() + "," 
-				+ getPointsPerGame() + "," + getPlusMinus() + "," + getShots() + "," 
+				+ getPointsPerGame() + "," + getPlusMinus() + "," + getShots() + "," + getShotsOnNet() + ","
 				+ getSaves() + "," + getSavePercentage() + "," + getSavesPerGame() + "," 
 				+ getGoalsAllowed() + "," + getGoalsAllowedAverage() + "," + getGamesPlayed() + "," 
 				+ getGamesPlayedAtG();

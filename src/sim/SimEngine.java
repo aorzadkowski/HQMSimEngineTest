@@ -45,6 +45,14 @@ public class SimEngine {
 		for (int i = 0; i < team1.teamPlayers.length; i++) {
 			team1PlayerStats[i] = new Stats(team1.teamPlayers[i]);
 			team2PlayerStats[i] = new Stats(team2.teamPlayers[i]);
+			
+			if (i < 4) {
+				team1PlayerStats[i].addGamesPlayed();
+				team2PlayerStats[i].addGamesPlayed();
+			} else {
+				team1PlayerStats[i].addGamesPlayedAtG();
+				team2PlayerStats[i].addGamesPlayedAtG();
+			}
 		}
 		
 		int[][] boxScore = new int[3][2];
@@ -127,6 +135,39 @@ public class SimEngine {
 		
 		game.setScore(boxScore);
 
+		game.team1PlayerStats = team1PlayerStats;
+		game.team2PlayerStats = team2PlayerStats;
+
+		/*
+		System.out.println("Here are the stats for each player: \n\tName\tSeason\tPos\tPts\tG\tA\tP/G\t+/-\tShots\tShots Faced\tSvs\tSv%\tSv/G\tGA\tGAA\tGP\tGP@G");
+		
+		for (int i = 0; i < team1PlayerStats.length; i++) {
+			
+			String[] stats = team1PlayerStats[i].toCSV().split(",");
+			
+			for (int j = 0; j < stats.length; j++) {
+				System.out.print("\t" + stats[j]);
+			}
+			System.out.println();
+		}
+		
+		System.out.println();
+		
+		for (int i = 0; i < team2PlayerStats.length; i++) {
+			
+			String[] stats = team2PlayerStats[i].toCSV().split(",");
+			
+			for (int j = 0; j < stats.length; j++) {
+				System.out.print("\t" + stats[j]);
+			}
+			System.out.println();
+		}
+		*/
+	}
+	
+	public static int[] getNetScoreInPeriod(Team team1, Team team2) {
+		team1Total = 0;
+		team2Total = 0;
 		
 
 
@@ -146,7 +187,7 @@ public class SimEngine {
 				
 				////////////
 				//new stats system
-				for (int k = 0; k < team2Stats[1][4]; k++) {
+				for (int k = 0; k < team1Points[i]; k++) {
 					addShotOnGoal(getNameFromIndex(4, team2));
 					addShot(getNameFromIndex(i, team1));
 				}
@@ -159,7 +200,7 @@ public class SimEngine {
 			
 			//////////////
 			//new stats system
-			for (int k = 0; k < team1Stats[0][i]; k++) {
+			for (int k = 0; k < team1Points[i]; k++) {
 				addGoal(getNameFromIndex(i, team1));
 				addPlus(true);
 				addMinus(false);
@@ -173,7 +214,8 @@ public class SimEngine {
 				
 				////////////
 				//new stats system
-				for (int k = 0; k < team1Stats[1romIndex(4, team1));
+				for (int k = 0; k < team2Points[i]; k++) {
+					addShotOnGoal(getNameFromIndex(4, team1));
 					addShot(getNameFromIndex(i, team2));
 				}
 				
@@ -387,8 +429,8 @@ public class SimEngine {
 			
 			///////////////////
 			//new stats system
-			for (int i = 0; i < team1Stats[0][4]; i++) {
-				addSave(getNameFromIndex(4, goalieTeam));
+			for (int i = 0; i < saves; i++) {
+				addSave(goalie.getName());
 			}
 		}
 		else if( saves > 0 && goalieTeamNum == 2 ) {
@@ -397,7 +439,7 @@ public class SimEngine {
 
 			////////////////////
 			//new stats system
-			for (int i = 0; i < team2Stats[0][4]; i++) {
+			for (int i = 0; i < saves; i++) {
 				addSave(getNameFromIndex(4, goalieTeam));
 			}
 		}

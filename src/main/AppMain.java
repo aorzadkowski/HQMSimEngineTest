@@ -116,6 +116,8 @@ public class AppMain {
 					+ "\t\t" + SimulatedSeason.multiOrderedTeamStats[4][i] // SA/G
 					);
 		}
+		
+		SimulatedSeason.printFullStats();
 	}
 
 	private static void runGames(int gameCount, Team team1, Team team2) {
