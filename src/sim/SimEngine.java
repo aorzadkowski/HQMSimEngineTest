@@ -171,11 +171,15 @@ public class SimEngine {
 		
 
 
-		System.out.println("Here are the stats for each player: \n\tName\tSeason\tPos\tPts\tG\tA\tP/G\t+/-\tShots\tSvs\tSv%\tSv/G\tGA\tGAA\tGP\tGP@G");
+		//System.out.println("Here are the stats for each player: \n\tName\tSeason\tPos\tPts\tG\tA\tP/G\t+/-\tShots\tSvs\tSv%\tSv/G\tGA\tGAA\tGP\tGP@G");
 		
-		for (int i = 0; i < team1PlayerStats.length; i++) {
-			 getBlocksInPeriod(team1);
+		//for (int i = 0; i < team1PlayerStats.length - 1; i++) {
+		//	 getBlocksInPeriod(team1);
 		
+		for (int i = 0; i < 4; i++) {
+			team1Goals[i] = getScoreInPeriod(team1, i);
+			team1Blocks[i] = getBlocksInPeriod(team1);
+			
 			team2Goals[i] = getScoreInPeriod(team2, i);
 			team2Blocks[i] = getBlocksInPeriod(team2);
 		}

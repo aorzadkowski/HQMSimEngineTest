@@ -137,4 +137,8 @@ public class GameState {
 		String toReturn = fullPlayByPlay();
 		return toReturn;
 	}
+	
+	public State getCurrentState() {
+		return currentState;
+	}
 }
