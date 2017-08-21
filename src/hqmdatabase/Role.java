@@ -25,7 +25,7 @@ public enum Role {
         case TWO_WAY_FORWARD: return new double[] {0.047,0.046,0.042,0.052,0.048,0.052,0.048,0.05,0.05,0.059,0.049,0.047,0.048,0.047,0.054,0.052,0.048,0.054,0.053,0.05};
         case OFFENSIVE_DMAN: return new double[] {0.032,0.045,0.048,0.05,0.052,0.051,0.051,0.053,0.053,0.056,0.056,0.053,0.052,0.032,0.051,0.051,0.051,0.058,0.05,0.048};
         case DEFENSIVE_DMAN: return new double[] {0.02,0.053,0.058,0.045,0.051,0.051,0.056,0.053,0.04,0.046,0.04,0.03,0.049,0.02,0.059,0.068,0.06,0.049,0.063,0.051};
-        case GOALIE: return new double[] {1.0/7,1.0/7,1.0/7,1.0/7,1.0/7,1.0/7,1.0/7};
+        case GOALIE: return new double[] {0.138,0.141,0.126,0.129,0.131,0.105,0.105,0.125};
         case DEVELOPER: return new double[] {0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05,0.05};
         default: return new double[] {0.00,0.0,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.0,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00,0.00};
         }
@@ -42,7 +42,7 @@ public enum Role {
         case TWO_WAY_FORWARD: return new double[] {12.88,6.10,1.00};
         case OFFENSIVE_DMAN: return new double[] {13.16,5.92,0.96};
         case DEFENSIVE_DMAN: return new double[] {11.84,7.18,1.02};
-        case GOALIE: return new double[] {0.00,14.29,0.00};
+        case GOALIE: return new double[] {0.00,15.40,2.5};
         case DEVELOPER: return new double[] {14.00, 4.00, 3.00};
         default: return new double[] {0.00,0.00,0.00};
 		}

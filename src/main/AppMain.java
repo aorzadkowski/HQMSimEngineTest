@@ -69,7 +69,7 @@ public class AppMain {
 				mainDB.retrievePlayer("Drag", Season.LHLS13),
 				mainDB.retrievePlayer("Dalfan", Season.LHLS13),
 				mainDB.retrievePlayer("Icey", Season.LHLS13),
-				mainDB.retrievePlayer("Ace",Season.LHLS13)
+				mainDB.retrievePlayer("pkpaching",Season.LHLS13)
 				);
 		
 		Team[] lhlTeams = {bos, nyr, chi, tor, nsh, win};

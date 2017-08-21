@@ -1,6 +1,7 @@
 package sim;
 
 import hqmdatabase.Player;
+import main.Options;
 
 public class SimEngine {
 	
@@ -168,9 +169,12 @@ public class SimEngine {
 		team1Total = 0;
 		team2Total = 0;
 		
-		for ( int i = 0; i < 4; i++ ) {
-			team1Goals[i] = getScoreInPeriod(team1, i);
-			team1Blocks[i] = getBlocksInPeriod(team1);
+
+
+		System.out.println("Here are the stats for each player: \n\tName\tSeason\tPos\tPts\tG\tA\tP/G\t+/-\tShots\tSvs\tSv%\tSv/G\tGA\tGAA\tGP\tGP@G");
+		
+		for (int i = 0; i < team1PlayerStats.length; i++) {
+			 getBlocksInPeriod(team1);
 		
 			team2Goals[i] = getScoreInPeriod(team2, i);
 			team2Blocks[i] = getBlocksInPeriod(team2);
@@ -381,6 +385,7 @@ public class SimEngine {
 		double goalieStatUsed;
 		double difference;
 		double newGoalieDRatio;
+		double newGoalieDBRatio;
 		int saves = 0;
 		int newGoals = 0;
 
@@ -403,12 +408,19 @@ public class SimEngine {
 			}
 			difference = goalieStatUsed - shooterStatUsed;
 			newGoalieDRatio = goalieTeam.goalieDRatio + (0.05 * difference);
-			//System.out.println(goalieTeam.goalieDRatio + "\t" + difference + "\t" + newGoalieDRatio + "\t" + shooter.getName() + "\t" + shooterStatUsed + "\t" + goalieStatUsed + "\t" + prob);
 			if ( newGoalieDRatio > 0.90) newGoalieDRatio = 0.9;
 			if ( newGoalieDRatio < 0.10) newGoalieDRatio = 0.1;
-			//System.out.println(goalieTeam.goalieDRatio + "\t" + difference + "\t" + newGoalieDRatio + "\n");
-			if( Math.random() < newGoalieDRatio ) saves++;
-			else newGoals++;
+			if ( i == 0 ) {
+				if (Options.debug) System.out.println( newGoalieDRatio + "\t" + i );
+				if ( Math.random() < newGoalieDRatio ) saves++;
+				else newGoals++;
+			}
+			else {
+				newGoalieDBRatio = newGoalieDRatio - (( 0.01 + goalieTeam.invGoalieBRatio ) * newGoalieDRatio * i);
+				if (Options.debug) System.out.println( newGoalieDBRatio + "\t" + i );
+				if ( Math.random() < newGoalieDBRatio ) saves++;
+				else newGoals++;
+			}
 		}
 
 		if ( saves > 0 && goalieTeamNum == 1 ) {
