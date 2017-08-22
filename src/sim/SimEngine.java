@@ -11,73 +11,51 @@ public class SimEngine {
 	private static int[] team2Blocks = new int[4];
 	private static int[] team1Points = new int[4];
 	private static int[] team2Points = new int[4];
-	public static int[][] team1Stats = new int[2][5];
-	public static int[][] team2Stats = new int[2][5];
-	public static double[][] team1MultiStats = new double[2][5];
-	public static double[][] team2MultiStats = new double[2][5];
-	public static double[] probArray = new double[5];
-	public static int[] goalieAssists = new int[2];
-	public static int[] multiGoalieAssists = new int[2];
-	static int team1Total = 0;
-	static int team2Total = 0;
-	public static int team1Assists;
-	public static int team2Assists;
-	
 	public static Stats[] team1PlayerStats;
 	public static Stats[] team2PlayerStats;
 	
 	public static void simulateGame(Game game) {
-
-		team1Stats = new int[2][5]; // Resets individual game stats
-		team2Stats = new int[2][5]; // Resets individual game stats
-		goalieAssists = new int[2];
-		team1Total = 0;
-		team2Total = 0;
-		team1Assists = 0;
-		team2Assists = 0;
+		Team team1 = game.getTeam1();	// Stores Team 1 locally
+		Team team2 = game.getTeam2();	// Stores Team 2 locally
 		
-		Team team1 = game.getTeam1();
-		Team team2 = game.getTeam2();
+		team1PlayerStats = new Stats[5];	// Resets player stats for Team 1
+		team2PlayerStats = new Stats[5];	// Resets player stats for Team 2
 		
-		team1PlayerStats = new Stats[5];
-		team2PlayerStats = new Stats[5];
-		
-		for (int i = 0; i < team1.teamPlayers.length; i++) {
-			team1PlayerStats[i] = new Stats(team1.teamPlayers[i]);
-			team2PlayerStats[i] = new Stats(team2.teamPlayers[i]);
+		for (int i = 0; i < team1.teamPlayers.length; i++) {	// Cycles through all players on a team (5)
+			team1PlayerStats[i] = new Stats(team1.teamPlayers[i]);	// Creates player map for Team 1
+			team2PlayerStats[i] = new Stats(team2.teamPlayers[i]);	// Creates player map for Team 2
 			
 			if (i < 4) {
-				team1PlayerStats[i].addGamesPlayed();
-				team2PlayerStats[i].addGamesPlayed();
+				team1PlayerStats[i].addGamesPlayed();	// Adds game played for non-goalies
+				team2PlayerStats[i].addGamesPlayed();	// Adds game played for non-goalies
 			} else {
-				team1PlayerStats[i].addGamesPlayedAtG();
-				team2PlayerStats[i].addGamesPlayedAtG();
+				team1PlayerStats[i].addGamesPlayedAtG();	// Adds game played for goalie
+				team2PlayerStats[i].addGamesPlayedAtG();	// Adds game played for goalie
 			}
 		}
 		
-		int[][] boxScore = new int[3][2];
+		int[][] boxScore = new int[3][2];	// Creates boxscore array
 		
-		boxScore[0] = getNetScoreInPeriod(team1, team2);
-		boxScore[1] = getNetScoreInPeriod(team1, team2);
-		boxScore[2] = getNetScoreInPeriod(team1, team2);
+		boxScore[0] = getNetScoreInPeriod(team1, team2);	// Simulates the first period
+		boxScore[1] = getNetScoreInPeriod(team1, team2);	// Simulates the second period
+		boxScore[2] = getNetScoreInPeriod(team1, team2);	// Simulates the third period
 		
-		int team1Score = (boxScore[0][0] + boxScore[1][0] + boxScore[2][0]);
-		int team2Score = (boxScore[0][1] + boxScore[1][1] + boxScore[2][1]);
+		int team1Score = (boxScore[0][0] + boxScore[1][0] + boxScore[2][0]);	// Calculates Team 1 total score
+		int team2Score = (boxScore[0][1] + boxScore[1][1] + boxScore[2][1]);	// Calculates Team 2 total score
 		
-		if (team1Score == team2Score) {
-			int team1OTScore = 0;
-			int team2OTScore = 0;
-			int otCount = 0;
+		if (team1Score == team2Score) {		// Checks if the game is still tied after regulation
+			int team1OTScore = 0;			// Resets Team 1 OT score
+			int team2OTScore = 0;			// Resets Team 2 OT score
+			int otCount = 0;				// Resets OT Period
 			
-			while (team1OTScore == team2OTScore) {
-				int[] otPeriod = getNetScoreInPeriod(team1, team2);
+			while (team1OTScore == team2OTScore) {	// If the score is still tied after OT periods (or regulation for first pass)
+				int[] otPeriod = getNetScoreInPeriod(team1, team2);	// Simulates one OT period
 			
-				team1OTScore = otPeriod[0];
-				team2OTScore = otPeriod[1];
+				team1OTScore = otPeriod[0];	// Retrieves Team 1 score in OT
+				team2OTScore = otPeriod[1];	// Retrieves Team 2 score in OT
 		
 				/*
-				 
-				 8.8.17 Removing code below (sudden death) until we figure out what to do with stats during the OT period
+				8.8.17 Removing code below (sudden death) until we figure out what to do with stats during the OT period
 				
 				if (team1OTScore > team2OTScore) {
 					team1OTScore = 1;
@@ -91,52 +69,35 @@ public class SimEngine {
 					team1OTScore = 0;
 					team2OTScore = 0;
 				}
-				
 				*/
-				
-				
-				otCount += 1;
+							
+				otCount += 1;				// Increments the OT period tracker
 			}
 			
-			int[][] newBoxScore = new int[3 + otCount][2];
+			int[][] newBoxScore = new int[3 + otCount][2];	// Creates a new boxscore to accomodate the OT periods
 			
-			for (int i = 0; i < 3; i++) {
+			for (int i = 0; i < 3; i++) {	// Cycles through the 3 regulation periods
 				for (int j = 0; j < 2; j++) {
-					newBoxScore[i][j] = boxScore[i][j];
+					newBoxScore[i][j] = boxScore[i][j];	// Creates the final boxscore
 				}
 			}
 			
-			for (int i = 3; i < 3 + otCount; i++) {
+			for (int i = 3; i < 3 + otCount; i++) {	// Cycles through OT periods
 				for (int j = 0; j < 2; j++) {
-					newBoxScore[i][j] = 0;
+					newBoxScore[i][j] = 0;	// Adds any OT periods to final boxscore
 				}
 			}
 			
-			newBoxScore[2+otCount][0] = team1OTScore;
-			newBoxScore[2+otCount][1] = team2OTScore;
+			newBoxScore[2+otCount][0] = team1OTScore;	// Adds Team 1 final score to end of boxscore
+			newBoxScore[2+otCount][1] = team2OTScore;	// Adds Team 2 final score to end of boxscore
 			
-			boxScore = newBoxScore;
+			boxScore = newBoxScore;			// Assigns the new boxscore to the orignal boxscore (for other methods)
 		}
 		
-		for ( int i = 0; i < 4; i++) {
-			team1MultiStats[0][i] += team1Stats[0][i];
-			team1MultiStats[1][i] += team1Stats[1][i];
-			team2MultiStats[0][i] += team2Stats[0][i];
-			team2MultiStats[1][i] += team2Stats[1][i];
-			team1Assists += team1Stats[1][i];
-			team2Assists += team2Stats[1][i];
-		}
-		team1MultiStats[1][4] += team1Stats[1][4];
-		team2MultiStats[1][4] += team2Stats[1][4];
-		team1Assists += goalieAssists[0];
-		team2Assists += goalieAssists[1];
-		multiGoalieAssists[0] += goalieAssists[0];
-		multiGoalieAssists[1] += goalieAssists[1];
-		
-		game.setScore(boxScore);
+		game.setScore(boxScore);			// Sets the final score of the game
 
-		game.team1PlayerStats = team1PlayerStats;
-		game.team2PlayerStats = team2PlayerStats;
+		game.team1PlayerStats = team1PlayerStats;	// Maps the player stats for Team 1
+		game.team2PlayerStats = team2PlayerStats;	// Maps the player stats for Team 2
 
 		/*
 		System.out.println("Here are the stats for each player: \n\tName\tSeason\tPos\tPts\tG\tA\tP/G\t+/-\tShots\tShots Faced\tSvs\tSv%\tSv/G\tGA\tGAA\tGP\tGP@G");
@@ -166,81 +127,56 @@ public class SimEngine {
 	}
 	
 	public static int[] getNetScoreInPeriod(Team team1, Team team2) {
-		team1Total = 0;
-		team2Total = 0;
+		int team1Total = 0;						// Resets Team 1 goals
+		int team2Total = 0;						// Resets Team 2 goals
 		
-
-
-		//System.out.println("Here are the stats for each player: \n\tName\tSeason\tPos\tPts\tG\tA\tP/G\t+/-\tShots\tSvs\tSv%\tSv/G\tGA\tGAA\tGP\tGP@G");
-		
-		//for (int i = 0; i < team1PlayerStats.length - 1; i++) {
-		//	 getBlocksInPeriod(team1);
-		
-		for (int i = 0; i < 4; i++) {
-			team1Goals[i] = getScoreInPeriod(team1, i);
-			team1Blocks[i] = getBlocksInPeriod(team1);
-			
-			team2Goals[i] = getScoreInPeriod(team2, i);
-			team2Blocks[i] = getBlocksInPeriod(team2);
+		for (int i = 0; i < 4; i++) {		// Cycles through the 4 skaters for the teams
+			team1Goals[i] = getScoreInPeriod(team1, i);	// Calculates Team 1 shots on net for each player
+			team1Blocks[i] = getBlocksInPeriod(team1);	// Calculates Team 1 blocks against each opposing player
+			team2Goals[i] = getScoreInPeriod(team2, i);	// Calculates Team 2 shots on net for each player
+			team2Blocks[i] = getBlocksInPeriod(team2);	// Calculates Team 2 blocks against each opposing player
 		}
 		
-		for ( int i = 0; i < 4; i++ ) {
-			team1Points[i] = team1Goals[i] + team2Blocks[i];
-		    if (team1Points[i] > 0) {
-				team2Stats[1][4] += team1Points[i];
-				
-				////////////
-				//new stats system
-				for (int k = 0; k < team1Points[i]; k++) {
-					addShotOnGoal(getNameFromIndex(4, team2));
-					addShot(getNameFromIndex(i, team1));
+		for ( int i = 0; i < 4; i++ ) {		// Cycles through the 4 skaters for the teams
+			team1Points[i] = team1Goals[i] + team2Blocks[i];	// Calculates potential points for the player (shots on net - blocks)
+		    if (team1Points[i] > 0) {		// Checks to see if any shots went unblocked
+				for (int k = 0; k < team1Points[i]; k++) {	// Cycles through the amount of shots on net that were not blocked
+					addShotOnGoal(getNameFromIndex(4, team2));	// Adds a shot on net for the opposing goalie
+					addShot(getNameFromIndex(i, team1));	// Adds a shot for the shooter
 				}
-				
-	    		team1Points[i] = calcSave(team2, team1.teamPlayers[i], team2.teamPlayers[4], team1Points[i], 2);
+				team1Points[i] = calcSave(team2, team1.teamPlayers[i], team2.teamPlayers[4], team1Points[i], 2);	// Calculates how many shots are saved by the opposing goalie, returns the amount of goals scored
 			}
-			if (team1Points[i] < 0) team1Points[i] = 0;
-			team1Stats[0][i] += team1Points[i];
-			team1Total += team1Points[i];
+		    
+			if (team1Points[i] < 0) team1Points[i] = 0;	// Sets points to 0 in case blocks outnumber shots
+			team1Total += team1Points[i];	// Adds up the goals for each skater
 			
-			//////////////
-			//new stats system
-			for (int k = 0; k < team1Points[i]; k++) {
-				addGoal(getNameFromIndex(i, team1));
-				addPlus(true);
-				addMinus(false);
+			for (int k = 0; k < team1Points[i]; k++) {	// Cycles through the amount of goals scored
+				addGoal(getNameFromIndex(i, team1));	// Adds a goal stat
+				addPlus(true);				// Adds a plus stat for Team 1
+				addMinus(false);			// Adds a minus stat for Team 2
 			}
-			
-			if ( team1Points[i] > 0) calcApple(team1, team1Points[i], i, 1);
+			if ( team1Points[i] > 0) calcApple(team1, team1Points[i], i, 1);	// Calculates any assists if goals were scored
 		
-			team2Points[i] = team2Goals[i] + team1Blocks[i];
-			if (team2Points[i] > 0) {
-				team1Stats[1][4] += team2Points[i];
-				
-				////////////
-				//new stats system
-				for (int k = 0; k < team2Points[i]; k++) {
-					addShotOnGoal(getNameFromIndex(4, team1));
-					addShot(getNameFromIndex(i, team2));
+			team2Points[i] = team2Goals[i] + team1Blocks[i];	// Calculates potential points for the player (shots on net - blocks)
+			if (team2Points[i] > 0) {		// Checks to see if any shots went unblocked
+				for (int k = 0; k < team2Points[i]; k++) {	// Cycles through the amount of shots on net that were not blocked
+					addShotOnGoal(getNameFromIndex(4, team1));	// Adds a shot on net for the opposing goalie
+					addShot(getNameFromIndex(i, team2));	// Adds a shot for the shooter
 				}
-				
-		    	team2Points[i] = calcSave(team1, team2.teamPlayers[i], team1.teamPlayers[4], team2Points[i], 1);
+				team2Points[i] = calcSave(team1, team2.teamPlayers[i], team1.teamPlayers[4], team2Points[i], 1);	// Calculates how many shots are saved by the opposing goalie, returns the amount of goals scored
 			}
-			if (team2Points[i] < 0) team2Points[i] = 0;
-			team2Stats[0][i] += team2Points[i];
-			team2Total += team2Points[i];
 			
-			//////////////
-			//new stats system
-			for (int k = 0; k < team2Points[i]; k++) {
-				addGoal(getNameFromIndex(i, team2));
-				addPlus(false);
-				addMinus(true);
+			if (team2Points[i] < 0) team2Points[i] = 0;	// Sets points to 0 in case blocks outnumber shots
+			team2Total += team2Points[i];	// Adds up the goals for each skater
+			
+			for (int k = 0; k < team2Points[i]; k++) {	// Cycles through the amount of goals scored
+				addGoal(getNameFromIndex(i, team2));	// Adds a goal stat
+				addPlus(false);				// Adds a plus stat for Team 2
+				addMinus(true);				// Adds a minus stat for Team 1
 			}
-			if ( team2Points[i] > 0) calcApple(team2, team2Points[i], i, 2);
-			
+			if ( team2Points[i] > 0) calcApple(team2, team2Points[i], i, 2);	// Calculates any assists if goals were scored
 		}
-		
-		return new int[] {team1Total, team2Total};
+		return new int[] {team1Total, team2Total};	// Returns the goals scored by each team
 	}
 	
 	private static void addPlus(boolean team1) {
@@ -428,27 +364,17 @@ public class SimEngine {
 		}
 
 		if ( saves > 0 && goalieTeamNum == 1 ) {
-			team1Stats[0][4] += saves;
-			team1MultiStats[0][4] += saves;
-			
-			///////////////////
-			//new stats system
 			for (int i = 0; i < saves; i++) {
 				addSave(goalie.getName());
 			}
 		}
+		
 		else if( saves > 0 && goalieTeamNum == 2 ) {
-			team2Stats[0][4] += saves;
-			team2MultiStats[0][4] += saves;
-
-			////////////////////
-			//new stats system
 			for (int i = 0; i < saves; i++) {
 				addSave(getNameFromIndex(4, goalieTeam));
 			}
 		}
-		
-
+	
 		return newGoals;
 	}
 	
@@ -456,8 +382,7 @@ public class SimEngine {
 		for ( int i = 0; i < goals; i++ ) {
 			double[] playerPassing = {0,0,0,0,0};
 			int passingTotal = 0;
-			probArray = new double[]{0.28,0.28,0.28,0.28,0.28,0.28};
-			
+			double[] probArray = new double[]{0.28,0.28,0.28,0.28,0.28,0.28};
 			int appleFlag = 0;
 			
 			for ( int j = 0; j < 4; j++ ) {
@@ -482,28 +407,16 @@ public class SimEngine {
 				else if( j != (player + 1) ) {
 					if( prob < probArray[j] && j != 0 && appleFlag == 0 ) {
 						if ( teamNum == 1 && j != 5) {
-							team1Stats[1][j-1]++;
-							appleFlag = 1;
-							
-							//////////////
-							//new stats system
 							addAssist(getNameFromIndex(j-1, team));
+							appleFlag = 1;
 						}
 						else if ( j == 5) {
-							goalieAssists[teamNum-1]++;
-							appleFlag = 1;
-							
-							/////////////
-							//new stats system
 							addAssist(getNameFromIndex(4, team));
+							appleFlag = 1;
 						}
 						else {
-							team2Stats[1][j-1]++;
-							appleFlag = 1;
-							
-							//////////////
-							//new stats system
 							addAssist(getNameFromIndex(j-1, team));
+							appleFlag = 1;
 						}
 					}
 				}

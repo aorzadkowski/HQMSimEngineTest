@@ -152,8 +152,8 @@ public class AppMain {
 			
 			winningTeamGoals += testGame.winningTeamGoals();
 			losingTeamGoals += testGame.losingTeamGoals();
-			winningTeamAssists += testGame.winningTeamAssists();
-			losingTeamAssists += testGame.losingTeamAssists();
+		//	winningTeamAssists += testGame.winningTeamAssists();
+		//	losingTeamAssists += testGame.losingTeamAssists();
 			totalGoals += testGame.totalGoals();
 			
 			marginOfVictoryGoals += testGame.marginOfVictory();
@@ -182,7 +182,7 @@ public class AppMain {
 		System.out.println("Most OT periods:\t" + mostOT);
 		System.out.println("Most Goals Scored in a Game: \t" + maxGoalsInGame + "\n");
 
-		for ( int i = 0; i < 4; i++ ) {
+	/*	for ( int i = 0; i < 4; i++ ) {
 			System.out.println(team1Out.teamPlayers[i].getName() + "\t\t\t" + team2Out.teamPlayers[i].getName());
 			System.out.println("Goals:   " + (SimEngine.team1MultiStats[0][i] / gameCount ) + "\t\tGoals:   " + (SimEngine.team2MultiStats[0][i] / gameCount ));
 			System.out.println("Assists: " + (SimEngine.team1MultiStats[1][i] / gameCount ) + "\t\tAssists: " + (SimEngine.team2MultiStats[1][i] / gameCount ) + "\n");
@@ -191,7 +191,7 @@ public class AppMain {
 			System.out.println("Saves:    " + (SimEngine.team1MultiStats[0][4] / gameCount ) + "\t\tSaves:    " + (SimEngine.team2MultiStats[0][4] / gameCount ));
 			System.out.println("Attempts: " + (SimEngine.team1MultiStats[1][4] / gameCount ) + "\t\tAttempts: " + (SimEngine.team2MultiStats[1][4] / gameCount ));
 			System.out.println("Assists:  " + ((double)SimEngine.multiGoalieAssists[0] / gameCount ) + "\t\tAssists:  " + ((double)SimEngine.multiGoalieAssists[1] / gameCount ));
-		}
+	*/	}
 	
 
 	private static void runPeriod(Team team1, Team team2) {

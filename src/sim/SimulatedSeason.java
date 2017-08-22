@@ -73,7 +73,7 @@ public class SimulatedSeason {
 			for( int i = 0; i < 7; i++) {							// Cycles through a 7 game series
 				playoffGame[i] = new Game ( playoffTeams[0], playoffTeams[3]); // Sets up the first matchup
 				SimEngine.simulateGame(playoffGame[i]);				// Simulates the first matchup
-				updatePlayerStats(playoffGame[i]);			// Updates player stats using the new stats class
+			//	updatePlayerStats(playoffGame[i]);					// Updates player stats using the new stats class
 				if( playoffGame[i].didTeam1Win()) {					// Checks to see    
 					playoffRecords[0]++;							// which team
 				}													// won and 
@@ -93,7 +93,7 @@ public class SimulatedSeason {
 			for( int i = 0; i < 7; i++) {							// Cycles through a 7 game series
 				playoffGame[i] = new Game ( playoffTeams[1], playoffTeams[2]); // Sets up the second matchup
 				SimEngine.simulateGame(playoffGame[i]);				// Simulates the second matchup
-				updatePlayerStats(playoffGame[i]);			// Updates player stats using the new stats class
+			//	updatePlayerStats(playoffGame[i]);					// Updates player stats using the new stats class
 				if( playoffGame[i].didTeam1Win()) {					// Checks to see
 					playoffRecords[1]++;							// which team
 				}													// won and
@@ -113,7 +113,7 @@ public class SimulatedSeason {
 			for( int i = 0; i < 7; i++) {							// Cycles through a 7 game series
 				playoffGame[i] = new Game ( finalsTeams[0], finalsTeams[1]);	// Sets up the finals matchup
 				SimEngine.simulateGame(playoffGame[i]);				// Simulates the finals matchup
-				updatePlayerStats(playoffGame[i]);			// Updates player stats using the new stats class
+			//	updatePlayerStats(playoffGame[i]);			// Updates player stats using the new stats class
 				if( playoffGame[i].didTeam1Win()) {					// Checks to see
 					finalsRecords[0]++;								// which team
 				}													// won and
@@ -176,14 +176,14 @@ public class SimulatedSeason {
 				records[4][team2]+= 1;								// team points
 				teamStats[0][team1] += seasonGame[game].winningTeamGoals();	// Stats for G/G
 				teamStats[0][team2] += seasonGame[game].losingTeamGoals();	// Stats for G/G
-				teamStats[1][team1] += seasonGame[game].winningTeamAssists();	// Stats for A/G
-				teamStats[1][team2] += seasonGame[game].losingTeamAssists();	// Stats for A/G
+		//		teamStats[1][team1] += seasonGame[game].winningTeamAssists();	// Stats for A/G
+		//		teamStats[1][team2] += seasonGame[game].losingTeamAssists();	// Stats for A/G
 				teamStats[2][team1] += seasonGame[game].losingTeamGoals();	// Stats for GA/G
 				teamStats[2][team2] += seasonGame[game].winningTeamGoals();	// Stats for GA/G
-				teamStats[3][team1] += seasonGame[game].winningTeamSaves();	// Stats for Sv/G
-				teamStats[3][team2] += seasonGame[game].losingTeamSaves();	// Stats for Sv/G
-				teamStats[4][team1] += seasonGame[game].losingTeamShots();	// Stats for SA/G
-				teamStats[4][team2] += seasonGame[game].winningTeamShots();	// Stats for SA/G
+		//		teamStats[3][team1] += seasonGame[game].winningTeamSaves();	// Stats for Sv/G
+		//		teamStats[3][team2] += seasonGame[game].losingTeamSaves();	// Stats for Sv/G
+		//		teamStats[4][team1] += seasonGame[game].losingTeamShots();	// Stats for SA/G
+		//		teamStats[4][team2] += seasonGame[game].winningTeamShots();	// Stats for SA/G
 			}
 			else {
 				records[2][team1]++;
@@ -192,14 +192,14 @@ public class SimulatedSeason {
 				records[4][team2]+= 2;
 				teamStats[0][team1] += seasonGame[game].losingTeamGoals();
 				teamStats[0][team2] += seasonGame[game].winningTeamGoals();
-				teamStats[1][team1] += seasonGame[game].losingTeamAssists();
-				teamStats[1][team2] += seasonGame[game].winningTeamAssists();
+		//		teamStats[1][team1] += seasonGame[game].losingTeamAssists();
+		//		teamStats[1][team2] += seasonGame[game].winningTeamAssists();
 				teamStats[2][team1] += seasonGame[game].winningTeamGoals();
 				teamStats[2][team2] += seasonGame[game].losingTeamGoals();
-				teamStats[3][team1] += seasonGame[game].losingTeamSaves();
-				teamStats[3][team2] += seasonGame[game].winningTeamSaves();
-				teamStats[4][team1] += seasonGame[game].winningTeamShots();
-				teamStats[4][team2] += seasonGame[game].losingTeamShots();
+		//		teamStats[3][team1] += seasonGame[game].losingTeamSaves();
+		//		teamStats[3][team2] += seasonGame[game].winningTeamSaves();
+		//		teamStats[4][team1] += seasonGame[game].winningTeamShots();
+		//		teamStats[4][team2] += seasonGame[game].losingTeamShots();
 			}
 		}
 		else {
@@ -209,14 +209,14 @@ public class SimulatedSeason {
 				records[3][team2]++;
 				teamStats[0][team1] += seasonGame[game].winningTeamGoals();
 				teamStats[0][team2] += seasonGame[game].losingTeamGoals();
-				teamStats[1][team1] += seasonGame[game].winningTeamAssists();
-				teamStats[1][team2] += seasonGame[game].losingTeamAssists();
+		//		teamStats[1][team1] += seasonGame[game].winningTeamAssists();
+		//		teamStats[1][team2] += seasonGame[game].losingTeamAssists();
 				teamStats[2][team1] += seasonGame[game].losingTeamGoals();
 				teamStats[2][team2] += seasonGame[game].winningTeamGoals();
-				teamStats[3][team1] += seasonGame[game].winningTeamSaves();
-				teamStats[3][team2] += seasonGame[game].losingTeamSaves();
-				teamStats[4][team1] += seasonGame[game].losingTeamShots();
-				teamStats[4][team2] += seasonGame[game].winningTeamShots();
+		//		teamStats[3][team1] += seasonGame[game].winningTeamSaves();
+		//		teamStats[3][team2] += seasonGame[game].losingTeamSaves();
+		//		teamStats[4][team1] += seasonGame[game].losingTeamShots();
+		//		teamStats[4][team2] += seasonGame[game].winningTeamShots();
 			}
 			else {
 				records[3][team1]++; 
@@ -224,14 +224,14 @@ public class SimulatedSeason {
 				records[4][team2]+= 3;
 				teamStats[0][team1] += seasonGame[game].losingTeamGoals();
 				teamStats[0][team2] += seasonGame[game].winningTeamGoals();
-				teamStats[1][team1] += seasonGame[game].losingTeamAssists();
-				teamStats[1][team2] += seasonGame[game].winningTeamAssists();
+		//		teamStats[1][team1] += seasonGame[game].losingTeamAssists();
+		//		teamStats[1][team2] += seasonGame[game].winningTeamAssists();
 				teamStats[2][team1] += seasonGame[game].winningTeamGoals();
 				teamStats[2][team2] += seasonGame[game].losingTeamGoals();
-				teamStats[3][team1] += seasonGame[game].losingTeamSaves();
-				teamStats[3][team2] += seasonGame[game].winningTeamSaves();
-				teamStats[4][team1] += seasonGame[game].winningTeamShots();
-				teamStats[4][team2] += seasonGame[game].losingTeamShots();
+		//		teamStats[3][team1] += seasonGame[game].losingTeamSaves();
+		//		teamStats[3][team2] += seasonGame[game].winningTeamSaves();
+		//		teamStats[4][team1] += seasonGame[game].winningTeamShots();
+		//		teamStats[4][team2] += seasonGame[game].losingTeamShots();
 			}
 	}
 	}

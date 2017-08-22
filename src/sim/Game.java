@@ -117,6 +117,7 @@ public class Game {
 		return (team1Score < team2Score ? team1Score : team2Score);
 	}
 	
+	/*
 	public int winningTeamAssists() {
 		if (!scoreSet) { System.err.println("Game.java: Score is not set!"); return -1; }
 		return (team1Score > team2Score ? SimEngine.team1Assists : SimEngine.team2Assists);
@@ -126,7 +127,7 @@ public class Game {
 		if (!scoreSet) { System.err.println("Game.java: Score is not set!"); return -1; }
 		return (team1Score < team2Score ? SimEngine.team1Assists : SimEngine.team2Assists);
 	}
-	
+		
 	public int winningTeamSaves() {
 		if (!scoreSet) { System.err.println("Game.java: Score is not set!"); return -1; }
 		return (team1Score > team2Score ? SimEngine.team1Stats[0][4] : SimEngine.team2Stats[0][4]);
@@ -146,6 +147,7 @@ public class Game {
 		if (!scoreSet) { System.err.println("Game.java: Score is not set!"); return -1; }
 		return (team1Score < team2Score ? SimEngine.team2Stats[1][4] : SimEngine.team1Stats[1][4]);
 	}
+	*/
 	
 	public boolean didTeam1Win() {
 		return team1Score > team2Score;
