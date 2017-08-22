@@ -1,8 +1,5 @@
 package sim.gamefsm.player;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import hqmdatabase.Player;
 import hqmdatabase.Position;
 import sim.gamefsm.GameState;
@@ -14,13 +11,12 @@ public abstract class Skater {
 	protected int x;
 	protected int y;
 	
-	Map<String, Integer> stats; 
-	
 	public Skater(Player player, boolean isHomeTeam) {
 		this.player = player;
 		this.isHomeTeam = isHomeTeam;
 		
-		stats = new HashMap<String, Integer>();
+		x = getStartingXBasedOnPosition(player.position);
+		y = getStartingYBasedOnPosition(player.position);
 	}
 	
 	public abstract void act(GameState gs);
@@ -71,5 +67,56 @@ public abstract class Skater {
 		}
 		System.err.println("PlayerState could not define X value for position " + position);
 		return -1;
+	}
+
+	protected int getDirectionTowardsPuck(GameState gs) {
+		int dx = x - gs.puckX;
+		int dy = y - gs.puckY;
+		
+		if (dx == 0 && dy > 0) 
+			return 1;
+		else if (dx < 0 && dy > 0)
+			return 2;
+		else if (dx < 0 && dy == 0)
+			return 3;
+		else if (dx < 0 && dy < 0) 
+			return 4;
+		else if (dx == 0 && dy < 0) 
+			return 5;
+		else if (dx > 0 && dy < 0) 
+			return 6;
+		else if (dx > 0 && dy == 0) 
+			return 7;
+		else if (dx > 0 && dy > 0)
+			return 0;
+		
+		return -1;
+	}
+	
+	/**
+	 * Moves the player in a direction using the following pattern (where O is the player)
+	 * 
+	 * 		8  1  2
+	 *       \ | /
+	 * 		7 -O- 3
+	 * 		 / | \
+	 * 		6  5  4
+	 * @param direction 
+	 */
+	protected void move(int direction) {
+		switch (direction) {
+		case 1: if (isValidLocation(x, y - 1)) 					  y -= 1; 
+		case 2: if (isValidLocation(x + 1, y - 1)) 		{ x += 1; y -= 1; } 
+		case 3: if (isValidLocation(x + 1, y)) 			  x += 1; 
+		case 4: if (isValidLocation(x + 1, y + 1)) 		{ x += 1; y += 1; }
+		case 5: if (isValidLocation(x, y + 1)) 			 		  y += 1; 
+		case 6: if (isValidLocation(x - 1, y + 1)) 		{ x -= 1; y += 1; }
+		case 7: if (isValidLocation(x - 1, y)) 			  x -= 1;
+		case 8: if (isValidLocation(x - 1, y - 1)) 		{ x -= 1; y -= 1; }
+		}
+	}
+	
+	protected boolean isValidLocation(int x, int y) {
+		return x < 0 || y < 0 || x > 9 || y > 4;  //Checks to make sure it's in bounds.
 	}
 }

@@ -50,8 +50,8 @@ public class GameState {
 	 * 			RD (6,1)
 	 * 			G (8,2)
 	 */
-	int puckX;
-	int puckY;
+	public int puckX;
+	public int puckY;
 	
 	public GameState(Team homeTeam, Team awayTeam) {
 		this.homeTeam = applyConsistencyForTeam(homeTeam);
